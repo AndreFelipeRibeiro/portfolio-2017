@@ -1,7 +1,21 @@
 nav {
-  h1 {
-    font-size: 21px;
-    font-weight: 300;
-    margin: 0 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  .nav-content {
+    width: @nav-width;
+    height: @nav-height;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+
+    h1 {
+      font-size: 21px;
+      font-weight: 300;
+      margin: 0 0;
+    }
   }
 }

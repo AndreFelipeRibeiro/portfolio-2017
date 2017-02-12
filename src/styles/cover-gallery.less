@@ -1,0 +1,142 @@
+.cover-gallery-wrapper {
+  position: fixed;
+  top: @nav-height;
+  left: 0;
+
+  width: 100%;
+  height: ~'calc(100vh - @{nav-height})';
+  padding-bottom: 100px;
+
+  .cover-gallery {
+    position: relative;
+
+    height: 100%;
+    width: @nav-width;
+    margin: 0 auto;
+  }
+
+  .project {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    &[data-arrival-index="1"] {
+      .imagery {
+        transform: translate3d(3vw,0,0);
+      }
+
+      .text {
+        transform: translate3d(6vw,0,0);
+      }
+    }
+
+    &[data-arrival-index="0"] {
+      .imagery, .text {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+        transition: opacity 800ms @cubic 800ms, transform 800ms @cubic 800ms;
+      }
+
+      .text {
+      }
+    }
+
+    .imagery {
+      display: inline-block;
+      height: 100%;
+      background-size: cover;
+
+      opacity: 0;
+      transform: translate3d(-3vw,0,0);
+      transition: opacity 800ms @cubic, transform 800ms @cubic;
+    }
+
+    .text {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      margin: auto;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      opacity: 0;
+      transform: translate3d(-6vw,0,0);
+      transition: opacity 800ms @cubic, transform 800ms @cubic;
+
+      .eyebrow {
+      }
+
+      p {
+        max-width: 380px;
+      }
+
+      button {
+        margin-top: 30px;
+      }
+    }
+
+    &[data-project="squarespace"] {
+      .imagery {
+        width: 60%;
+        background-image: url('../../assets/projects/squarespace-cover.jpg');
+      }
+
+      .text {
+        right: 0;
+
+        p {
+          align-self: flex-end;
+        }
+      }
+    }
+
+    &[data-project="apple"] {
+      text-align: center;
+
+      .imagery {
+        width: 30%;
+        background-image: url('../../assets/projects/apple-cover.jpg');
+      }
+
+      .text {
+        text-align: left;
+        left: 6vw;
+
+        .eyebrow, .title {
+          margin-left: 7.5vw;
+        }
+
+        p {
+          align-self: flex-start;
+        }
+      }
+    }
+
+    &[data-project="bloomingdales"] {
+      text-align: right;
+
+      .imagery {
+        width: 48%;
+        background-image: url('../../assets/projects/bloomingdales-cover.jpg');
+      }
+
+      .text {
+        text-align: left;
+        left: 0;
+
+        .title {
+          margin-left: -0.6vw;
+        }
+
+        p {
+          margin-left: 10vw;
+        }
+      }
+    }
+  }
+}
