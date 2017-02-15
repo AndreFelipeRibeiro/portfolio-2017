@@ -6,10 +6,19 @@
 
   <section class="cover-gallery-wrapper">
     <div class="cover-gallery">
-      <article class="project" data-project="squarespace">
-        <div class="imagery"></div>
 
-        <div class="text">
+      <div class="cover-gallery-imagery">
+        <div class="imagery" data-project="squarespace" data-arrival-index="1"></div>
+        <div class="imagery" data-project="apple"></div>
+        <div class="imagery" data-project="bloomingdales"></div>
+        <div class="imagery" data-project="apple"></div>
+
+        <div class="concealer left"></div>
+        <div class="concealer right"></div>
+      </div>
+
+      <div class="cover-gallery-text">
+        <article class="text" data-project="squarespace" data-arrival-index="1">
           <h3 class="eyebrow">Frontsite</h3>
           <h2 class="title">Squarespace</h2>
           <p>
@@ -17,13 +26,9 @@
             <br />
             <button>Learn More</button>
           </p>
-        </div>
-      </article>
+        </article>
 
-      <article class="project" data-project="apple">
-        <div class="imagery"></div>
-
-        <div class="text">
+        <article class="text" data-project="apple">
           <h3 class="eyebrow">Frontsite</h3>
           <h2 class="title">Apple</h2>
           <p>
@@ -31,13 +36,9 @@
             <br />
             <button>Learn More</button>
           </p>
-        </div>
-      </article>
+        </article>
 
-      <article class="project" data-project="bloomingdales">
-        <div class="imagery"></div>
-
-        <div class="text">
+        <article class="text" data-project="bloomingdales">
           <h3 class="eyebrow">Frontsite</h3>
           <h2 class="title">Bloomingdale's</h2>
           <p>
@@ -45,8 +46,19 @@
             <br />
             <button>Learn More</button>
           </p>
-        </div>
-      </article>
+        </article>
+
+        <article class="text" data-project="apple">
+          <h3 class="eyebrow">Frontsite</h3>
+          <h2 class="title">Apple</h2>
+          <p>
+            Lorem ipsum dolor amet consectetur adipiscing elit duisam velit at augue commodo aliquet lorem ipsum dolor consectetur elit duisam velit.
+            <br />
+            <button>Learn More</button>
+          </p>
+        </article>
+      </div>
+
     </div>
   </section>
 

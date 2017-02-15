@@ -15,48 +15,114 @@
     margin: 0 auto;
   }
 
-  .project {
+  .cover-gallery-imagery,
+  .cover-gallery-text {
+    width: 100%;
+    height: 100%;
+  }
+
+  .imagery,
+  .text {
     position: absolute;
     top: 0;
     left: 0;
 
     width: 100%;
     height: 100%;
+  }
 
-    &[data-arrival-index="1"] {
-      .imagery {
-        transform: translate3d(3vw,0,0);
-      }
-
-      .text {
-        transform: translate3d(6vw,0,0);
-      }
-    }
-
-    &[data-arrival-index="0"] {
-      .imagery, .text {
-        opacity: 1;
-        transform: translate3d(0,0,0);
-        transition: opacity 800ms @cubic 800ms, transform 800ms @cubic 800ms;
-      }
-
-      .text {
-      }
-    }
+  .cover-gallery-imagery {
+    transition: background-color 700ms @cubic;
 
     .imagery {
-      display: inline-block;
-      height: 100%;
       background-size: cover;
+      background-position: center;
 
       opacity: 0;
-      transform: translate3d(-3vw,0,0);
-      transition: opacity 800ms @cubic, transform 800ms @cubic;
+
+      transition: opacity 700ms @cubic;
+
+
+      &[data-project="squarespace"] {
+        width: 60%;
+        background-image: url('../../assets/projects/squarespace-cover.jpg');
+      }
+
+      &[data-project="apple"] {
+        margin: auto;
+        left: 0;
+        right: 0;
+        width: 30%;
+        background-image: url('../../assets/projects/apple-cover.jpg');
+      }
+
+      &[data-project="bloomingdales"] {
+        left: auto;
+        right: 0;
+        width: 48%;
+        background-image: url('../../assets/projects/bloomingdales-cover.jpg');
+      }
+
+      &[data-arrival-index="0"] {
+        opacity: 1;
+        transition: opacity 700ms @cubic 1400ms;
+      }
     }
+
+    .concealer {
+      position: absolute;
+      top: 0;
+      left: auto;
+      right: auto;
+
+      width: 100%;
+      height: 100%;
+
+      background-color: @white-0;
+
+      transition: transform 700ms @cubic 700ms;
+
+      &.left {
+        left: -100%;
+      }
+
+      &.right {
+        right: -100%;
+      }
+    }
+
+    &[data-project="squarespace"] {
+      background-color: #e3e2de;
+
+      .concealer.left  { transform: translate3d(0,0,0); }
+      .concealer.right { transform: translate3d(-40%,0,0); }
+    }
+
+    &[data-project="apple"] {
+      background-color: #ededed;
+
+      .concealer.left  { transform: translate3d(35%,0,0); }
+      .concealer.right { transform: translate3d(-35%,0,0); }
+    }
+
+    &[data-project="bloomingdales"] {
+      background-color: #8e7e71;
+
+      .concealer.left  { transform: translate3d(52%,0,0); }
+      .concealer.right { transform: translate3d(0,0,0); }
+    }
+  }
+
+  .cover-gallery-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 
     .text {
       position: absolute;
       top: 0;
+      width: 50%;
       height: 100%;
       margin: auto;
 
@@ -65,45 +131,16 @@
       justify-content: center;
 
       opacity: 0;
-      transform: translate3d(-6vw,0,0);
-      transition: opacity 800ms @cubic, transform 800ms @cubic;
 
-      .eyebrow {
-      }
+      transition: opacity 700ms @cubic, transform 700ms @cubic;
 
-      p {
-        max-width: 380px;
-      }
-
-      button {
-        margin-top: 30px;
-      }
-    }
-
-    &[data-project="squarespace"] {
-      .imagery {
-        width: 60%;
-        background-image: url('../../assets/projects/squarespace-cover.jpg');
-      }
-
-      .text {
+      &[data-project="squarespace"] {
         right: 0;
-
-        p {
-          align-self: flex-end;
-        }
-      }
-    }
-
-    &[data-project="apple"] {
-      text-align: center;
-
-      .imagery {
-        width: 30%;
-        background-image: url('../../assets/projects/apple-cover.jpg');
+        left: auto;
+        p { align-self: flex-end; }
       }
 
-      .text {
+      &[data-project="apple"] {
         text-align: left;
         left: 6vw;
 
@@ -111,21 +148,10 @@
           margin-left: 7.5vw;
         }
 
-        p {
-          align-self: flex-start;
-        }
-      }
-    }
-
-    &[data-project="bloomingdales"] {
-      text-align: right;
-
-      .imagery {
-        width: 48%;
-        background-image: url('../../assets/projects/bloomingdales-cover.jpg');
+        p { align-self: flex-start; }
       }
 
-      .text {
+      &[data-project="bloomingdales"] {
         text-align: left;
         left: 0;
 
@@ -137,6 +163,56 @@
           margin-left: 10vw;
         }
       }
+
+      &[data-arrival-index="0"] {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+
+        transition: opacity 700ms @cubic 700ms, transform 700ms @cubic 700ms;
+
+        .eyebrow, .title, p, button {
+          opacity: 1;
+          transform: translate3d(0,0,0);
+        }
+
+        .eyebrow { transition: opacity 700ms @cubic 700ms,  transform 700ms @cubic 700ms; }
+        .title   { transition: opacity 700ms @cubic 700ms,  transform 700ms @cubic 700ms; }
+        p        { transition: opacity 700ms @cubic 1300ms, transform 700ms @cubic 1300ms; }
+        button   { transition: opacity 700ms @cubic 1300ms, transform 700ms @cubic 1300ms; }
+      }
+
+      &[data-arrival-index="1"] {
+        transform: translate3d(0,2vw,0);
+        transition: opacity 700ms @cubic, transform 700ms @cubic;
+
+        .eyebrow, .title, p, button { transform: translate3d(0,10px,0); }
+      }
+
+      &[data-departure-index="1"] {
+        transform: translate3d(0,-2vw,0);
+        transition: opacity 700ms @cubic, transform 700ms @cubic;
+
+        .eyebrow, .title, p, button { transform: translate3d(0,-10px,0); }
+      }
+    }
+
+    .eyebrow, .title, p, button {
+      opacity: 0;
+      transition: opacity 700ms @cubic, transform 700ms @cubic;
+    }
+
+    .eyebrow {
+    }
+
+    p {
+      max-width: 380px;
+    }
+
+    button {
+      margin-top: 30px;
     }
   }
+
+
+
 }

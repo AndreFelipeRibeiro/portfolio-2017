@@ -432,7 +432,10 @@ body {
   padding: 0 0;
 }
 body {
-  min-height: 800vh;
+  min-height: 100vh;
+}
+body::-webkit-scrollbar {
+  display: none;
 }
 p {
   font-size: 14px;
@@ -493,93 +496,192 @@ nav .nav-content h1 {
   width: 90%;
   margin: 0 auto;
 }
-.cover-gallery-wrapper .project {
+.cover-gallery-wrapper .cover-gallery-imagery,
+.cover-gallery-wrapper .cover-gallery-text {
+  width: 100%;
+  height: 100%;
+}
+.cover-gallery-wrapper .imagery,
+.cover-gallery-wrapper .text {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-.cover-gallery-wrapper .project[data-arrival-index="1"] .imagery {
-  transform: translate3d(3vw, 0, 0);
+.cover-gallery-wrapper .cover-gallery-imagery {
+  transition: background-color 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
 }
-.cover-gallery-wrapper .project[data-arrival-index="1"] .text {
-  transform: translate3d(6vw, 0, 0);
-}
-.cover-gallery-wrapper .project[data-arrival-index="0"] .imagery,
-.cover-gallery-wrapper .project[data-arrival-index="0"] .text {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-  transition: opacity 800ms cubic-bezier(0.8, 0, 0.55, 0.94) 800ms, transform 800ms cubic-bezier(0.8, 0, 0.55, 0.94) 800ms;
-}
-.cover-gallery-wrapper .project .imagery {
-  display: inline-block;
-  height: 100%;
+.cover-gallery-wrapper .cover-gallery-imagery .imagery {
   background-size: cover;
+  background-position: center;
   opacity: 0;
-  transform: translate3d(-3vw, 0, 0);
-  transition: opacity 800ms cubic-bezier(0.8, 0, 0.55, 0.94), transform 800ms cubic-bezier(0.8, 0, 0.55, 0.94);
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
 }
-.cover-gallery-wrapper .project .text {
+.cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="squarespace"] {
+  width: 60%;
+  background-image: url('../../assets/projects/squarespace-cover.jpg');
+}
+.cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="apple"] {
+  margin: auto;
+  left: 0;
+  right: 0;
+  width: 30%;
+  background-image: url('../../assets/projects/apple-cover.jpg');
+}
+.cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="bloomingdales"] {
+  left: auto;
+  right: 0;
+  width: 48%;
+  background-image: url('../../assets/projects/bloomingdales-cover.jpg');
+}
+.cover-gallery-wrapper .cover-gallery-imagery .imagery[data-arrival-index="0"] {
+  opacity: 1;
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1400ms;
+}
+.cover-gallery-wrapper .cover-gallery-imagery .concealer {
   position: absolute;
   top: 0;
+  left: auto;
+  right: auto;
+  width: 100%;
+  height: 100%;
+  background-color: #FFF;
+  transition: transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms;
+}
+.cover-gallery-wrapper .cover-gallery-imagery .concealer.left {
+  left: -100%;
+}
+.cover-gallery-wrapper .cover-gallery-imagery .concealer.right {
+  right: -100%;
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="squarespace"] {
+  background-color: #e3e2de;
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="squarespace"] .concealer.left {
+  transform: translate3d(0, 0, 0);
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="squarespace"] .concealer.right {
+  transform: translate3d(-40%, 0, 0);
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="apple"] {
+  background-color: #ededed;
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="apple"] .concealer.left {
+  transform: translate3d(35%, 0, 0);
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="apple"] .concealer.right {
+  transform: translate3d(-35%, 0, 0);
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="bloomingdales"] {
+  background-color: #8e7e71;
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="bloomingdales"] .concealer.left {
+  transform: translate3d(52%, 0, 0);
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="bloomingdales"] .concealer.right {
+  transform: translate3d(0, 0, 0);
+}
+.cover-gallery-wrapper .cover-gallery-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.cover-gallery-wrapper .cover-gallery-text .text {
+  position: absolute;
+  top: 0;
+  width: 50%;
   height: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   opacity: 0;
-  transform: translate3d(-6vw, 0, 0);
-  transition: opacity 800ms cubic-bezier(0.8, 0, 0.55, 0.94), transform 800ms cubic-bezier(0.8, 0, 0.55, 0.94);
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94), transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
 }
-.cover-gallery-wrapper .project .text p {
-  max-width: 380px;
-}
-.cover-gallery-wrapper .project .text button {
-  margin-top: 30px;
-}
-.cover-gallery-wrapper .project[data-project="squarespace"] .imagery {
-  width: 60%;
-  background-image: url('../../assets/projects/squarespace-cover.jpg');
-}
-.cover-gallery-wrapper .project[data-project="squarespace"] .text {
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="squarespace"] {
   right: 0;
+  left: auto;
 }
-.cover-gallery-wrapper .project[data-project="squarespace"] .text p {
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="squarespace"] p {
   align-self: flex-end;
 }
-.cover-gallery-wrapper .project[data-project="apple"] {
-  text-align: center;
-}
-.cover-gallery-wrapper .project[data-project="apple"] .imagery {
-  width: 30%;
-  background-image: url('../../assets/projects/apple-cover.jpg');
-}
-.cover-gallery-wrapper .project[data-project="apple"] .text {
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="apple"] {
   text-align: left;
   left: 6vw;
 }
-.cover-gallery-wrapper .project[data-project="apple"] .text .eyebrow,
-.cover-gallery-wrapper .project[data-project="apple"] .text .title {
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="apple"] .eyebrow,
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="apple"] .title {
   margin-left: 7.5vw;
 }
-.cover-gallery-wrapper .project[data-project="apple"] .text p {
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="apple"] p {
   align-self: flex-start;
 }
-.cover-gallery-wrapper .project[data-project="bloomingdales"] {
-  text-align: right;
-}
-.cover-gallery-wrapper .project[data-project="bloomingdales"] .imagery {
-  width: 48%;
-  background-image: url('../../assets/projects/bloomingdales-cover.jpg');
-}
-.cover-gallery-wrapper .project[data-project="bloomingdales"] .text {
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="bloomingdales"] {
   text-align: left;
   left: 0;
 }
-.cover-gallery-wrapper .project[data-project="bloomingdales"] .text .title {
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="bloomingdales"] .title {
   margin-left: -0.6vw;
 }
-.cover-gallery-wrapper .project[data-project="bloomingdales"] .text p {
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="bloomingdales"] p {
   margin-left: 10vw;
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms;
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] .eyebrow,
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] .title,
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] p,
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] button {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] .eyebrow {
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms;
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] .title {
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms;
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] p {
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1300ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1300ms;
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] button {
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1300ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1300ms;
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="1"] {
+  transform: translate3d(0, 2vw, 0);
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94), transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="1"] .eyebrow,
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="1"] .title,
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="1"] p,
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="1"] button {
+  transform: translate3d(0, 10px, 0);
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-departure-index="1"] {
+  transform: translate3d(0, -2vw, 0);
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94), transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-departure-index="1"] .eyebrow,
+.cover-gallery-wrapper .cover-gallery-text .text[data-departure-index="1"] .title,
+.cover-gallery-wrapper .cover-gallery-text .text[data-departure-index="1"] p,
+.cover-gallery-wrapper .cover-gallery-text .text[data-departure-index="1"] button {
+  transform: translate3d(0, -10px, 0);
+}
+.cover-gallery-wrapper .cover-gallery-text .eyebrow,
+.cover-gallery-wrapper .cover-gallery-text .title,
+.cover-gallery-wrapper .cover-gallery-text p,
+.cover-gallery-wrapper .cover-gallery-text button {
+  opacity: 0;
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94), transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
+}
+.cover-gallery-wrapper .cover-gallery-text p {
+  max-width: 380px;
+}
+.cover-gallery-wrapper .cover-gallery-text button {
+  margin-top: 30px;
 }

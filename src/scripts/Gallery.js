@@ -125,7 +125,10 @@ class Gallery {
   }
 
   updateChildren() {
-    if (this.handleChange) this.handleChange(this.getRealIndex(), this.index)
+    if (this.handleChange) {
+      const $activeChild = this.$children[this.getRealIndex()]
+      this.handleChange(this.getRealIndex(), this.index, $activeChild)
+    }
 
     this.$children.forEach(($child, i) => {
       const distFromIndex = Math.abs(this.index - i)
