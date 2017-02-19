@@ -440,29 +440,43 @@ body::-webkit-scrollbar {
 p {
   font-size: 14px;
   font-weight: 200;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
 }
 button {
   font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.05em;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   border: none;
   background-color: transparent;
   outline: none;
+  color: #000;
   padding: 0 0;
   text-transform: uppercase;
 }
 .eyebrow {
   font-size: 12px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.18em;
   font-weight: 400;
   text-transform: uppercase;
   opacity: 0.5;
+  margin: 5px 0;
 }
 .title {
-  font-size: 7.6vw;
+  font-size: 7.5vw;
+  letter-spacing: -0.04em;
   font-weight: 400;
   margin: -1.2vw 0 30px;
+}
+.label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  font-weight: 400;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: 0 0;
+}
+.no-transitions {
+  transition: none !important;
 }
 nav {
   position: fixed;
@@ -472,7 +486,7 @@ nav {
 }
 nav .nav-content {
   width: 90%;
-  height: 100px;
+  height: 200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -484,11 +498,11 @@ nav .nav-content h1 {
 }
 .cover-gallery-wrapper {
   position: fixed;
-  top: 100px;
+  top: 200px;
   left: 0;
   width: 100%;
-  height: calc(100vh - 100px);
-  padding-bottom: 100px;
+  height: calc(100vh - 200px);
+  padding-bottom: 200px;
 }
 .cover-gallery-wrapper .cover-gallery {
   position: relative;
@@ -594,6 +608,7 @@ nav .nav-content h1 {
   width: 50%;
   height: 100%;
   margin: auto;
+  padding-top: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -611,9 +626,11 @@ nav .nav-content h1 {
   text-align: left;
   left: 6vw;
 }
-.cover-gallery-wrapper .cover-gallery-text .text[data-project="apple"] .eyebrow,
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="apple"] .eyebrow {
+  margin-left: 9vw;
+}
 .cover-gallery-wrapper .cover-gallery-text .text[data-project="apple"] .title {
-  margin-left: 7.5vw;
+  margin-left: 8.5vw;
 }
 .cover-gallery-wrapper .cover-gallery-text .text[data-project="apple"] p {
   align-self: flex-start;
@@ -639,6 +656,12 @@ nav .nav-content h1 {
 .cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] button {
   opacity: 1;
   transform: translate3d(0, 0, 0);
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] .eyebrow {
+  opacity: 0.5;
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] p {
+  opacity: 0.7;
 }
 .cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] .eyebrow {
   transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms;
@@ -681,7 +704,42 @@ nav .nav-content h1 {
 }
 .cover-gallery-wrapper .cover-gallery-text p {
   max-width: 380px;
+  margin-top: 20px;
+  line-height: 2em;
 }
 .cover-gallery-wrapper .cover-gallery-text button {
-  margin-top: 30px;
+  margin-top: 50px;
+}
+.cover-gallery-wrapper .cover-gallery-pagination {
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+}
+.cover-gallery-wrapper .cover-gallery-pagination .active-page-mask,
+.cover-gallery-wrapper .cover-gallery-pagination .divider,
+.cover-gallery-wrapper .cover-gallery-pagination .page-count {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1em;
+}
+.cover-gallery-wrapper .cover-gallery-pagination .divider {
+  width: 60px;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 0 15px;
+}
+.cover-gallery-wrapper .cover-gallery-pagination .active-page-mask {
+  vertical-align: top;
+  margin-top: 5px;
+  height: 15px;
+  overflow: hidden;
+}
+.cover-gallery-wrapper .cover-gallery-pagination .active-page-wrapper {
+  transition: transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
+}
+.cover-gallery-wrapper .cover-gallery-pagination .active-page {
+  opacity: 1;
 }

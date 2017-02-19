@@ -1,3 +1,6 @@
+@imagery-left-squarespace: 0;
+@imagery-right-squarespace: 0;
+
 .cover-gallery-wrapper {
   position: fixed;
   top: @nav-height;
@@ -5,7 +8,7 @@
 
   width: 100%;
   height: ~'calc(100vh - @{nav-height})';
-  padding-bottom: 100px;
+  padding-bottom: @nav-height;
 
   .cover-gallery {
     position: relative;
@@ -124,7 +127,9 @@
       top: 0;
       width: 50%;
       height: 100%;
+
       margin: auto;
+      padding-top: 100px;
 
       display: flex;
       flex-direction: column;
@@ -144,10 +149,8 @@
         text-align: left;
         left: 6vw;
 
-        .eyebrow, .title {
-          margin-left: 7.5vw;
-        }
-
+        .eyebrow { margin-left: 9vw; }
+        .title { margin-left: 8.5vw; }
         p { align-self: flex-start; }
       }
 
@@ -174,6 +177,9 @@
           opacity: 1;
           transform: translate3d(0,0,0);
         }
+
+        .eyebrow { opacity: 0.5; }
+        p { opacity: 0.7; }
 
         .eyebrow { transition: opacity 700ms @cubic 700ms,  transform 700ms @cubic 700ms; }
         .title   { transition: opacity 700ms @cubic 700ms,  transform 700ms @cubic 700ms; }
@@ -206,13 +212,51 @@
 
     p {
       max-width: 380px;
+      margin-top: 20px;
+      line-height: 2em;
     }
 
     button {
-      margin-top: 30px;
+      margin-top: 50px;
     }
   }
 
+  .cover-gallery-pagination {
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
 
+    .active-page-mask,
+    .divider,
+    .page-count, {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1em;
+    }
 
+    .divider {
+      width: 60px;
+      height: 1px;
+      background-color: rgba(0,0,0,0.1);
+      margin: 0 15px;
+    }
+
+    .active-page-mask {
+      vertical-align: top;
+      margin-top: 5px;
+      height: 15px;
+      overflow: hidden;
+    }
+
+    .active-page-wrapper {
+      transition: transform 700ms @cubic;
+    }
+
+    .active-page {
+      opacity: 1;
+    }
+  }
 }

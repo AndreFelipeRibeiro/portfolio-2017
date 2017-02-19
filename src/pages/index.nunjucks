@@ -11,7 +11,6 @@
         <div class="imagery" data-project="squarespace" data-arrival-index="1"></div>
         <div class="imagery" data-project="apple"></div>
         <div class="imagery" data-project="bloomingdales"></div>
-        <div class="imagery" data-project="apple"></div>
 
         <div class="concealer left"></div>
         <div class="concealer right"></div>
@@ -29,7 +28,7 @@
         </article>
 
         <article class="text" data-project="apple">
-          <h3 class="eyebrow">Frontsite</h3>
+          <h3 class="eyebrow">Redesign Concepts</h3>
           <h2 class="title">Apple</h2>
           <p>
             Lorem ipsum dolor amet consectetur adipiscing elit duisam velit at augue commodo aliquet lorem ipsum dolor consectetur elit duisam velit.
@@ -47,16 +46,14 @@
             <button>Learn More</button>
           </p>
         </article>
+      </div>
 
-        <article class="text" data-project="apple">
-          <h3 class="eyebrow">Frontsite</h3>
-          <h2 class="title">Apple</h2>
-          <p>
-            Lorem ipsum dolor amet consectetur adipiscing elit duisam velit at augue commodo aliquet lorem ipsum dolor consectetur elit duisam velit.
-            <br />
-            <button>Learn More</button>
-          </p>
-        </article>
+      <div class="cover-gallery-pagination">
+        <div class="active-page-mask">
+          <div class="active-page-wrapper"></div>
+        </div>
+        <div class="divider"></div>
+        <div class="label page-count">05</div>
       </div>
 
     </div>
