@@ -1,44 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Andre Felipe Ribeiro</title>
-
-    <link href="./styles/index.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-
-    
-
-  <nav>
-  <div class="nav-content">
-    <h1>Andre Ribeiro</h1>
-
-    <div id="hamburger">
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-  </div>
-</nav>
-
-  <section class="grid-gallery-wrapper">
-  <div class="grid-gallery">
-    <div class="grid-block" data-project="squarespace">
-      <div class="imagery"></div>
-      <div class="label">01</div>
-    </div>
-    <div class="grid-block" data-project="apple">
-      <div class="imagery"></div>
-      <div class="label">02</div>
-    </div>
-    <div class="grid-block" data-project="bloomingdales">
-      <div class="imagery"></div>
-      <div class="label">03</div>
-    </div>
-  </div>
-</section>
-
-  <section class="cover-gallery-wrapper">
+<section class="cover-gallery-wrapper">
   <div class="cover-gallery">
 
     <div class="cover-gallery-imagery">
@@ -113,10 +73,3 @@
     </div>
   </div>
 </section>
-
-
-
-
-    <script src="./scripts/bundle.js" type="text/javascript"></script>
-  </body>
-</html>

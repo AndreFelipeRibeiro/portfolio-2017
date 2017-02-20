@@ -1,0 +1,44 @@
+.cover-gallery-wrapper {
+  .cover-gallery-pagination {
+    position: absolute;
+    bottom: @nav-height * -0.5;
+    left: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+
+    .active-page-mask,
+    .divider,
+    .page-count, {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1em;
+    }
+
+    .divider {
+      width: 60px;
+      height: 1px;
+      background-color: rgba(0,0,0,0.1);
+      margin: 0 15px;
+    }
+
+    .active-page-mask {
+      vertical-align: top;
+      margin-top: 5px;
+      height: 15px;
+      overflow: hidden;
+    }
+
+    .active-page-wrapper {
+      transition: transform @transition-duration @cubic;
+    }
+
+    .active-page {
+      opacity: 1;
+    }
+
+    @media @desktop_lg {
+      bottom: (@nav-height-desktop-lg * -0.5) - 0.5vw;
+    }
+  }
+}

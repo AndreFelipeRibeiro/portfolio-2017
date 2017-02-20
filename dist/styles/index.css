@@ -458,21 +458,25 @@ button {
   letter-spacing: 0.18em;
   font-weight: 400;
   text-transform: uppercase;
-  opacity: 0.5;
   margin: 5px 0;
 }
 .title {
-  font-size: 7.5vw;
+  font-size: 8.5vw;
   letter-spacing: -0.04em;
   font-weight: 400;
-  margin: -1.2vw 0 30px;
+  margin: -1.2vw 0 20px;
+}
+@media all and (min-width: 1600px) {
+  .title {
+    font-size: 8vw;
+  }
 }
 .label {
   font-size: 11px;
   letter-spacing: 0.18em;
   font-weight: 400;
   text-transform: uppercase;
-  opacity: 0.5;
+  opacity: 0.3;
   margin: 0 0;
 }
 .no-transitions {
@@ -483,26 +487,35 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
+  height: 100px;
 }
 nav .nav-content {
   width: 90%;
-  height: 200px;
+  height: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;
 }
 nav .nav-content h1 {
-  font-size: 21px;
+  font-size: 19.5px;
   font-weight: 300;
   margin: 0 0;
 }
+@media all and (min-width: 1440px) {
+  nav {
+    height: 7.5vw;
+  }
+  nav h1 {
+    padding-bottom: 1vw;
+  }
+}
 .cover-gallery-wrapper {
   position: fixed;
-  top: 200px;
+  top: 100px;
   left: 0;
   width: 100%;
-  height: calc(100vh - 200px);
-  padding-bottom: 200px;
+  height: calc(100vh - 100px);
+  padding-bottom: 100px;
 }
 .cover-gallery-wrapper .cover-gallery {
   position: relative;
@@ -523,6 +536,13 @@ nav .nav-content h1 {
   width: 100%;
   height: 100%;
 }
+@media all and (min-width: 1440px) {
+  .cover-gallery-wrapper {
+    top: 7.5vw;
+    height: calc(100vh - 7.5vw);
+    padding-bottom: 8.5vw;
+  }
+}
 .cover-gallery-wrapper .cover-gallery-imagery {
   transition: background-color 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
 }
@@ -530,10 +550,10 @@ nav .nav-content h1 {
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
+  transition: opacity 400ms cubic-bezier(0.8, 0, 0.55, 0.94);
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="squarespace"] {
-  width: 60%;
+  width: 55%;
   background-image: url('../../assets/projects/squarespace-cover.jpg');
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="apple"] {
@@ -549,9 +569,21 @@ nav .nav-content h1 {
   width: 48%;
   background-image: url('../../assets/projects/bloomingdales-cover.jpg');
 }
+.cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="morgan-stanley"] {
+  left: 0;
+  right: auto;
+  width: 30%;
+  background-image: url('../../assets/projects/morgan-stanley-cover.jpg');
+}
+.cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="vans"] {
+  left: auto;
+  right: 0;
+  width: 45%;
+  background-image: url('../../assets/projects/vans-cover.jpg');
+}
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-arrival-index="0"] {
   opacity: 1;
-  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1400ms;
+  transition: opacity 400ms cubic-bezier(0.8, 0, 0.55, 0.94) 1400ms;
 }
 .cover-gallery-wrapper .cover-gallery-imagery .concealer {
   position: absolute;
@@ -565,18 +597,20 @@ nav .nav-content h1 {
 }
 .cover-gallery-wrapper .cover-gallery-imagery .concealer.left {
   left: -100%;
+  transform: translate3d(50%, 0, 0);
 }
 .cover-gallery-wrapper .cover-gallery-imagery .concealer.right {
   right: -100%;
+  transform: translate3d(-50%, 0, 0);
 }
 .cover-gallery-wrapper .cover-gallery-imagery[data-project="squarespace"] {
-  background-color: #e3e2de;
+  background-color: #e9eae7;
 }
 .cover-gallery-wrapper .cover-gallery-imagery[data-project="squarespace"] .concealer.left {
   transform: translate3d(0, 0, 0);
 }
 .cover-gallery-wrapper .cover-gallery-imagery[data-project="squarespace"] .concealer.right {
-  transform: translate3d(-40%, 0, 0);
+  transform: translate3d(-45%, 0, 0);
 }
 .cover-gallery-wrapper .cover-gallery-imagery[data-project="apple"] {
   background-color: #ededed;
@@ -588,12 +622,30 @@ nav .nav-content h1 {
   transform: translate3d(-35%, 0, 0);
 }
 .cover-gallery-wrapper .cover-gallery-imagery[data-project="bloomingdales"] {
-  background-color: #8e7e71;
+  background-color: #a69689;
 }
 .cover-gallery-wrapper .cover-gallery-imagery[data-project="bloomingdales"] .concealer.left {
   transform: translate3d(52%, 0, 0);
 }
 .cover-gallery-wrapper .cover-gallery-imagery[data-project="bloomingdales"] .concealer.right {
+  transform: translate3d(0, 0, 0);
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="morgan-stanley"] {
+  background-color: #93336a;
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="morgan-stanley"] .concealer.left {
+  transform: translate3d(0, 0, 0);
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="morgan-stanley"] .concealer.right {
+  transform: translate3d(-70%, 0, 0);
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="vans"] {
+  background-color: #1a1a1a;
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="vans"] .concealer.left {
+  transform: translate3d(55%, 0, 0);
+}
+.cover-gallery-wrapper .cover-gallery-imagery[data-project="vans"] .concealer.right {
   transform: translate3d(0, 0, 0);
 }
 .cover-gallery-wrapper .cover-gallery-text {
@@ -608,7 +660,7 @@ nav .nav-content h1 {
   width: 50%;
   height: 100%;
   margin: auto;
-  padding-top: 100px;
+  padding-top: 75px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -616,15 +668,15 @@ nav .nav-content h1 {
   transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94), transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
 }
 .cover-gallery-wrapper .cover-gallery-text .text[data-project="squarespace"] {
-  right: 0;
-  left: auto;
+  right: auto;
+  left: 45%;
 }
 .cover-gallery-wrapper .cover-gallery-text .text[data-project="squarespace"] p {
   align-self: flex-end;
 }
 .cover-gallery-wrapper .cover-gallery-text .text[data-project="apple"] {
   text-align: left;
-  left: 6vw;
+  left: 6.35vw;
 }
 .cover-gallery-wrapper .cover-gallery-text .text[data-project="apple"] .eyebrow {
   margin-left: 9vw;
@@ -645,6 +697,20 @@ nav .nav-content h1 {
 .cover-gallery-wrapper .cover-gallery-text .text[data-project="bloomingdales"] p {
   margin-left: 10vw;
 }
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="morgan-stanley"] {
+  right: auto;
+  left: 35%;
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="morgan-stanley"] p {
+  align-self: flex-end;
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="vans"] {
+  text-align: left;
+  left: 6vw;
+}
+.cover-gallery-wrapper .cover-gallery-text .text[data-project="vans"] p {
+  margin-left: 8vw;
+}
 .cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] {
   opacity: 1;
   transform: translate3d(0, 0, 0);
@@ -658,7 +724,7 @@ nav .nav-content h1 {
   transform: translate3d(0, 0, 0);
 }
 .cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] .eyebrow {
-  opacity: 0.5;
+  opacity: 0.3;
 }
 .cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] p {
   opacity: 0.7;
@@ -670,10 +736,10 @@ nav .nav-content h1 {
   transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms;
 }
 .cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] p {
-  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1300ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1300ms;
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1470ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1470ms;
 }
 .cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="0"] button {
-  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1300ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1300ms;
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1470ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1470ms;
 }
 .cover-gallery-wrapper .cover-gallery-text .text[data-arrival-index="1"] {
   transform: translate3d(0, 2vw, 0);
@@ -710,9 +776,14 @@ nav .nav-content h1 {
 .cover-gallery-wrapper .cover-gallery-text button {
   margin-top: 50px;
 }
+@media all and (min-width: 1440px) {
+  .cover-gallery-wrapper .cover-gallery-text .text[data-project="vans"] {
+    left: 12vw;
+  }
+}
 .cover-gallery-wrapper .cover-gallery-pagination {
   position: absolute;
-  bottom: -100px;
+  bottom: -50px;
   left: 0;
   right: 0;
   width: 100%;
@@ -742,4 +813,9 @@ nav .nav-content h1 {
 }
 .cover-gallery-wrapper .cover-gallery-pagination .active-page {
   opacity: 1;
+}
+@media all and (min-width: 1440px) {
+  .cover-gallery-wrapper .cover-gallery-pagination {
+    bottom: -4.25vw;
+  }
 }

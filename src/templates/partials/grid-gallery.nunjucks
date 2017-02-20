@@ -1,0 +1,16 @@
+<section class="grid-gallery-wrapper">
+  <div class="grid-gallery">
+    <div class="grid-block" data-project="squarespace">
+      <div class="imagery"></div>
+      <div class="label">01</div>
+    </div>
+    <div class="grid-block" data-project="apple">
+      <div class="imagery"></div>
+      <div class="label">02</div>
+    </div>
+    <div class="grid-block" data-project="bloomingdales">
+      <div class="imagery"></div>
+      <div class="label">03</div>
+    </div>
+  </div>
+</section>

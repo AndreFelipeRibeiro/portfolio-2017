@@ -1,7 +1,12 @@
 @nav-width: 90%;
-@nav-height: 200px;
+@nav-height: 100px;
+@nav-height-desktop-lg: 7.5vw;
 
 @cubic: cubic-bezier(0.8, 0, 0.55, 0.94);
+@snappy: cubic-bezier(1, 0, 0.51, 1);
+
+@transition-duration: 700ms;
+@transition-duration-quick: 400ms;
 
 
 * {
@@ -50,16 +55,18 @@ button {
   letter-spacing: 0.18em;
   font-weight: 400;
   text-transform: uppercase;
-
-  opacity: 0.5;
   margin: 5px 0;
 }
 
 .title {
-  font-size: 7.5vw;
+  font-size: 8.5vw;
   letter-spacing: -0.04em;
   font-weight: 400;
-  margin: -1.2vw 0 30px;
+  margin: -1.2vw 0 20px;
+
+  @media @desktop_xl {
+    font-size: 8vw;
+  }
 }
 
 .label {
@@ -68,10 +75,9 @@ button {
   font-weight: 400;
   text-transform: uppercase;
 
-  opacity: 0.5;
+  opacity: 0.3;
   margin: 0 0;
 }
-
 
 .no-transitions {
   transition: none !important;

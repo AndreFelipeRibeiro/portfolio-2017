@@ -27,11 +27,13 @@ class Portfolio {
 
     this.lastPageYOffset = window.pageYOffset
     this.currentPageYOffset = window.pageYOffset
+    this.sectionHeight = 2000
 
     this.initPagination()
     this.initCoverGalleries()
 
     scrollTo(0,0)
+    this.handleResize()
 
     this.addEventListeners()
   }
@@ -67,8 +69,7 @@ class Portfolio {
   }
 
   handleScroll(e) {
-    const sectionHeight = this.vh
-    const section = Math.floor(this.currentPageYOffset / sectionHeight)
+    const section = Math.floor(this.currentPageYOffset / this.sectionHeight)
     const nextIndex = section % this.$coverImages.length
 
     const endOfPage = this.bodyHeight - this.vh
@@ -149,6 +150,7 @@ class Portfolio {
 
   initCoverGalleries() {
     this.coverIndex = 0
+    this.updatePagination(this.coverIndex)
 
     this.coverGalleryImagery = new BaseGallery({
       galleryNode: this.$coverGalleryImagery,
@@ -164,8 +166,7 @@ class Portfolio {
       handleChange: () => {}
     })
 
-    document.body.style.height = (this.$coverImages.length + 1) * window.innerHeight + 'px'
-    this.handleResize()
+    document.body.style.height = (this.$coverImages.length + 1) * this.sectionHeight + 'px'
 
     this.$coverGalleryImagery.dataset.project = this.$coverImages[0].dataset.project
   }
