@@ -1,5 +1,7 @@
 const Hammer = require('hammerjs')
 
+const transitionEnd = require('../lib/transition-end')
+
 const BaseGallery = require('../blocks/Gallery')
 const Pagination = require('../blocks/Pagination')
 
@@ -19,17 +21,20 @@ class Home {
     this.$coverPagination     = this.$portfolio.getElementsByClassName('cover-gallery-pagination')[0]
     this.$activePageWrapper   = this.$coverPagination.getElementsByClassName('active-page-wrapper')[0]
 
+    this.$gridGalleryWrapper  = this.$portfolio.getElementsByClassName('grid-gallery-wrapper')[0]
     this.$gridGallery         = this.$portfolio.getElementsByClassName('grid-gallery')[0]
+    this.$gridBlocks          = Array.from(this.$gridGallery.getElementsByClassName('grid-block'))
 
     this.$sideNav             = this.$portfolio.getElementsByClassName('side-nav')[0]
     this.$sideNavOptions      = Array.from(this.$sideNav.getElementsByClassName('label'))
-
 
     this.handleCoverChange = this.handleCoverChange.bind(this)
     this.handleResize      = this.handleResize.bind(this)
     this.handleScroll      = this.handleScroll.bind(this)
     this.requestScroll     = this.requestScroll.bind(this)
 
+    this.isFirstLoad        = true
+    this.layout             = this.$portfolio.dataset.view
     this.lastPageYOffset    = window.pageYOffset
     this.currentPageYOffset = window.pageYOffset
     this.sectionHeight      = 2000
@@ -38,6 +43,8 @@ class Home {
     this.initPagination()
     this.initCoverGalleries()
     this.initGridGallery()
+
+    this.updateView(this.layout)
 
     scrollTo(0,0)
     this.handleResize()
@@ -71,7 +78,7 @@ class Home {
     this.vh = window.innerHeight
     this.bodyHeight = document.body.clientHeight
 
-    this.resizeGalleryGridBlocks()
+    this.setGridBlockSizes()
   }
 
   handleScroll(e) {
@@ -101,34 +108,79 @@ class Home {
   initSideNav() {
     this.$sideNavOptions.forEach($option => {
       $option.addEventListener('click', (e) => {
-        this.$portfolio.dataset.view = e.target.dataset.view
-        this.$sideNav.dataset.view = e.target.dataset.view
+        this.layout = e.target.dataset.view
+
+        this.$portfolio.dataset.view = this.layout
+        this.$sideNav.dataset.view = this.layout
 
         this.$gridBlocks = Array.from(this.$gridGallery.querySelectorAll(`.grid-block`))
 
-        if (e.target.dataset.view === 'grid') {
-          this.$gridBlocks.forEach($block => {
+        this.updateView(this.layout)
+      })
+    })
+  }
 
-            if ($block.dataset.project === this.$coverGalleryImagery.dataset.project) {
-              $block.classList.add('is--active')
-            } else {
-              $block.classList.remove('is--active')
-            }
+  updateView(type) {
+
+    if (type === 'grid') {
+      this.$gridBlocks.forEach($block => {
+
+        const scale = $block.dataset.scale
+        const $image = $block.querySelector(`.imagery`)
+
+        const isActiveProject = $block.dataset.project === this.$coverGalleryImagery.dataset.project
+        if (isActiveProject) $block.classList.add('is--active')
+
+        if (!this.isFirstLoad && isActiveProject) {
+          const { diffX, diffY } = $block.dataset
+          $block.classList.add('no-transitions')
+          $image.classList.add('no-transitions')
+          $image.style.removeProperty('transform')
+          $block.style.transform = `translate3d(${diffX}px,${diffY}px,0)`
+          $block.clientHeight
+          $image.clientHeight
+          $image.classList.remove('no-transitions')
+          $block.classList.remove('no-transitions')
+        }
+
+        $block.style.removeProperty('transform')
+        $image.style.transform = `scale(${scale})`
+      })
+    }
+
+    if (type === 'cover') {
+      this.$gridBlocks.forEach($block => {
+        const $image = $block.querySelector(`.imagery`)
+        const scale = $block.dataset.scale
+        const isActiveProject = $block.dataset.project === this.$coverGalleryImagery.dataset.project
+
+        if (!this.isFirstLoad && isActiveProject) {
+          const { diffX, diffY } = $block.dataset
+          $image.style.removeProperty('transform')
+          $block.style.transform = `translate3d(${diffX}px,${diffY}px,0)`
+
+          const handleTransitionEnd = (e) => {
+            if (e.target !== this.$gridGalleryWrapper) return
+            if (e.propertyName !== 'opacity') return
+
+            this.$gridGalleryWrapper.removeEventListener(transitionEnd, handleTransitionEnd)
 
             const scale = $block.dataset.scale
             const $image = $block.querySelector(`.imagery`)
+
+            $block.classList.remove('is--active')
             $block.style.removeProperty('transform')
             $image.style.transform = `scale(${scale})`
-          })
+          }
+
+          this.$gridGalleryWrapper.addEventListener(transitionEnd, handleTransitionEnd)
         } else {
-          this.$gridBlocks.forEach($block => {
-            const $image = $block.querySelector(`.imagery`)
-            $image.style.removeProperty('transform')
-          })
-          this.resizeGalleryGridBlocks()
+          $image.style.transform = `scale(${scale})`
         }
       })
-    })
+    }
+
+    this.isFirstLoad = false
   }
 
   initPagination() {
@@ -161,10 +213,10 @@ class Home {
 
   initGridGallery() {
     this.gridBlocks = {}
-    this.resizeGalleryGridBlocks()
+    this.setGridBlockSizes()
   }
 
-  resizeGalleryGridBlocks() {
+  setGridBlockSizes() {
     this.$coverImages.forEach($image => {
       const project = $image.dataset.project
       const $gridBlock = this.$gridGallery.querySelector(`.grid-block[data-project=${project}]`)
@@ -176,6 +228,11 @@ class Home {
       $gridBlockImage.style.width = $image.clientWidth + 'px'
       $gridBlockImage.style.height = $image.clientHeight + 'px'
 
+      $gridBlockImage.classList.add('no-transitions')
+      $gridBlockImage.style.transform = `scale(${scale})`
+      $gridBlockImage.clientHeight
+      $gridBlockImage.classList.remove('no-transitions')
+
       $gridBlock.style.width = $image.clientWidth * scale + 'px'
       $gridBlock.style.height = $image.clientHeight * scale + 'px'
 
@@ -184,9 +241,8 @@ class Home {
       const diffX = imageRect.left - gridBlockRect.left
       const diffY = imageRect.top - gridBlockRect.top
 
-      console.log(project, imageRect, gridBlockRect)
-
-      $gridBlock.style.transform = `translate3d(${diffX}px,${diffY}px,0)`
+      $gridBlock.dataset.diffX = diffX
+      $gridBlock.dataset.diffY = diffY
     })
   }
 }

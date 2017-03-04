@@ -52,7 +52,9 @@
 
 	var Hammer = __webpack_require__(1);
 
-	var BaseGallery = __webpack_require__(2);
+	var transitionEnd = __webpack_require__(2);
+
+	var BaseGallery = __webpack_require__(3);
 	var Pagination = __webpack_require__(4);
 
 	// Polyfill
@@ -74,7 +76,9 @@
 	    this.$coverPagination = this.$portfolio.getElementsByClassName('cover-gallery-pagination')[0];
 	    this.$activePageWrapper = this.$coverPagination.getElementsByClassName('active-page-wrapper')[0];
 
+	    this.$gridGalleryWrapper = this.$portfolio.getElementsByClassName('grid-gallery-wrapper')[0];
 	    this.$gridGallery = this.$portfolio.getElementsByClassName('grid-gallery')[0];
+	    this.$gridBlocks = Array.from(this.$gridGallery.getElementsByClassName('grid-block'));
 
 	    this.$sideNav = this.$portfolio.getElementsByClassName('side-nav')[0];
 	    this.$sideNavOptions = Array.from(this.$sideNav.getElementsByClassName('label'));
@@ -84,6 +88,8 @@
 	    this.handleScroll = this.handleScroll.bind(this);
 	    this.requestScroll = this.requestScroll.bind(this);
 
+	    this.isFirstLoad = true;
+	    this.layout = this.$portfolio.dataset.view;
 	    this.lastPageYOffset = window.pageYOffset;
 	    this.currentPageYOffset = window.pageYOffset;
 	    this.sectionHeight = 2000;
@@ -92,6 +98,8 @@
 	    this.initPagination();
 	    this.initCoverGalleries();
 	    this.initGridGallery();
+
+	    this.updateView(this.layout);
 
 	    scrollTo(0, 0);
 	    this.handleResize();
@@ -132,7 +140,7 @@
 	      this.vh = window.innerHeight;
 	      this.bodyHeight = document.body.clientHeight;
 
-	      this.resizeGalleryGridBlocks();
+	      this.setGridBlockSizes();
 	    }
 	  }, {
 	    key: 'handleScroll',
@@ -166,34 +174,87 @@
 
 	      this.$sideNavOptions.forEach(function ($option) {
 	        $option.addEventListener('click', function (e) {
-	          _this2.$portfolio.dataset.view = e.target.dataset.view;
-	          _this2.$sideNav.dataset.view = e.target.dataset.view;
+	          _this2.layout = e.target.dataset.view;
+
+	          _this2.$portfolio.dataset.view = _this2.layout;
+	          _this2.$sideNav.dataset.view = _this2.layout;
 
 	          _this2.$gridBlocks = Array.from(_this2.$gridGallery.querySelectorAll('.grid-block'));
 
-	          if (e.target.dataset.view === 'grid') {
-	            _this2.$gridBlocks.forEach(function ($block) {
+	          _this2.updateView(_this2.layout);
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'updateView',
+	    value: function updateView(type) {
+	      var _this3 = this;
 
-	              if ($block.dataset.project === _this2.$coverGalleryImagery.dataset.project) {
-	                $block.classList.add('is--active');
-	              } else {
-	                $block.classList.remove('is--active');
-	              }
+	      if (type === 'grid') {
+	        this.$gridBlocks.forEach(function ($block) {
+
+	          var scale = $block.dataset.scale;
+	          var $image = $block.querySelector('.imagery');
+
+	          var isActiveProject = $block.dataset.project === _this3.$coverGalleryImagery.dataset.project;
+	          if (isActiveProject) $block.classList.add('is--active');
+
+	          if (!_this3.isFirstLoad && isActiveProject) {
+	            var _$block$dataset = $block.dataset,
+	                diffX = _$block$dataset.diffX,
+	                diffY = _$block$dataset.diffY;
+
+	            $block.classList.add('no-transitions');
+	            $image.classList.add('no-transitions');
+	            $image.style.removeProperty('transform');
+	            $block.style.transform = 'translate3d(' + diffX + 'px,' + diffY + 'px,0)';
+	            $block.clientHeight;
+	            $image.clientHeight;
+	            $image.classList.remove('no-transitions');
+	            $block.classList.remove('no-transitions');
+	          }
+
+	          $block.style.removeProperty('transform');
+	          $image.style.transform = 'scale(' + scale + ')';
+	        });
+	      }
+
+	      if (type === 'cover') {
+	        this.$gridBlocks.forEach(function ($block) {
+	          var $image = $block.querySelector('.imagery');
+	          var scale = $block.dataset.scale;
+	          var isActiveProject = $block.dataset.project === _this3.$coverGalleryImagery.dataset.project;
+
+	          if (!_this3.isFirstLoad && isActiveProject) {
+	            var _$block$dataset2 = $block.dataset,
+	                diffX = _$block$dataset2.diffX,
+	                diffY = _$block$dataset2.diffY;
+
+	            $image.style.removeProperty('transform');
+	            $block.style.transform = 'translate3d(' + diffX + 'px,' + diffY + 'px,0)';
+
+	            var handleTransitionEnd = function handleTransitionEnd(e) {
+	              if (e.target !== _this3.$gridGalleryWrapper) return;
+	              if (e.propertyName !== 'opacity') return;
+
+	              _this3.$gridGalleryWrapper.removeEventListener(transitionEnd, handleTransitionEnd);
 
 	              var scale = $block.dataset.scale;
 	              var $image = $block.querySelector('.imagery');
+
+	              $block.classList.remove('is--active');
 	              $block.style.removeProperty('transform');
 	              $image.style.transform = 'scale(' + scale + ')';
-	            });
+	            };
+
+	            _this3.$gridGalleryWrapper.addEventListener(transitionEnd, handleTransitionEnd);
 	          } else {
-	            _this2.$gridBlocks.forEach(function ($block) {
-	              var $image = $block.querySelector('.imagery');
-	              $image.style.removeProperty('transform');
-	            });
-	            _this2.resizeGalleryGridBlocks();
+	            $image.style.transform = 'scale(' + scale + ')';
 	          }
 	        });
-	      });
+	      }
+
+	      this.isFirstLoad = false;
 	    }
 	  }, {
 	    key: 'initPagination',
@@ -229,23 +290,28 @@
 	    key: 'initGridGallery',
 	    value: function initGridGallery() {
 	      this.gridBlocks = {};
-	      this.resizeGalleryGridBlocks();
+	      this.setGridBlockSizes();
 	    }
 	  }, {
-	    key: 'resizeGalleryGridBlocks',
-	    value: function resizeGalleryGridBlocks() {
-	      var _this3 = this;
+	    key: 'setGridBlockSizes',
+	    value: function setGridBlockSizes() {
+	      var _this4 = this;
 
 	      this.$coverImages.forEach(function ($image) {
 	        var project = $image.dataset.project;
-	        var $gridBlock = _this3.$gridGallery.querySelector('.grid-block[data-project=' + project + ']');
+	        var $gridBlock = _this4.$gridGallery.querySelector('.grid-block[data-project=' + project + ']');
 	        var $gridBlockImage = $gridBlock.getElementsByClassName('imagery')[0];
 	        var scale = parseFloat($gridBlock.dataset.scale);
 
-	        _this3.gridBlocks[project] = $gridBlock;
+	        _this4.gridBlocks[project] = $gridBlock;
 
 	        $gridBlockImage.style.width = $image.clientWidth + 'px';
 	        $gridBlockImage.style.height = $image.clientHeight + 'px';
+
+	        $gridBlockImage.classList.add('no-transitions');
+	        $gridBlockImage.style.transform = 'scale(' + scale + ')';
+	        $gridBlockImage.clientHeight;
+	        $gridBlockImage.classList.remove('no-transitions');
 
 	        $gridBlock.style.width = $image.clientWidth * scale + 'px';
 	        $gridBlock.style.height = $image.clientHeight * scale + 'px';
@@ -255,9 +321,8 @@
 	        var diffX = imageRect.left - gridBlockRect.left;
 	        var diffY = imageRect.top - gridBlockRect.top;
 
-	        console.log(project, imageRect, gridBlockRect);
-
-	        $gridBlock.style.transform = 'translate3d(' + diffX + 'px,' + diffY + 'px,0)';
+	        $gridBlock.dataset.diffX = diffX;
+	        $gridBlock.dataset.diffY = diffY;
 	      });
 	    }
 	  }]);
@@ -2907,6 +2972,33 @@
 
 /***/ },
 /* 2 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	// Usage:
+	// const transitionEnd = require('./transition-end');
+	// element.addEventListener(transitionEnd, handler);
+
+	var map = {
+	  'transition': 'transitionend',
+	  'WebkitTransition': 'webkitTransitionEnd',
+	  'MozTransition': 'transitionend',
+	  'OTransition': 'oTransitionEnd',
+	  'msTransition': 'MSTransitionEnd'
+	};
+
+	var elem = document.createElement('p');
+
+	for (var transition in map) {
+	  if (elem.style[transition] != null) {
+	    module.exports = map[transition];
+	    break;
+	  }
+	}
+
+/***/ },
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2915,7 +3007,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var transitionEnd = __webpack_require__(3);
+	var transitionEnd = __webpack_require__(2);
 
 	/* This is a very very simple gallery.
 
@@ -3107,33 +3199,6 @@
 	module.exports = Gallery;
 
 /***/ },
-/* 3 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	// Usage:
-	// const transitionEnd = require('./transition-end');
-	// element.addEventListener(transitionEnd, handler);
-
-	var map = {
-	  'transition': 'transitionend',
-	  'WebkitTransition': 'webkitTransitionEnd',
-	  'MozTransition': 'transitionend',
-	  'OTransition': 'oTransitionEnd',
-	  'msTransition': 'MSTransitionEnd'
-	};
-
-	var elem = document.createElement('p');
-
-	for (var transition in map) {
-	  if (elem.style[transition] != null) {
-	    module.exports = map[transition];
-	    break;
-	  }
-	}
-
-/***/ },
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -3143,7 +3208,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var transitionEnd = __webpack_require__(3);
+	var transitionEnd = __webpack_require__(2);
 	var transform = __webpack_require__(5);
 
 	var Pagination = function () {

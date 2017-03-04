@@ -7,6 +7,22 @@
       transition: opacity @transition-duration @cubic @transition-duration,
                   visibility @transition-duration step-start @transition-duration;
     }
+
+    .grid-gallery-wrapper {
+      transition: opacity @transition-duration step-end @transition-duration,
+                  visibility @transition-duration step-end @transition-duration;
+
+      .grid-block {
+        transition: opacity @transition-duration @cubic,
+                    transform @transition-duration @cubic 0ms;
+
+        &.is--active .imagery {
+          transition: opacity @transition-duration step-end @transition-duration,
+                      transform @transition-duration @cubic 0ms;
+
+        }
+      }
+    }
   }
 
   &[data-view="grid"] {
@@ -16,8 +32,8 @@
         transition: opacity @transition-duration @cubic;
       }
 
-      transition: opacity @transition-duration @cubic @transition-duration,
-                  visibility @transition-duration step-start @transition-duration;
+      transition: opacity @transition-duration @cubic,
+                  visibility @transition-duration step-end;
     }
 
     .grid-gallery-wrapper {
@@ -26,10 +42,25 @@
 
       .grid-block {
         opacity: 1;
+
+        transition: opacity @transition-duration @cubic @transition-duration * 1.8,
+                    transform @transition-duration @cubic @transition-duration * 1.5;
+
+        &.is--active {
+          transition: opacity @transition-duration @cubic @transition-duration,
+                      transform @transition-duration @cubic @transition-duration;
+
+          .imagery {
+            transition: transform @transition-duration @cubic @transition-duration;
+          }
+        }
+
+        .imagery {
+          transition: transform @transition-duration @cubic @transition-duration * 1.5;
+        }
       }
 
-      // transition: opacity @transition-duration @cubic @transition-duration,
-      //             visibility @transition-duration step-start @transition-duration;
+      transition: none;
     }
   }
 
@@ -45,8 +76,6 @@
     width: 100%;
     height: ~'calc(100vh - @{nav-height})';
     padding-bottom: @nav-height;
-
-
   }
 
   @media @desktop_lg {

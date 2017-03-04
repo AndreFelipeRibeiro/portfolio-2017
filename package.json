@@ -4,9 +4,9 @@
   "description": "Pretty self-explanatory.",
   "main": "index.html",
   "scripts": {
-    "dev": "gulp watch & webpack-dev-server --hot --progress",
+    "dev": "npm run build && gulp watch",
     "server": "squarespace-server https://andre-ribeiro-j82g.squarespace.com",
-    "start": "gulp watch & webpack-dev-server --hot --progress",
+    "start": "npm run dev",
     "build": "gulp less & webpack",
     "tunnel": "ngrok http 9000"
   },
