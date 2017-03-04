@@ -1,0 +1,34 @@
+<section class="grid-gallery-wrapper">
+  <div class="grid-gallery">
+
+    <div class="grid-column">
+      <div class="grid-block" data-project="squarespace" data-scale="0.45">
+        <div class="imagery"></div>
+        <div class="label">01</div>
+      </div>
+      <div class="grid-block" data-project="bloomingdales" data-scale="0.45">
+        <div class="imagery"></div>
+        <div class="label">03</div>
+      </div>
+    </div>
+
+    <div class="grid-column">
+      <div class="grid-block" data-project="apple" data-scale="1">
+        <div class="imagery"></div>
+        <div class="label">02</div>
+      </div>
+    </div>
+
+    <div class="grid-column">
+      <div class="grid-block" data-project="morgan-stanley" data-scale="0.45">
+        <div class="imagery"></div>
+        <div class="label">04</div>
+      </div>
+      <div class="grid-block" data-project="vans" data-scale="0.45">
+        <div class="imagery"></div>
+        <div class="label">05</div>
+      </div>
+    </div>
+
+  </div>
+</section>

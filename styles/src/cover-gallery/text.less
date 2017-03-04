@@ -1,0 +1,164 @@
+.cover-gallery-wrapper {
+  .cover-gallery-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    .text {
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+
+      margin: auto;
+      padding-top: 75px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      opacity: 0;
+
+      transition: opacity @transition-duration @cubic, transform @transition-duration @cubic;
+
+      &[data-project="squarespace"] {
+        right: auto;
+        left: 45%;
+        p { align-self: flex-end; }
+      }
+
+      &[data-project="apple"] {
+        text-align: left;
+        left: 6.35vw;
+
+        .eyebrow { margin-left: 9vw; }
+        .title { margin-left: 8.5vw; }
+        p { align-self: flex-start; }
+      }
+
+      &[data-project="bloomingdales"] {
+        text-align: left;
+        left: 0;
+
+        .title {
+          margin-left: -0.6vw;
+        }
+
+        p {
+          margin-left: 10vw;
+        }
+      }
+
+      &[data-project="morgan-stanley"] {
+        right: auto;
+        left: 35%;
+        p { align-self: flex-end; }
+      }
+
+      &[data-project="vans"] {
+        text-align: left;
+        left: 6vw;
+
+        p { margin-left: 8vw; }
+      }
+
+      &[data-arrival-index="0"] {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+
+        transition: opacity @transition-duration @cubic @transition-duration, transform @transition-duration @cubic @transition-duration;
+
+        z-index: 1;
+
+        .eyebrow, .title, p, button {
+          opacity: 1;
+          transform: translate3d(0,0,0);
+        }
+
+        .eyebrow { opacity: 0.3; }
+
+        .eyebrow { transition: opacity @transition-duration @cubic @transition-duration,  transform @transition-duration @cubic @transition-duration; }
+        .title   { transition: opacity @transition-duration @cubic @transition-duration,  transform @transition-duration @cubic @transition-duration; }
+        p        { transition: opacity @transition-duration @cubic (@transition-duration * 2.1), transform @transition-duration @cubic (@transition-duration * 2.1); }
+        button   { transition: opacity @transition-duration @cubic (@transition-duration * 2.1), transform @transition-duration @cubic (@transition-duration * 2.1); }
+      }
+
+      &[data-arrival-index="1"] {
+        transform: translate3d(0,2vw,0);
+        transition: opacity @transition-duration @cubic, transform @transition-duration @cubic;
+
+        .eyebrow, .title, p, button { transform: translate3d(0,10px,0); }
+      }
+
+      &[data-departure-index="1"] {
+        transform: translate3d(0,-2vw,0);
+        transition: opacity @transition-duration @cubic, transform @transition-duration @cubic;
+
+        .eyebrow, .title, p, button { transform: translate3d(0,-10px,0); }
+      }
+    }
+
+    .text-content {
+      display: flex;
+      flex-direction: column;
+
+      &:hover {
+        cursor: pointer;
+
+        button::before {
+          transform: translate3d(100%,0,0);
+        }
+      }
+    }
+
+    .eyebrow, .title, p, button {
+      opacity: 0;
+      transition: opacity @transition-duration @cubic, transform @transition-duration @cubic;
+    }
+
+    .eyebrow {
+    }
+
+    p {
+      max-width: 380px;
+      margin-top: 20px;
+      line-height: 2em;
+    }
+
+    button {
+      margin-top: 50px;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        left: 120%;
+      }
+
+      &::before {
+        height: 100%;
+        z-index: -1;
+        background: #FFF;
+
+        transition: transform @transition-duration-quick @cubic;
+      }
+
+      &::after {
+        height: 1px;
+        background-color: rgba(0,0,0,0.1);
+        top: 14px;
+        z-index: -2;
+      }
+    }
+
+    @media @desktop_lg {
+      .text {
+        &[data-project="vans"] {
+          left: 12vw;
+        }
+      }
+    }
+  }
+}

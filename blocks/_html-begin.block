@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="initial-scale=1">
+    {squarespace-headers}
+
+    <title>Andre Felipe Ribeiro</title>
+    <link href="/styles/dist/index.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    {@|apply header.block}

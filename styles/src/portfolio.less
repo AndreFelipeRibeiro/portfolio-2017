@@ -1,0 +1,60 @@
+#portfolio {
+  &[data-view="cover"] {
+    .cover-gallery-wrapper {
+      visibility: visible;
+      opacity: 1;
+
+      transition: opacity @transition-duration @cubic @transition-duration,
+                  visibility @transition-duration step-start @transition-duration;
+    }
+  }
+
+  &[data-view="grid"] {
+    .cover-gallery-wrapper {
+      .text {
+        opacity: 0;
+        transition: opacity @transition-duration @cubic;
+      }
+
+      transition: opacity @transition-duration @cubic @transition-duration,
+                  visibility @transition-duration step-start @transition-duration;
+    }
+
+    .grid-gallery-wrapper {
+      visibility: visible;
+      opacity: 1;
+
+      .grid-block {
+        opacity: 1;
+      }
+
+      // transition: opacity @transition-duration @cubic @transition-duration,
+      //             visibility @transition-duration step-start @transition-duration;
+    }
+  }
+
+  .cover-gallery-wrapper,
+  .grid-gallery-wrapper {
+    opacity: 0;
+    visibility: hidden;
+
+    position: fixed;
+    top: @nav-height;
+    left: 0;
+
+    width: 100%;
+    height: ~'calc(100vh - @{nav-height})';
+    padding-bottom: @nav-height;
+
+
+  }
+
+  @media @desktop_lg {
+    .cover-gallery-wrapper,
+    .grid-gallery-wrapper {
+      top: @nav-height-desktop-lg;
+      height: ~'calc(100vh - @{nav-height-desktop-lg})';
+      padding-bottom: @nav-height-desktop-lg + 1vw;
+    }
+  }
+}
