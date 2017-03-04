@@ -1,3 +1,3 @@
-{@|apply _html-begin.block}
+{@|apply html-begin.block}
   {squarespace.main-content}
-{@|apply _html-end.block}
+{@|apply html-end.block}
