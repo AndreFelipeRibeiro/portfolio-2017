@@ -108,8 +108,10 @@ class Home {
   initSideNav() {
     this.$sideNavOptions.forEach($option => {
       $option.addEventListener('click', (e) => {
-        this.layout = e.target.dataset.view
+        const layout = e.target.dataset.view
+        if (layout === this.layout) return
 
+        this.layout = layout
         this.$portfolio.dataset.view = this.layout
         this.$sideNav.dataset.view = this.layout
 
@@ -121,7 +123,6 @@ class Home {
   }
 
   updateView(type) {
-
     if (type === 'grid') {
       this.$gridBlocks.forEach($block => {
 

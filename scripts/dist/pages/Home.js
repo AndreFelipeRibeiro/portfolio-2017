@@ -174,8 +174,10 @@
 
 	      this.$sideNavOptions.forEach(function ($option) {
 	        $option.addEventListener('click', function (e) {
-	          _this2.layout = e.target.dataset.view;
+	          var layout = e.target.dataset.view;
+	          if (layout === _this2.layout) return;
 
+	          _this2.layout = layout;
 	          _this2.$portfolio.dataset.view = _this2.layout;
 	          _this2.$sideNav.dataset.view = _this2.layout;
 

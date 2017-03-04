@@ -19,7 +19,6 @@
         &.is--active .imagery {
           transition: opacity @transition-duration step-end @transition-duration,
                       transform @transition-duration @cubic 0ms;
-
         }
       }
     }
@@ -57,6 +56,11 @@
 
         .imagery {
           transition: transform @transition-duration @cubic @transition-duration * 1.5;
+        }
+
+        .label {
+          opacity: 0.3;
+          transition: opacity @transition-duration @cubic @transition-duration * 1.5;
         }
       }
 

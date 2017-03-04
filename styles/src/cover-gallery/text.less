@@ -106,8 +106,12 @@
       &:hover {
         cursor: pointer;
 
-        button::before {
-          transform: translate3d(100%,0,0);
+        button {
+          span {
+            transform: translate3d(-40%,0,0);
+          }
+
+          &::before { opacity: 0.6; }
         }
       }
     }
@@ -129,27 +133,27 @@
     button {
       margin-top: 50px;
 
-      &::before,
-      &::after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        left: 120%;
+      span {
+        display: inline-block;
+        background-color: @white-0;
+        padding-right: 20px;
+
+        transition: transform @transition-duration @cubic;
       }
 
       &::before {
-        height: 100%;
-        z-index: -1;
-        background: #FFF;
-
-        transition: transform @transition-duration-quick @cubic;
-      }
-
-      &::after {
-        height: 1px;
-        background-color: rgba(0,0,0,0.1);
+        content: "";
+        position: absolute;
         top: 14px;
+        left: 60%;
+
+        width: 120%;
+        height: 1px;
+        background-color: #000;
+        opacity: 0.1;
         z-index: -2;
+
+        transition: opacity @transition-duration @cubic;
       }
     }
 
