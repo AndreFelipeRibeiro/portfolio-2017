@@ -1,55 +1,55 @@
 @font-face {
   font-family: "Plain";
-  src: url("/../fonts/Plain-Ultralight.otf");
+  src: url("../fonts/Plain-Ultralight.otf");
   font-weight: 100;
 }
 @font-face {
   font-family: "Plain";
-  src: url("/../fonts/Plain-UltralightItalic.otf");
+  src: url("../fonts/Plain-UltralightItalic.otf");
   font-weight: 100;
   font-style: italic;
 }
 @font-face {
   font-family: "Plain";
-  src: url("/../fonts/Plain-Light.otf");
+  src: url("../fonts/Plain-Light.otf");
   font-weight: 200;
 }
 @font-face {
   font-family: "Plain";
-  src: url("/../fonts/Plain-LightItalic.otf");
+  src: url("../fonts/Plain-LightItalic.otf");
   font-weight: 200;
   font-style: italic;
 }
 @font-face {
   font-family: "Plain";
-  src: url("/../fonts/Plain-Regular.otf");
+  src: url("../fonts/Plain-Regular.otf");
   font-weight: 300;
 }
 @font-face {
   font-family: "Plain";
-  src: url("/../fonts/Plain-RegularItalic.otf");
+  src: url("../fonts/Plain-RegularItalic.otf");
   font-weight: 300;
   font-style: italic;
 }
 @font-face {
   font-family: "Plain";
-  src: url("/../fonts/Plain-Medium.otf");
+  src: url("../fonts/Plain-Medium.otf");
   font-weight: 400;
 }
 @font-face {
   font-family: "Plain";
-  src: url("/../fonts/Plain-MediumItalic.otf");
+  src: url("../fonts/Plain-MediumItalic.otf");
   font-weight: 400;
   font-style: italic;
 }
 @font-face {
   font-family: "Plain";
-  src: url("/../fonts/Plain-Bold.otf");
+  src: url("../fonts/Plain-Bold.otf");
   font-weight: 500;
 }
 @font-face {
   font-family: "Plain";
-  src: url("/../fonts/Plain-BoldItalic.otf");
+  src: url("../fonts/Plain-BoldItalic.otf");
   font-weight: 500;
   font-style: italic;
 }
@@ -639,32 +639,32 @@ nav .nav-content h1 {
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="squarespace"] {
   width: 55%;
-  background-image: url('/../projects/squarespace-cover.jpg');
+  background-image: url('../projects/squarespace-cover.jpg');
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="apple"] {
   margin: auto;
   left: 0;
   right: 0;
   width: 30%;
-  background-image: url('/../projects/apple-cover.jpg');
+  background-image: url('../projects/apple-cover.jpg');
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="bloomingdales"] {
   left: auto;
   right: 0;
   width: 48%;
-  background-image: url('/../projects/bloomingdales-cover.jpg');
+  background-image: url('../projects/bloomingdales-cover.jpg');
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="morgan-stanley"] {
   left: 0;
   right: auto;
   width: 30%;
-  background-image: url('/../projects/morgan-stanley-cover.jpg');
+  background-image: url('../projects/morgan-stanley-cover.jpg');
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="vans"] {
   left: auto;
   right: 0;
   width: 45%;
-  background-image: url('/../projects/vans-cover.jpg');
+  background-image: url('../projects/vans-cover.jpg');
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-arrival-index="0"] {
   opacity: 1;
@@ -979,21 +979,21 @@ nav .nav-content h1 {
   opacity: 1;
 }
 .grid-gallery-wrapper .grid-block[data-project="squarespace"] .imagery {
-  background-image: url('/../projects/squarespace-cover.jpg');
+  background-image: url('../projects/squarespace-cover.jpg');
 }
 .grid-gallery-wrapper .grid-block[data-project="apple"] .imagery {
-  background-image: url('/../projects/apple-cover.jpg');
+  background-image: url('../projects/apple-cover.jpg');
 }
 .grid-gallery-wrapper .grid-block[data-project="bloomingdales"] {
   margin-left: auto;
   margin-right: 0;
 }
 .grid-gallery-wrapper .grid-block[data-project="bloomingdales"] .imagery {
-  background-image: url('/../projects/bloomingdales-cover.jpg');
+  background-image: url('../projects/bloomingdales-cover.jpg');
 }
 .grid-gallery-wrapper .grid-block[data-project="morgan-stanley"] .imagery {
-  background-image: url('/../projects/morgan-stanley-cover.jpg');
+  background-image: url('../projects/morgan-stanley-cover.jpg');
 }
 .grid-gallery-wrapper .grid-block[data-project="vans"] .imagery {
-  background-image: url('/../projects/vans-cover.jpg');
+  background-image: url('../projects/vans-cover.jpg');
 }
