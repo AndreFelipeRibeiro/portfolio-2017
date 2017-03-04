@@ -619,32 +619,32 @@ nav .nav-content h1 {
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="squarespace"] {
   width: 55%;
-  background-image: url('../projects/squarespace-cover.jpg');
+  background-image: url('/assets/projects/squarespace-cover.jpg');
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="apple"] {
   margin: auto;
   left: 0;
   right: 0;
   width: 30%;
-  background-image: url('../projects/apple-cover.jpg');
+  background-image: url('/assets/projects/apple-cover.jpg');
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="bloomingdales"] {
   left: auto;
   right: 0;
   width: 48%;
-  background-image: url('../projects/bloomingdales-cover.jpg');
+  background-image: url('/assets/projects/bloomingdales-cover.jpg');
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="morgan-stanley"] {
   left: 0;
   right: auto;
   width: 30%;
-  background-image: url('../projects/morgan-stanley-cover.jpg');
+  background-image: url('/assets/projects/morgan-stanley-cover.jpg');
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-project="vans"] {
   left: auto;
   right: 0;
   width: 45%;
-  background-image: url('../projects/vans-cover.jpg');
+  background-image: url('/assets/projects/vans-cover.jpg');
 }
 .cover-gallery-wrapper .cover-gallery-imagery .imagery[data-arrival-index="0"] {
   opacity: 1;
@@ -962,21 +962,21 @@ nav .nav-content h1 {
   transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms;
 }
 .grid-gallery-wrapper .grid-block[data-project="squarespace"] .imagery {
-  background-image: url('../projects/squarespace-cover.jpg');
+  background-image: url('/assets/projects/squarespace-cover.jpg');
 }
 .grid-gallery-wrapper .grid-block[data-project="apple"] .imagery {
-  background-image: url('../projects/apple-cover.jpg');
+  background-image: url('/assets/projects/apple-cover.jpg');
 }
 .grid-gallery-wrapper .grid-block[data-project="bloomingdales"] {
   margin-left: auto;
   margin-right: 0;
 }
 .grid-gallery-wrapper .grid-block[data-project="bloomingdales"] .imagery {
-  background-image: url('../projects/bloomingdales-cover.jpg');
+  background-image: url('/assets/projects/bloomingdales-cover.jpg');
 }
 .grid-gallery-wrapper .grid-block[data-project="morgan-stanley"] .imagery {
-  background-image: url('../projects/morgan-stanley-cover.jpg');
+  background-image: url('/assets/projects/morgan-stanley-cover.jpg');
 }
 .grid-gallery-wrapper .grid-block[data-project="vans"] .imagery {
-  background-image: url('../projects/vans-cover.jpg');
+  background-image: url('/assets/projects/vans-cover.jpg');
 }
