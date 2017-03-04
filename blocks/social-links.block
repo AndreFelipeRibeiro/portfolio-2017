@@ -1,0 +1,14 @@
+{.section website}
+  <nav class="SocialLinks" data-content-field="connected-accounts">
+    <div class="SocialLinks-inner">
+    {.repeated section socialAccounts}<a href="{profileUrl}" target="_blank" class="SocialLinks-link {serviceName}" style="">
+        <div>
+          <svg class="SocialLinks-link-svg" viewBox="0 0 64 64">
+            <use class="SocialLinks-link-icon" xlink:href="/universal/svg/social-accounts.svg#{serviceName}-icon"></use>
+            <use class="SocialLinks-link-mask" xlink:href="/universal/svg/social-accounts.svg#{serviceName}-mask"></use>
+          </svg>
+        </div>
+      </a>{.end}
+    </div>
+  </nav>
+{.end}
