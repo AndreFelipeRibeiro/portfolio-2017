@@ -240,6 +240,7 @@
 	              if (e.propertyName !== 'opacity') return;
 
 	              _this3.$gridGalleryWrapper.removeEventListener(transitionEnd, handleTransitionEnd);
+	              _this3.hasTransitionListener = false;
 
 	              var scale = $block.dataset.scale;
 	              var $image = $block.querySelector('.imagery');
@@ -249,7 +250,8 @@
 	              $image.style.transform = 'scale(' + scale + ')';
 	            };
 
-	            _this3.$gridGalleryWrapper.addEventListener(transitionEnd, handleTransitionEnd);
+	            if (!_this3.hasTransitionListener) _this3.$gridGalleryWrapper.addEventListener(transitionEnd, handleTransitionEnd);
+	            _this3.hasTransitionListener = true;
 	          } else {
 	            $image.style.transform = 'scale(' + scale + ')';
 	          }
@@ -299,6 +301,7 @@
 	    value: function setGridBlockSizes() {
 	      var _this4 = this;
 
+	      console.log('this should work');
 	      this.$coverImages.forEach(function ($image) {
 	        var project = $image.dataset.project;
 	        var $gridBlock = _this4.$gridGallery.querySelector('.grid-block[data-project=' + project + ']');

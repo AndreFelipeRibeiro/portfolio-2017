@@ -165,6 +165,7 @@ class Home {
             if (e.propertyName !== 'opacity') return
 
             this.$gridGalleryWrapper.removeEventListener(transitionEnd, handleTransitionEnd)
+            this.hasTransitionListener = false
 
             const scale = $block.dataset.scale
             const $image = $block.querySelector(`.imagery`)
@@ -174,7 +175,8 @@ class Home {
             $image.style.transform = `scale(${scale})`
           }
 
-          this.$gridGalleryWrapper.addEventListener(transitionEnd, handleTransitionEnd)
+          if (!this.hasTransitionListener) this.$gridGalleryWrapper.addEventListener(transitionEnd, handleTransitionEnd)
+          this.hasTransitionListener = true
         } else {
           $image.style.transform = `scale(${scale})`
         }
@@ -218,6 +220,7 @@ class Home {
   }
 
   setGridBlockSizes() {
+    console.log('this should work')
     this.$coverImages.forEach($image => {
       const project = $image.dataset.project
       const $gridBlock = this.$gridGallery.querySelector(`.grid-block[data-project=${project}]`)
