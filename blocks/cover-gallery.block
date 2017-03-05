@@ -2,11 +2,21 @@
   <div class="cover-gallery">
 
     <div class="cover-gallery-imagery">
-      <div class="imagery" data-project="squarespace" data-arrival-index="1"></div>
-      <div class="imagery" data-project="apple"></div>
-      <div class="imagery" data-project="bloomingdales"></div>
-      <div class="imagery" data-project="morgan-stanley"></div>
-      <div class="imagery" data-project="vans"></div>
+      <div class="imagery" data-project="squarespace" data-arrival-index="1">
+        <div class="label">2016 — Present</div>
+      </div>
+      <div class="imagery" data-project="apple">
+        <div class="label">2014</div>
+      </div>
+      <div class="imagery" data-project="bloomingdales">
+        <div class="label">2015</div>
+      </div>
+      <div class="imagery" data-project="morgan-stanley">
+        <div class="label">2015</div>
+      </div>
+      <div class="imagery" data-project="vans">
+        <div class="label">2012</div>
+      </div>
 
       <div class="concealer left"></div>
       <div class="concealer right"></div>
