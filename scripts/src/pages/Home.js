@@ -33,6 +33,7 @@ class Home {
     this.handleResize      = this.handleResize.bind(this)
     this.handleScroll      = this.handleScroll.bind(this)
     this.requestScroll     = this.requestScroll.bind(this)
+    this.handleTransitionEnd = this.handleTransitionEnd.bind(this)
 
     this.isFirstLoad        = true
     this.layout             = this.$portfolio.dataset.view
@@ -124,38 +125,38 @@ class Home {
     })
   }
 
-  updateView(type) {
-
-    const handleTransitionEnd = (e) => {
-      if (type === 'grid') {
-        if (!e.target.classList.contains('grid-block')) return
-        if (e.target.classList.contains('is--active')) return
-        if (e.propertyName !== 'opacity') return
-      }
-
-      if (type === 'cover') {
-        if (e.target !== this.$gridGalleryWrapper) return
-        if (e.propertyName !== 'opacity') return
-      }
-
-console.log(e)
-      this.$gridGalleryWrapper.removeEventListener(transitionEnd, handleTransitionEnd)
-
-      this.setGridBlockSizes()
-
-      if (type === 'cover') {
-        this.$gridBlocks.forEach($block => {
-          const scale = $block.dataset.scale
-          const $image = $block.querySelector(`.imagery`)
-
-          $block.classList.remove('is--active')
-          $block.style.removeProperty('transform')
-          $image.style.transform = `scale(${scale})`
-        })
-      }
+  handleTransitionEnd(e) {
+    if (this.layout === 'grid') {
+      if (!e.target.classList.contains('grid-block')) return
+      if (e.target.classList.contains('is--active')) return
+      if (e.propertyName !== 'opacity') return
     }
 
-    this.$gridGalleryWrapper.addEventListener(transitionEnd, handleTransitionEnd)
+    if (this.layout === 'cover') {
+      if (e.target !== this.$gridGalleryWrapper) return
+      if (e.propertyName !== 'opacity') return
+    }
+
+    this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleTransitionEnd)
+
+    this.setGridBlockSizes()
+
+    if (this.layout === 'cover') {
+      this.$gridBlocks.forEach($block => {
+        const scale = $block.dataset.scale
+        const $image = $block.querySelector(`.imagery`)
+
+        $block.classList.remove('is--active')
+        $block.style.removeProperty('transform')
+        $image.style.transform = `scale(${scale})`
+      })
+    }
+  }
+
+  updateView(type) {
+
+    this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleTransitionEnd)
+    this.$gridGalleryWrapper.addEventListener(transitionEnd, this.handleTransitionEnd)
 
     if (type === 'grid') {
       this.$gridBlocks.forEach($block => {

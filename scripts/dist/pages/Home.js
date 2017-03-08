@@ -88,6 +88,7 @@
 	    this.handleResize = this.handleResize.bind(this);
 	    this.handleScroll = this.handleScroll.bind(this);
 	    this.requestScroll = this.requestScroll.bind(this);
+	    this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
 
 	    this.isFirstLoad = true;
 	    this.layout = this.$portfolio.dataset.view;
@@ -190,40 +191,41 @@
 	      });
 	    }
 	  }, {
+	    key: 'handleTransitionEnd',
+	    value: function handleTransitionEnd(e) {
+	      if (this.layout === 'grid') {
+	        if (!e.target.classList.contains('grid-block')) return;
+	        if (e.target.classList.contains('is--active')) return;
+	        if (e.propertyName !== 'opacity') return;
+	      }
+
+	      if (this.layout === 'cover') {
+	        if (e.target !== this.$gridGalleryWrapper) return;
+	        if (e.propertyName !== 'opacity') return;
+	      }
+
+	      this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleTransitionEnd);
+
+	      this.setGridBlockSizes();
+
+	      if (this.layout === 'cover') {
+	        this.$gridBlocks.forEach(function ($block) {
+	          var scale = $block.dataset.scale;
+	          var $image = $block.querySelector('.imagery');
+
+	          $block.classList.remove('is--active');
+	          $block.style.removeProperty('transform');
+	          $image.style.transform = 'scale(' + scale + ')';
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'updateView',
 	    value: function updateView(type) {
 	      var _this3 = this;
 
-	      var handleTransitionEnd = function handleTransitionEnd(e) {
-	        if (type === 'grid') {
-	          if (!e.target.classList.contains('grid-block')) return;
-	          if (e.target.classList.contains('is--active')) return;
-	          if (e.propertyName !== 'opacity') return;
-	        }
-
-	        if (type === 'cover') {
-	          if (e.target !== _this3.$gridGalleryWrapper) return;
-	          if (e.propertyName !== 'opacity') return;
-	        }
-
-	        console.log(e);
-	        _this3.$gridGalleryWrapper.removeEventListener(transitionEnd, handleTransitionEnd);
-
-	        _this3.setGridBlockSizes();
-
-	        if (type === 'cover') {
-	          _this3.$gridBlocks.forEach(function ($block) {
-	            var scale = $block.dataset.scale;
-	            var $image = $block.querySelector('.imagery');
-
-	            $block.classList.remove('is--active');
-	            $block.style.removeProperty('transform');
-	            $image.style.transform = 'scale(' + scale + ')';
-	          });
-	        }
-	      };
-
-	      this.$gridGalleryWrapper.addEventListener(transitionEnd, handleTransitionEnd);
+	      this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleTransitionEnd);
+	      this.$gridGalleryWrapper.addEventListener(transitionEnd, this.handleTransitionEnd);
 
 	      if (type === 'grid') {
 	        this.$gridBlocks.forEach(function ($block) {
