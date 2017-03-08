@@ -67,6 +67,7 @@
 	    _classCallCheck(this, Home);
 
 	    this.$portfolio = document.getElementById('portfolio');
+	    this.$coverGalleryWrapper = this.$portfolio.getElementsByClassName('cover-gallery-wrapper')[0];
 	    this.$coverGallery = this.$portfolio.getElementsByClassName('cover-gallery')[0];
 	    this.$coverGalleryImagery = this.$portfolio.getElementsByClassName('cover-gallery-imagery')[0];
 	    this.$coverGalleryText = this.$portfolio.getElementsByClassName('cover-gallery-text')[0];
@@ -93,6 +94,7 @@
 	    this.lastPageYOffset = window.pageYOffset;
 	    this.currentPageYOffset = window.pageYOffset;
 	    this.sectionHeight = 2000;
+	    this.transitionListeners = [];
 
 	    this.initSideNav();
 	    this.initPagination();
@@ -192,9 +194,39 @@
 	    value: function updateView(type) {
 	      var _this3 = this;
 
+	      var handleTransitionEnd = function handleTransitionEnd(e) {
+	        if (type === 'grid') {
+	          if (!e.target.classList.contains('grid-block')) return;
+	          if (e.target.classList.contains('is--active')) return;
+	          if (e.propertyName !== 'opacity') return;
+	        }
+
+	        if (type === 'cover') {
+	          if (e.target !== _this3.$gridGalleryWrapper) return;
+	          if (e.propertyName !== 'opacity') return;
+	        }
+
+	        console.log(e);
+	        _this3.$gridGalleryWrapper.removeEventListener(transitionEnd, handleTransitionEnd);
+
+	        _this3.setGridBlockSizes();
+
+	        if (type === 'cover') {
+	          _this3.$gridBlocks.forEach(function ($block) {
+	            var scale = $block.dataset.scale;
+	            var $image = $block.querySelector('.imagery');
+
+	            $block.classList.remove('is--active');
+	            $block.style.removeProperty('transform');
+	            $image.style.transform = 'scale(' + scale + ')';
+	          });
+	        }
+	      };
+
+	      this.$gridGalleryWrapper.addEventListener(transitionEnd, handleTransitionEnd);
+
 	      if (type === 'grid') {
 	        this.$gridBlocks.forEach(function ($block) {
-
 	          var scale = $block.dataset.scale;
 	          var $image = $block.querySelector('.imagery');
 
@@ -234,24 +266,6 @@
 
 	            $image.style.removeProperty('transform');
 	            $block.style.transform = 'translate3d(' + diffX + 'px,' + diffY + 'px,0)';
-
-	            var handleTransitionEnd = function handleTransitionEnd(e) {
-	              if (e.target !== _this3.$gridGalleryWrapper) return;
-	              if (e.propertyName !== 'opacity') return;
-
-	              _this3.$gridGalleryWrapper.removeEventListener(transitionEnd, handleTransitionEnd);
-	              _this3.hasTransitionListener = false;
-
-	              var scale = $block.dataset.scale;
-	              var $image = $block.querySelector('.imagery');
-
-	              $block.classList.remove('is--active');
-	              $block.style.removeProperty('transform');
-	              $image.style.transform = 'scale(' + scale + ')';
-	            };
-
-	            if (!_this3.hasTransitionListener) _this3.$gridGalleryWrapper.addEventListener(transitionEnd, handleTransitionEnd);
-	            _this3.hasTransitionListener = true;
 	          } else {
 	            $image.style.transform = 'scale(' + scale + ')';
 	          }
@@ -301,7 +315,6 @@
 	    value: function setGridBlockSizes() {
 	      var _this4 = this;
 
-	      console.log('this should work');
 	      this.$coverImages.forEach(function ($image) {
 	        var project = $image.dataset.project;
 	        var $gridBlock = _this4.$gridGallery.querySelector('.grid-block[data-project=' + project + ']');
@@ -314,7 +327,12 @@
 	        $gridBlockImage.style.height = $image.clientHeight + 'px';
 
 	        $gridBlockImage.classList.add('no-transitions');
+	        $gridBlock.classList.add('no-transitions');
 	        $gridBlockImage.style.transform = 'scale(' + scale + ')';
+
+	        var hadTransform = !!$gridBlock.style.transform;
+	        $gridBlock.style.removeProperty('transform');
+
 	        $gridBlockImage.clientHeight;
 	        $gridBlockImage.classList.remove('no-transitions');
 
@@ -328,6 +346,11 @@
 
 	        $gridBlock.dataset.diffX = diffX;
 	        $gridBlock.dataset.diffY = diffY;
+
+	        if (hadTransform) $gridBlock.style.transform = 'translate3d(' + diffX + 'px,' + diffY + 'px,0)';
+
+	        $gridBlock.clientHeight;
+	        $gridBlock.classList.remove('no-transitions');
 	      });
 	    }
 	  }]);

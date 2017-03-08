@@ -12,6 +12,7 @@ Array.from = (arr) => Array.prototype.slice.call(arr)
 class Home {
   constructor() {
     this.$portfolio           = document.getElementById('portfolio')
+    this.$coverGalleryWrapper = this.$portfolio.getElementsByClassName('cover-gallery-wrapper')[0]
     this.$coverGallery        = this.$portfolio.getElementsByClassName('cover-gallery')[0]
     this.$coverGalleryImagery = this.$portfolio.getElementsByClassName('cover-gallery-imagery')[0]
     this.$coverGalleryText    = this.$portfolio.getElementsByClassName('cover-gallery-text')[0]
@@ -38,6 +39,7 @@ class Home {
     this.lastPageYOffset    = window.pageYOffset
     this.currentPageYOffset = window.pageYOffset
     this.sectionHeight      = 2000
+    this.transitionListeners = []
 
     this.initSideNav()
     this.initPagination()
@@ -123,9 +125,40 @@ class Home {
   }
 
   updateView(type) {
+
+    const handleTransitionEnd = (e) => {
+      if (type === 'grid') {
+        if (!e.target.classList.contains('grid-block')) return
+        if (e.target.classList.contains('is--active')) return
+        if (e.propertyName !== 'opacity') return
+      }
+
+      if (type === 'cover') {
+        if (e.target !== this.$gridGalleryWrapper) return
+        if (e.propertyName !== 'opacity') return
+      }
+
+console.log(e)
+      this.$gridGalleryWrapper.removeEventListener(transitionEnd, handleTransitionEnd)
+
+      this.setGridBlockSizes()
+
+      if (type === 'cover') {
+        this.$gridBlocks.forEach($block => {
+          const scale = $block.dataset.scale
+          const $image = $block.querySelector(`.imagery`)
+
+          $block.classList.remove('is--active')
+          $block.style.removeProperty('transform')
+          $image.style.transform = `scale(${scale})`
+        })
+      }
+    }
+
+    this.$gridGalleryWrapper.addEventListener(transitionEnd, handleTransitionEnd)
+
     if (type === 'grid') {
       this.$gridBlocks.forEach($block => {
-
         const scale = $block.dataset.scale
         const $image = $block.querySelector(`.imagery`)
 
@@ -156,27 +189,11 @@ class Home {
         const isActiveProject = $block.dataset.project === this.$coverGalleryImagery.dataset.project
 
         if (!this.isFirstLoad && isActiveProject) {
+
           const { diffX, diffY } = $block.dataset
           $image.style.removeProperty('transform')
           $block.style.transform = `translate3d(${diffX}px,${diffY}px,0)`
 
-          const handleTransitionEnd = (e) => {
-            if (e.target !== this.$gridGalleryWrapper) return
-            if (e.propertyName !== 'opacity') return
-
-            this.$gridGalleryWrapper.removeEventListener(transitionEnd, handleTransitionEnd)
-            this.hasTransitionListener = false
-
-            const scale = $block.dataset.scale
-            const $image = $block.querySelector(`.imagery`)
-
-            $block.classList.remove('is--active')
-            $block.style.removeProperty('transform')
-            $image.style.transform = `scale(${scale})`
-          }
-
-          if (!this.hasTransitionListener) this.$gridGalleryWrapper.addEventListener(transitionEnd, handleTransitionEnd)
-          this.hasTransitionListener = true
         } else {
           $image.style.transform = `scale(${scale})`
         }
@@ -220,7 +237,6 @@ class Home {
   }
 
   setGridBlockSizes() {
-    console.log('this should work')
     this.$coverImages.forEach($image => {
       const project = $image.dataset.project
       const $gridBlock = this.$gridGallery.querySelector(`.grid-block[data-project=${project}]`)
@@ -233,9 +249,15 @@ class Home {
       $gridBlockImage.style.height = $image.clientHeight + 'px'
 
       $gridBlockImage.classList.add('no-transitions')
+      $gridBlock.classList.add('no-transitions')
       $gridBlockImage.style.transform = `scale(${scale})`
+
+      const hadTransform = !!$gridBlock.style.transform
+      $gridBlock.style.removeProperty('transform')
+
       $gridBlockImage.clientHeight
       $gridBlockImage.classList.remove('no-transitions')
+
 
       $gridBlock.style.width = $image.clientWidth * scale + 'px'
       $gridBlock.style.height = $image.clientHeight * scale + 'px'
@@ -247,6 +269,11 @@ class Home {
 
       $gridBlock.dataset.diffX = diffX
       $gridBlock.dataset.diffY = diffY
+
+      if (hadTransform) $gridBlock.style.transform = `translate3d(${diffX}px,${diffY}px,0)`
+
+      $gridBlock.clientHeight
+      $gridBlock.classList.remove('no-transitions')
     })
   }
 }
