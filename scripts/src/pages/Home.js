@@ -33,7 +33,7 @@ class Home {
     this.handleResize      = this.handleResize.bind(this)
     this.handleScroll      = this.handleScroll.bind(this)
     this.requestScroll     = this.requestScroll.bind(this)
-    this.handleTransitionEnd = this.handleTransitionEnd.bind(this)
+    this.handleLayoutChange = this.handleLayoutChange.bind(this)
 
     this.isFirstLoad        = true
     this.layout             = this.$portfolio.dataset.view
@@ -47,7 +47,7 @@ class Home {
     this.initCoverGalleries()
     this.initGridGallery()
 
-    this.updateView(this.layout)
+    this.updateLayout(this.layout)
 
     scrollTo(0,0)
     this.handleResize()
@@ -58,6 +58,24 @@ class Home {
   addEventListeners() {
     window.addEventListener('scroll', this.requestScroll)
     window.addEventListener('resize', this.handleResize)
+
+    this.$gridBlocks.forEach($block => {
+      $block.addEventListener('mousemove', () => {
+        console.log('mousemove', this.isTransitioning)
+        if (this.isTransitioning) return
+        this.hoveredBlock = $block
+        this.$gridGallery.classList.add('has-hovered-block')
+        $block.classList.add('is-hovered')
+      })
+
+      $block.addEventListener('mouseleave', () => {
+        if (this.isTransitioning) return
+        if (this.hoveredBlock !== $block) return
+        this.$gridGallery.classList.remove('has-hovered-block')
+        $block.classList.remove('is-hovered')
+        this.hoveredBlock = null
+      })
+    })
   }
 
   requestScroll(e) {
@@ -120,24 +138,26 @@ class Home {
 
         this.$gridBlocks = Array.from(this.$gridGallery.querySelectorAll(`.grid-block`))
 
-        this.updateView(this.layout)
+        this.updateLayout()
       })
     })
   }
 
-  handleTransitionEnd(e) {
+  handleLayoutChange(e) {
     if (this.layout === 'grid') {
-      if (!e.target.classList.contains('grid-block')) return
-      if (e.target.classList.contains('is--active')) return
+      if (!e.target.classList.contains('imagery')) return
+      if (e.target.parentNode.classList.contains('is--active')) return
       if (e.propertyName !== 'opacity') return
+      console.log(e.target)
     }
 
     if (this.layout === 'cover') {
       if (e.target !== this.$gridGalleryWrapper) return
       if (e.propertyName !== 'opacity') return
     }
-
-    this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleTransitionEnd)
+    console.log('false false')
+    this.isTransitioning = false
+    this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleLayoutChange)
 
     this.setGridBlockSizes()
 
@@ -153,12 +173,13 @@ class Home {
     }
   }
 
-  updateView(type) {
+  updateLayout() {
+    console.log('truuu')
+    this.isTransitioning = true
+    this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleLayoutChange)
+    this.$gridGalleryWrapper.addEventListener(transitionEnd, this.handleLayoutChange)
 
-    this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleTransitionEnd)
-    this.$gridGalleryWrapper.addEventListener(transitionEnd, this.handleTransitionEnd)
-
-    if (type === 'grid') {
+    if (this.layout === 'grid') {
       this.$gridBlocks.forEach($block => {
         const scale = $block.dataset.scale
         const $image = $block.querySelector(`.imagery`)
@@ -183,7 +204,7 @@ class Home {
       })
     }
 
-    if (type === 'cover') {
+    if (this.layout === 'cover') {
       this.$gridBlocks.forEach($block => {
         const $image = $block.querySelector(`.imagery`)
         const scale = $block.dataset.scale

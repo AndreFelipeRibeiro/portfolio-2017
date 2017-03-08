@@ -13,11 +13,16 @@
                   visibility @transition-duration step-end @transition-duration;
 
       .grid-block {
-        transition: opacity @transition-duration @cubic,
+        transition: opacity @transition-duration-quick @cubic,
                     transform @transition-duration @cubic 0ms;
 
         &.is--active .imagery {
           transition: opacity @transition-duration step-end @transition-duration,
+                      transform @transition-duration @cubic 0ms;
+        }
+
+        .imagery {
+          transition: opacity @transition-duration @cubic,
                       transform @transition-duration @cubic 0ms;
         }
       }
@@ -39,28 +44,48 @@
       visibility: visible;
       opacity: 1;
 
-      .grid-block {
-        opacity: 1;
+      .grid-gallery {
+        &.has-hovered-block {
+          .grid-block {
+            opacity: 0.15;
 
-        transition: opacity @transition-duration @cubic @transition-duration * 1.8,
-                    transform @transition-duration @cubic @transition-duration * 1.5;
+            &.is-hovered {
+              opacity: 1;
+
+              .label.title {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+
+      .grid-block {
+        transition: opacity @transition-duration-quick @cubic,
+                    transform @transition-duration @cubic @transition-duration;
 
         &.is--active {
-          transition: opacity @transition-duration @cubic @transition-duration,
-                      transform @transition-duration @cubic @transition-duration;
-
           .imagery {
-            transition: transform @transition-duration @cubic @transition-duration;
+            transition: opacity @transition-duration @cubic @transition-duration,
+                        transform @transition-duration @cubic @transition-duration;
           }
         }
 
         .imagery {
-          transition: transform @transition-duration @cubic @transition-duration * 1.5;
+          opacity: 1;
+
+          transition: opacity @transition-duration @cubic @transition-duration * 1.8,
+                      transform @transition-duration @cubic @transition-duration * 1.5;
         }
 
-        .label {
+        .label.number {
           opacity: 0.3;
           transition: opacity @transition-duration @cubic @transition-duration * 1.5;
+        }
+
+        .label.title {
+          opacity: 0;
+          transition: opacity @transition-duration @cubic;
         }
       }
 

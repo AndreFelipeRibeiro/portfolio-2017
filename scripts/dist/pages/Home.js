@@ -88,7 +88,7 @@
 	    this.handleResize = this.handleResize.bind(this);
 	    this.handleScroll = this.handleScroll.bind(this);
 	    this.requestScroll = this.requestScroll.bind(this);
-	    this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
+	    this.handleLayoutChange = this.handleLayoutChange.bind(this);
 
 	    this.isFirstLoad = true;
 	    this.layout = this.$portfolio.dataset.view;
@@ -102,7 +102,7 @@
 	    this.initCoverGalleries();
 	    this.initGridGallery();
 
-	    this.updateView(this.layout);
+	    this.updateLayout(this.layout);
 
 	    scrollTo(0, 0);
 	    this.handleResize();
@@ -113,8 +113,28 @@
 	  _createClass(Home, [{
 	    key: 'addEventListeners',
 	    value: function addEventListeners() {
+	      var _this = this;
+
 	      window.addEventListener('scroll', this.requestScroll);
 	      window.addEventListener('resize', this.handleResize);
+
+	      this.$gridBlocks.forEach(function ($block) {
+	        $block.addEventListener('mousemove', function () {
+	          console.log('mousemove', _this.isTransitioning);
+	          if (_this.isTransitioning) return;
+	          _this.hoveredBlock = $block;
+	          _this.$gridGallery.classList.add('has-hovered-block');
+	          $block.classList.add('is-hovered');
+	        });
+
+	        $block.addEventListener('mouseleave', function () {
+	          if (_this.isTransitioning) return;
+	          if (_this.hoveredBlock !== $block) return;
+	          _this.$gridGallery.classList.remove('has-hovered-block');
+	          $block.classList.remove('is-hovered');
+	          _this.hoveredBlock = null;
+	        });
+	      });
 	    }
 	  }, {
 	    key: 'requestScroll',
@@ -124,15 +144,15 @@
 	  }, {
 	    key: 'requestTick',
 	    value: function requestTick(e) {
-	      var _this = this;
+	      var _this2 = this;
 
 	      if (this.ticking) return;
 
 	      requestAnimationFrame(function () {
-	        _this.lastPageYOffset = _this.currentPageYOffset;
-	        _this.currentPageYOffset = window.pageYOffset;
-	        _this.handleScroll(e);
-	        _this.ticking = false;
+	        _this2.lastPageYOffset = _this2.currentPageYOffset;
+	        _this2.currentPageYOffset = window.pageYOffset;
+	        _this2.handleScroll(e);
+	        _this2.ticking = false;
 	      });
 
 	      this.ticking = true;
@@ -173,38 +193,40 @@
 	  }, {
 	    key: 'initSideNav',
 	    value: function initSideNav() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      this.$sideNavOptions.forEach(function ($option) {
 	        $option.addEventListener('click', function (e) {
 	          var layout = e.target.dataset.view;
-	          if (layout === _this2.layout) return;
+	          if (layout === _this3.layout) return;
 
-	          _this2.layout = layout;
-	          _this2.$portfolio.dataset.view = _this2.layout;
-	          _this2.$sideNav.dataset.view = _this2.layout;
+	          _this3.layout = layout;
+	          _this3.$portfolio.dataset.view = _this3.layout;
+	          _this3.$sideNav.dataset.view = _this3.layout;
 
-	          _this2.$gridBlocks = Array.from(_this2.$gridGallery.querySelectorAll('.grid-block'));
+	          _this3.$gridBlocks = Array.from(_this3.$gridGallery.querySelectorAll('.grid-block'));
 
-	          _this2.updateView(_this2.layout);
+	          _this3.updateLayout();
 	        });
 	      });
 	    }
 	  }, {
-	    key: 'handleTransitionEnd',
-	    value: function handleTransitionEnd(e) {
+	    key: 'handleLayoutChange',
+	    value: function handleLayoutChange(e) {
 	      if (this.layout === 'grid') {
-	        if (!e.target.classList.contains('grid-block')) return;
-	        if (e.target.classList.contains('is--active')) return;
+	        if (!e.target.classList.contains('imagery')) return;
+	        if (e.target.parentNode.classList.contains('is--active')) return;
 	        if (e.propertyName !== 'opacity') return;
+	        console.log(e.target);
 	      }
 
 	      if (this.layout === 'cover') {
 	        if (e.target !== this.$gridGalleryWrapper) return;
 	        if (e.propertyName !== 'opacity') return;
 	      }
-
-	      this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleTransitionEnd);
+	      console.log('false false');
+	      this.isTransitioning = false;
+	      this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleLayoutChange);
 
 	      this.setGridBlockSizes();
 
@@ -220,22 +242,24 @@
 	      }
 	    }
 	  }, {
-	    key: 'updateView',
-	    value: function updateView(type) {
-	      var _this3 = this;
+	    key: 'updateLayout',
+	    value: function updateLayout() {
+	      var _this4 = this;
 
-	      this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleTransitionEnd);
-	      this.$gridGalleryWrapper.addEventListener(transitionEnd, this.handleTransitionEnd);
+	      console.log('truuu');
+	      this.isTransitioning = true;
+	      this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleLayoutChange);
+	      this.$gridGalleryWrapper.addEventListener(transitionEnd, this.handleLayoutChange);
 
-	      if (type === 'grid') {
+	      if (this.layout === 'grid') {
 	        this.$gridBlocks.forEach(function ($block) {
 	          var scale = $block.dataset.scale;
 	          var $image = $block.querySelector('.imagery');
 
-	          var isActiveProject = $block.dataset.project === _this3.$coverGalleryImagery.dataset.project;
+	          var isActiveProject = $block.dataset.project === _this4.$coverGalleryImagery.dataset.project;
 	          if (isActiveProject) $block.classList.add('is--active');
 
-	          if (!_this3.isFirstLoad && isActiveProject) {
+	          if (!_this4.isFirstLoad && isActiveProject) {
 	            var _$block$dataset = $block.dataset,
 	                diffX = _$block$dataset.diffX,
 	                diffY = _$block$dataset.diffY;
@@ -255,13 +279,13 @@
 	        });
 	      }
 
-	      if (type === 'cover') {
+	      if (this.layout === 'cover') {
 	        this.$gridBlocks.forEach(function ($block) {
 	          var $image = $block.querySelector('.imagery');
 	          var scale = $block.dataset.scale;
-	          var isActiveProject = $block.dataset.project === _this3.$coverGalleryImagery.dataset.project;
+	          var isActiveProject = $block.dataset.project === _this4.$coverGalleryImagery.dataset.project;
 
-	          if (!_this3.isFirstLoad && isActiveProject) {
+	          if (!_this4.isFirstLoad && isActiveProject) {
 	            var _$block$dataset2 = $block.dataset,
 	                diffX = _$block$dataset2.diffX,
 	                diffY = _$block$dataset2.diffY;
@@ -315,15 +339,15 @@
 	  }, {
 	    key: 'setGridBlockSizes',
 	    value: function setGridBlockSizes() {
-	      var _this4 = this;
+	      var _this5 = this;
 
 	      this.$coverImages.forEach(function ($image) {
 	        var project = $image.dataset.project;
-	        var $gridBlock = _this4.$gridGallery.querySelector('.grid-block[data-project=' + project + ']');
+	        var $gridBlock = _this5.$gridGallery.querySelector('.grid-block[data-project=' + project + ']');
 	        var $gridBlockImage = $gridBlock.getElementsByClassName('imagery')[0];
 	        var scale = parseFloat($gridBlock.dataset.scale);
 
-	        _this4.gridBlocks[project] = $gridBlock;
+	        _this5.gridBlocks[project] = $gridBlock;
 
 	        $gridBlockImage.style.width = $image.clientWidth + 'px';
 	        $gridBlockImage.style.height = $image.clientHeight + 'px';

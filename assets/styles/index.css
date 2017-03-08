@@ -557,10 +557,13 @@ nav .nav-content h1 {
   transition: opacity 700ms step-end 700ms, visibility 700ms step-end 700ms;
 }
 #portfolio[data-view="cover"] .grid-gallery-wrapper .grid-block {
-  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94), transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 0ms;
+  transition: opacity 400ms cubic-bezier(0.8, 0, 0.55, 0.94), transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 0ms;
 }
 #portfolio[data-view="cover"] .grid-gallery-wrapper .grid-block.is--active .imagery {
   transition: opacity 700ms step-end 700ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 0ms;
+}
+#portfolio[data-view="cover"] .grid-gallery-wrapper .grid-block .imagery {
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94), transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 0ms;
 }
 #portfolio[data-view="grid"] .cover-gallery-wrapper {
   transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94), visibility 700ms step-end;
@@ -574,22 +577,32 @@ nav .nav-content h1 {
   opacity: 1;
   transition: none;
 }
+#portfolio[data-view="grid"] .grid-gallery-wrapper .grid-gallery.has-hovered-block .grid-block {
+  opacity: 0.15;
+}
+#portfolio[data-view="grid"] .grid-gallery-wrapper .grid-gallery.has-hovered-block .grid-block.is-hovered {
+  opacity: 1;
+}
+#portfolio[data-view="grid"] .grid-gallery-wrapper .grid-gallery.has-hovered-block .grid-block.is-hovered .label.title {
+  opacity: 1;
+}
 #portfolio[data-view="grid"] .grid-gallery-wrapper .grid-block {
+  transition: opacity 400ms cubic-bezier(0.8, 0, 0.55, 0.94), transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms;
+}
+#portfolio[data-view="grid"] .grid-gallery-wrapper .grid-block.is--active .imagery {
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms;
+}
+#portfolio[data-view="grid"] .grid-gallery-wrapper .grid-block .imagery {
   opacity: 1;
   transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1260ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1050ms;
 }
-#portfolio[data-view="grid"] .grid-gallery-wrapper .grid-block.is--active {
-  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms;
-}
-#portfolio[data-view="grid"] .grid-gallery-wrapper .grid-block.is--active .imagery {
-  transition: transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms;
-}
-#portfolio[data-view="grid"] .grid-gallery-wrapper .grid-block .imagery {
-  transition: transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1050ms;
-}
-#portfolio[data-view="grid"] .grid-gallery-wrapper .grid-block .label {
+#portfolio[data-view="grid"] .grid-gallery-wrapper .grid-block .label.number {
   opacity: 0.3;
   transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 1050ms;
+}
+#portfolio[data-view="grid"] .grid-gallery-wrapper .grid-block .label.title {
+  opacity: 0;
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
 }
 #portfolio .cover-gallery-wrapper,
 #portfolio .grid-gallery-wrapper {
@@ -977,16 +990,17 @@ nav .nav-content h1 {
   padding-right: 0;
 }
 .grid-gallery-wrapper .grid-block {
-  opacity: 0;
   width: 100%;
   display: block;
   position: relative;
   text-align: left;
+  cursor: pointer;
 }
 .grid-gallery-wrapper .grid-block:last-child {
   margin-bottom: 0;
 }
 .grid-gallery-wrapper .grid-block .imagery {
+  opacity: 0;
   background-position: center;
   background-size: cover;
   width: 100%;
@@ -998,6 +1012,10 @@ nav .nav-content h1 {
   position: absolute;
   bottom: -20px;
   transition: opacity 70ms cubic-bezier(0.8, 0, 0.55, 0.94);
+}
+.grid-gallery-wrapper .grid-block .label.title {
+  color: #000;
+  right: 0;
 }
 .grid-gallery-wrapper .grid-block.is--active {
   z-index: 2;
