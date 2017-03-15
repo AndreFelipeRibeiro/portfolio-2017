@@ -5,9 +5,6 @@ const transitionEnd = require('../lib/transition-end')
 const BaseGallery = require('../blocks/Gallery')
 const Pagination = require('../blocks/Pagination')
 
-// Polyfill
-Array.from = (arr) => Array.prototype.slice.call(arr)
-
 
 class Home {
   constructor() {
@@ -20,6 +17,8 @@ class Home {
     this.$coverTexts          = Array.from(this.$coverGalleryText.getElementsByClassName('text'))
 
     this.$coverPagination     = this.$portfolio.getElementsByClassName('cover-gallery-pagination')[0]
+    this.$paginationDivider   = this.$coverPagination.getElementsByClassName('divider')[0]
+    this.$paginationTimer     = this.$paginationDivider.getElementsByClassName('timer')[0]
     this.$activePageWrapper   = this.$coverPagination.getElementsByClassName('active-page-wrapper')[0]
 
     this.$gridGalleryWrapper  = this.$portfolio.getElementsByClassName('grid-gallery-wrapper')[0]
@@ -29,18 +28,17 @@ class Home {
     this.$sideNav             = this.$portfolio.getElementsByClassName('side-nav')[0]
     this.$sideNavOptions      = Array.from(this.$sideNav.getElementsByClassName('label'))
 
-    this.handleCoverChange = this.handleCoverChange.bind(this)
-    this.handleResize      = this.handleResize.bind(this)
-    this.handleScroll      = this.handleScroll.bind(this)
-    this.requestScroll     = this.requestScroll.bind(this)
+    this.handleCoverChange  = this.handleCoverChange.bind(this)
+    this.handleResize       = this.handleResize.bind(this)
+    this.handleScroll       = this.handleScroll.bind(this)
+    this.requestScroll      = this.requestScroll.bind(this)
     this.handleLayoutChange = this.handleLayoutChange.bind(this)
 
-    this.isFirstLoad        = true
-    this.layout             = this.$portfolio.dataset.view
-    this.lastPageYOffset    = window.pageYOffset
-    this.currentPageYOffset = window.pageYOffset
-    this.sectionHeight      = 2000
-    this.transitionListeners = []
+    this.isFirstLoad         = true
+    this.layout              = this.$portfolio.dataset.view
+    this.lastPageYOffset     = window.pageYOffset
+    this.currentPageYOffset  = window.pageYOffset
+    this.sectionHeight       = 2000
 
     this.initSideNav()
     this.initPagination()
@@ -61,7 +59,6 @@ class Home {
 
     this.$gridBlocks.forEach($block => {
       $block.addEventListener('mousemove', () => {
-        console.log('mousemove', this.isTransitioning)
         if (this.isTransitioning) return
         this.hoveredBlock = $block
         this.$gridGallery.classList.add('has-hovered-block')
@@ -76,6 +73,19 @@ class Home {
         this.hoveredBlock = null
       })
     })
+  }
+
+  setTimer() {
+    this.lastCoverChange = new Date().getTime()
+
+    this.timer = setInterval(() => {
+      const now = new Date().getTime()
+      const timeSinceLastChange = now - this.lastCoverChange
+      const translation = (timeSinceLastChange / 8000) * 100
+      this.$paginationTimer.style.transform = `translate3d(${translation}%,0,0)`
+
+      if (timeSinceLastChange >= 8000) this.coverGalleryImagery.next()
+    }, 700)
   }
 
   requestScroll(e) {
@@ -120,6 +130,8 @@ class Home {
   handleCoverChange(index, indexWithClones, $activeChild) {
     if (indexWithClones === this.coverIndex) return
 
+    this.lastCoverChange = new Date().getTime()
+
     this.coverIndex = indexWithClones
     this.coverGalleryText.goToIndex(this.coverIndex)
 
@@ -148,14 +160,13 @@ class Home {
       if (!e.target.classList.contains('imagery')) return
       if (e.target.parentNode.classList.contains('is--active')) return
       if (e.propertyName !== 'opacity') return
-      console.log(e.target)
     }
 
     if (this.layout === 'cover') {
       if (e.target !== this.$gridGalleryWrapper) return
       if (e.propertyName !== 'opacity') return
     }
-    console.log('false false')
+
     this.isTransitioning = false
     this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleLayoutChange)
 
@@ -174,12 +185,13 @@ class Home {
   }
 
   updateLayout() {
-    console.log('truuu')
     this.isTransitioning = true
     this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleLayoutChange)
     this.$gridGalleryWrapper.addEventListener(transitionEnd, this.handleLayoutChange)
 
     if (this.layout === 'grid') {
+      clearInterval(this.timer)
+
       this.$gridBlocks.forEach($block => {
         const scale = $block.dataset.scale
         const $image = $block.querySelector(`.imagery`)
@@ -205,6 +217,8 @@ class Home {
     }
 
     if (this.layout === 'cover') {
+      this.setTimer()
+
       this.$gridBlocks.forEach($block => {
         const $image = $block.querySelector(`.imagery`)
         const scale = $block.dataset.scale
@@ -251,6 +265,8 @@ class Home {
     document.body.style.height = (this.$coverImages.length + 1) * this.sectionHeight + 'px'
 
     this.$coverGalleryImagery.dataset.project = this.$coverImages[0].dataset.project
+
+    this.setTimer()
   }
 
   initGridGallery() {
@@ -279,7 +295,6 @@ class Home {
 
       $gridBlockImage.clientHeight
       $gridBlockImage.classList.remove('no-transitions')
-
 
       $gridBlock.style.width = $image.clientWidth * scale + 'px'
       $gridBlock.style.height = $image.clientHeight * scale + 'px'

@@ -1,0 +1,28 @@
+<div class="menu-overlay">
+  <ul class="menu-links">
+
+    <div class="grid">
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+    </div>
+
+    <li class="link">
+      <a href="">work</a>
+    </li>
+    <br />
+    <li class="link">
+      <a href="">about</a>
+    </li>
+    <br />
+    <li class="link" data-type="crazy">
+      <a href="">labs</a>
+    </li>
+    <br />
+    <li class="link" data-type="outlined">
+      <a href="">archive</a>
+    </li>
+
+  </ul>
+</div>

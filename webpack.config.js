@@ -2,7 +2,8 @@ var webpack = require('webpack')
 
 module.exports = {
   entry: {
-    "/pages/Home.js": "./scripts/src/pages/Home.js"
+    "/pages/Home.js": "./scripts/src/pages/Home.js",
+    "/Global.js": "./scripts/src/Global.js"
   },
   output: {
     publicPath: "./scripts/dist/",

@@ -1,0 +1,140 @@
+.cover-gallery-wrapper {
+  .cover-gallery-imagery {
+    transition: background-color @transition-duration @cubic;
+
+    .imagery {
+      background-size: cover;
+      background-position: center;
+
+      opacity: 0;
+
+      z-index: 1;
+
+      transition: opacity @transition-duration-quick @cubic,
+                  z-index @transition-duration step-end;
+
+      &[data-project="squarespace"] {
+        width: 55%;
+        background-image: url('../projects/squarespace-cover.jpg');
+      }
+
+      &[data-project="apple"] {
+        margin: auto;
+        left: 0;
+        right: 0;
+        width: 30%;
+        background-image: url('../projects/apple-cover.jpg');
+      }
+
+      &[data-project="bloomingdales"] {
+        left: auto;
+        right: 0;
+        width: 48%;
+        background-image: url('../projects/bloomingdales-cover.jpg');
+      }
+
+      &[data-project="morgan-stanley"] {
+        left: 0;
+        right: auto;
+        width: 30%;
+        background-image: url('../projects/morgan-stanley-cover.jpg');
+      }
+
+      &[data-project="vans"] {
+        left: auto;
+        right: 0;
+        width: 45%;
+        background-image: url('../projects/vans-cover.jpg');
+      }
+
+      &[data-arrival-index="0"] {
+        z-index: 2;
+        opacity: 1;
+        transition: opacity @transition-duration-quick @cubic (@transition-duration * 2),
+                    z-index @transition-duration-quick step-start;
+
+        .label {
+          opacity: 0.3;
+        }
+      }
+    }
+
+    .label {
+      opacity: 0;
+
+      position: absolute;
+      bottom: 0;
+      display: inline-block;
+
+      padding-bottom: 15px;
+
+      transform-origin: 0% 100%;
+      transform: rotateZ(-90deg);
+
+      z-index: 2;
+
+      letter-spacing: 0.1em;
+
+      transition: opacity @transition-duration @cubic;
+    }
+
+    .concealer {
+      position: absolute;
+      top: 0;
+      left: auto;
+      right: auto;
+
+      width: 100%;
+      height: 100%;
+
+      background-color: @white-0;
+
+      transition: transform @transition-duration @cubic @transition-duration;
+
+      &.left {
+        left: -100%;
+        transform: translate3d(50%,0,0);
+      }
+
+      &.right {
+        right: -100%;
+        transform: translate3d(-50%,0,0);
+      }
+    }
+
+    &[data-project="squarespace"] {
+      background-color: #e9eae7;
+
+      .concealer.left  { transform: translate3d(0,0,0); }
+      .concealer.right { transform: translate3d(-45%,0,0); }
+    }
+
+    &[data-project="apple"] {
+      background-color: #ededed;
+
+      .concealer.left  { transform: translate3d(35%,0,0); }
+      .concealer.right { transform: translate3d(-35%,0,0); }
+    }
+
+    &[data-project="bloomingdales"] {
+      background-color: #a69689;
+
+      .concealer.left  { transform: translate3d(52%,0,0); }
+      .concealer.right { transform: translate3d(0,0,0); }
+    }
+
+    &[data-project="morgan-stanley"] {
+      background-color: #93336a;
+
+      .concealer.left  { transform: translate3d(0,0,0); }
+      .concealer.right { transform: translate3d(-70%,0,0); }
+    }
+
+    &[data-project="vans"] {
+      background-color: #1a1a1a;
+
+      .concealer.left  { transform: translate3d(55%,0,0); }
+      .concealer.right { transform: translate3d(0,0,0); }
+    }
+  }
+}

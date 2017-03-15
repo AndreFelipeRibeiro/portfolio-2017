@@ -1,8 +1,8 @@
-@nav-width: 90%;
-@nav-height: 100px;
-@nav-height-desktop-lg: 6vw;
+@header-width: 90%;
+@header-height: 100px;
+@header-height-desktop-lg: 6vw;
 
-@side-nav-height: 5vw;
+@side-header-height: 5vw;
 
 @cubic: cubic-bezier(0.8, 0, 0.55, 0.94);
 @snappy: cubic-bezier(1, 0, 0.51, 1);
@@ -28,6 +28,10 @@ body {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+main {
+  transition: opacity @transition-duration @cubic;
 }
 
 p {
@@ -85,4 +89,8 @@ button {
 
 .no-transitions {
   transition: none !important;
+}
+
+.is-transparent {
+  opacity: 0;
 }

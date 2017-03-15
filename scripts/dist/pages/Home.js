@@ -50,17 +50,12 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var Hammer = __webpack_require__(1);
+	var Hammer = __webpack_require__(2);
 
-	var transitionEnd = __webpack_require__(2);
+	var transitionEnd = __webpack_require__(3);
 
-	var BaseGallery = __webpack_require__(3);
-	var Pagination = __webpack_require__(4);
-
-	// Polyfill
-	Array.from = function (arr) {
-	  return Array.prototype.slice.call(arr);
-	};
+	var BaseGallery = __webpack_require__(4);
+	var Pagination = __webpack_require__(5);
 
 	var Home = function () {
 	  function Home() {
@@ -75,6 +70,8 @@
 	    this.$coverTexts = Array.from(this.$coverGalleryText.getElementsByClassName('text'));
 
 	    this.$coverPagination = this.$portfolio.getElementsByClassName('cover-gallery-pagination')[0];
+	    this.$paginationDivider = this.$coverPagination.getElementsByClassName('divider')[0];
+	    this.$paginationTimer = this.$paginationDivider.getElementsByClassName('timer')[0];
 	    this.$activePageWrapper = this.$coverPagination.getElementsByClassName('active-page-wrapper')[0];
 
 	    this.$gridGalleryWrapper = this.$portfolio.getElementsByClassName('grid-gallery-wrapper')[0];
@@ -95,7 +92,6 @@
 	    this.lastPageYOffset = window.pageYOffset;
 	    this.currentPageYOffset = window.pageYOffset;
 	    this.sectionHeight = 2000;
-	    this.transitionListeners = [];
 
 	    this.initSideNav();
 	    this.initPagination();
@@ -120,7 +116,6 @@
 
 	      this.$gridBlocks.forEach(function ($block) {
 	        $block.addEventListener('mousemove', function () {
-	          console.log('mousemove', _this.isTransitioning);
 	          if (_this.isTransitioning) return;
 	          _this.hoveredBlock = $block;
 	          _this.$gridGallery.classList.add('has-hovered-block');
@@ -137,6 +132,22 @@
 	      });
 	    }
 	  }, {
+	    key: 'setTimer',
+	    value: function setTimer() {
+	      var _this2 = this;
+
+	      this.lastCoverChange = new Date().getTime();
+
+	      this.timer = setInterval(function () {
+	        var now = new Date().getTime();
+	        var timeSinceLastChange = now - _this2.lastCoverChange;
+	        var translation = timeSinceLastChange / 8000 * 100;
+	        _this2.$paginationTimer.style.transform = 'translate3d(' + translation + '%,0,0)';
+
+	        if (timeSinceLastChange >= 8000) _this2.coverGalleryImagery.next();
+	      }, 700);
+	    }
+	  }, {
 	    key: 'requestScroll',
 	    value: function requestScroll(e) {
 	      this.requestTick(e);
@@ -144,15 +155,15 @@
 	  }, {
 	    key: 'requestTick',
 	    value: function requestTick(e) {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      if (this.ticking) return;
 
 	      requestAnimationFrame(function () {
-	        _this2.lastPageYOffset = _this2.currentPageYOffset;
-	        _this2.currentPageYOffset = window.pageYOffset;
-	        _this2.handleScroll(e);
-	        _this2.ticking = false;
+	        _this3.lastPageYOffset = _this3.currentPageYOffset;
+	        _this3.currentPageYOffset = window.pageYOffset;
+	        _this3.handleScroll(e);
+	        _this3.ticking = false;
 	      });
 
 	      this.ticking = true;
@@ -185,6 +196,8 @@
 	    value: function handleCoverChange(index, indexWithClones, $activeChild) {
 	      if (indexWithClones === this.coverIndex) return;
 
+	      this.lastCoverChange = new Date().getTime();
+
 	      this.coverIndex = indexWithClones;
 	      this.coverGalleryText.goToIndex(this.coverIndex);
 
@@ -193,20 +206,20 @@
 	  }, {
 	    key: 'initSideNav',
 	    value: function initSideNav() {
-	      var _this3 = this;
+	      var _this4 = this;
 
 	      this.$sideNavOptions.forEach(function ($option) {
 	        $option.addEventListener('click', function (e) {
 	          var layout = e.target.dataset.view;
-	          if (layout === _this3.layout) return;
+	          if (layout === _this4.layout) return;
 
-	          _this3.layout = layout;
-	          _this3.$portfolio.dataset.view = _this3.layout;
-	          _this3.$sideNav.dataset.view = _this3.layout;
+	          _this4.layout = layout;
+	          _this4.$portfolio.dataset.view = _this4.layout;
+	          _this4.$sideNav.dataset.view = _this4.layout;
 
-	          _this3.$gridBlocks = Array.from(_this3.$gridGallery.querySelectorAll('.grid-block'));
+	          _this4.$gridBlocks = Array.from(_this4.$gridGallery.querySelectorAll('.grid-block'));
 
-	          _this3.updateLayout();
+	          _this4.updateLayout();
 	        });
 	      });
 	    }
@@ -217,14 +230,13 @@
 	        if (!e.target.classList.contains('imagery')) return;
 	        if (e.target.parentNode.classList.contains('is--active')) return;
 	        if (e.propertyName !== 'opacity') return;
-	        console.log(e.target);
 	      }
 
 	      if (this.layout === 'cover') {
 	        if (e.target !== this.$gridGalleryWrapper) return;
 	        if (e.propertyName !== 'opacity') return;
 	      }
-	      console.log('false false');
+
 	      this.isTransitioning = false;
 	      this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleLayoutChange);
 
@@ -244,22 +256,23 @@
 	  }, {
 	    key: 'updateLayout',
 	    value: function updateLayout() {
-	      var _this4 = this;
+	      var _this5 = this;
 
-	      console.log('truuu');
 	      this.isTransitioning = true;
 	      this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleLayoutChange);
 	      this.$gridGalleryWrapper.addEventListener(transitionEnd, this.handleLayoutChange);
 
 	      if (this.layout === 'grid') {
+	        clearInterval(this.timer);
+
 	        this.$gridBlocks.forEach(function ($block) {
 	          var scale = $block.dataset.scale;
 	          var $image = $block.querySelector('.imagery');
 
-	          var isActiveProject = $block.dataset.project === _this4.$coverGalleryImagery.dataset.project;
+	          var isActiveProject = $block.dataset.project === _this5.$coverGalleryImagery.dataset.project;
 	          if (isActiveProject) $block.classList.add('is--active');
 
-	          if (!_this4.isFirstLoad && isActiveProject) {
+	          if (!_this5.isFirstLoad && isActiveProject) {
 	            var _$block$dataset = $block.dataset,
 	                diffX = _$block$dataset.diffX,
 	                diffY = _$block$dataset.diffY;
@@ -280,12 +293,14 @@
 	      }
 
 	      if (this.layout === 'cover') {
+	        this.setTimer();
+
 	        this.$gridBlocks.forEach(function ($block) {
 	          var $image = $block.querySelector('.imagery');
 	          var scale = $block.dataset.scale;
-	          var isActiveProject = $block.dataset.project === _this4.$coverGalleryImagery.dataset.project;
+	          var isActiveProject = $block.dataset.project === _this5.$coverGalleryImagery.dataset.project;
 
-	          if (!_this4.isFirstLoad && isActiveProject) {
+	          if (!_this5.isFirstLoad && isActiveProject) {
 	            var _$block$dataset2 = $block.dataset,
 	                diffX = _$block$dataset2.diffX,
 	                diffY = _$block$dataset2.diffY;
@@ -329,6 +344,8 @@
 	      document.body.style.height = (this.$coverImages.length + 1) * this.sectionHeight + 'px';
 
 	      this.$coverGalleryImagery.dataset.project = this.$coverImages[0].dataset.project;
+
+	      this.setTimer();
 	    }
 	  }, {
 	    key: 'initGridGallery',
@@ -339,15 +356,15 @@
 	  }, {
 	    key: 'setGridBlockSizes',
 	    value: function setGridBlockSizes() {
-	      var _this5 = this;
+	      var _this6 = this;
 
 	      this.$coverImages.forEach(function ($image) {
 	        var project = $image.dataset.project;
-	        var $gridBlock = _this5.$gridGallery.querySelector('.grid-block[data-project=' + project + ']');
+	        var $gridBlock = _this6.$gridGallery.querySelector('.grid-block[data-project=' + project + ']');
 	        var $gridBlockImage = $gridBlock.getElementsByClassName('imagery')[0];
 	        var scale = parseFloat($gridBlock.dataset.scale);
 
-	        _this5.gridBlocks[project] = $gridBlock;
+	        _this6.gridBlocks[project] = $gridBlock;
 
 	        $gridBlockImage.style.width = $image.clientWidth + 'px';
 	        $gridBlockImage.style.height = $image.clientHeight + 'px';
@@ -387,7 +404,8 @@
 	new Home();
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
@@ -3025,7 +3043,7 @@
 	})(window, document, 'Hammer');
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3052,7 +3070,7 @@
 	}
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3061,7 +3079,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var transitionEnd = __webpack_require__(2);
+	var transitionEnd = __webpack_require__(3);
 
 	/* This is a very very simple gallery.
 
@@ -3253,7 +3271,7 @@
 	module.exports = Gallery;
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3262,8 +3280,8 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var transitionEnd = __webpack_require__(2);
-	var transform = __webpack_require__(5);
+	var transitionEnd = __webpack_require__(3);
+	var transform = __webpack_require__(6);
 
 	var Pagination = function () {
 	  function Pagination($parent, count) {
@@ -3347,7 +3365,7 @@
 	module.exports = Pagination;
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';

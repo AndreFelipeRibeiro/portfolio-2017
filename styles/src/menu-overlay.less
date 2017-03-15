@@ -1,0 +1,131 @@
+.menu-overlay {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, -100%, 0);
+
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+
+  transition: opacity @transition-duration step-end,
+              transform @transition-duration @cubic,
+              visibility @transition-duration step-end,
+              background-color @transition-duration @cubic;
+
+  /*----------------------
+  ALTERNATE STATES
+  ----------------------*/
+  &.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+
+    transition: opacity @transition-duration step-start,
+                transform @transition-duration @cubic,
+                visibility @transition-duration step-start,
+                background-color @transition-duration @cubic;
+
+    &[data-hover-type] {
+      background-color: #000;
+
+      .grid { opacity: 0.1; }
+      .link { opacity: 0.1; }
+      .link a { color: #fff; }
+      .link.is-active { opacity: 1; }
+    }
+
+    &[data-hover-type="crazy"] {
+      background-color: #ff0000;
+
+      .link { opacity: 1; }
+      .link.is-active a { color: #000; }
+    }
+
+    &[data-hover-type="outlined"] {
+      background-color: #ffffff;
+
+      .link { opacity: 0.1; }
+      .link a { color: #000; }
+      .link.is-active { opacity: 1; }
+    }
+
+    .menu-links {
+      opacity: 1;
+      transition: opacity @transition-duration @cubic @transition-duration;
+    }
+  }
+
+  /*----------------------
+  CONTENT
+  ----------------------*/
+  .grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    opacity: 0.1;
+
+    transition: opacity @transition-duration @cubic;
+
+    .column {
+      flex: 1;
+      height: 100%;
+      border-left:  1px solid #aaa;
+
+      &:last-child {
+        border-right: 1px solid #aaa;
+      }
+    }
+  }
+
+  .menu-links {
+    opacity: 0;
+    position: relative;
+
+    width: @header-width;
+    height: 100%;
+    margin: 0 auto;
+
+    list-style: none;
+    padding-top: @header-height;
+    padding-left: 0;
+
+    transition: opacity @transition-duration-quick @cubic;
+  }
+
+  .link {
+    display: inline-block;
+
+    font-size: 12vw;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.2em;
+
+    user-select: none;
+    cursor: pointer;
+
+    transition: opacity @transition-duration-quick @cubic;
+
+    &[data-type="outlined"] a {
+      color: #fff;
+      text-shadow: 0 0 1px #666;
+    }
+
+    a {
+      color: #c3c3c3;
+      text-decoration: none;
+
+      transition: color @transition-duration-quick @cubic;
+    }
+  }
+}

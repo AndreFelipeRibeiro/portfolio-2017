@@ -4,7 +4,7 @@
   "description": "Pretty self-explanatory.",
   "main": "index.html",
   "scripts": {
-    "dev": "npm run build && gulp watch",
+    "dev": "squarespace assemble && npm run build && gulp watch",
     "server": "squarespace-server https://andre-ribeiro-j82g.squarespace.com",
     "start": "npm run dev",
     "build": "gulp less & webpack",
