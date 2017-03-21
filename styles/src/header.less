@@ -7,8 +7,16 @@
   font-size: 0;
   z-index: 4;
 
+  &.has-menu-overlay {
+    &[data-active-link="work"],
+    &[data-active-link="labs"] {
+      h1 { color: #fff; }
+      .hamburger .bar { background-color: #fff; }
+    }
+  }
+
   .header-content {
-    width: @header-width;
+    width: @page-width;
     height: 100%;
     margin: 0 auto;
 
@@ -37,6 +45,8 @@
     font-size: 19.5px;
     font-weight: 300;
     margin: 0 0;
+
+    transition: color @transition-duration-quick @cubic;
   }
 
   .hamburger {
@@ -61,7 +71,8 @@
       height: 1px;
       background-color: #000;
 
-      transition: transform @transition-duration-quick @cubic;
+      transition: background-color @transition-duration-quick @cubic,
+                  transform @transition-duration-quick @cubic;
 
       &-1 {
         transform-origin: 100% 0;

@@ -489,6 +489,25 @@ button {
 .is-transparent {
   opacity: 0;
 }
+.grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
+}
+.grid .column {
+  flex: 1;
+  height: 100%;
+  border-left: 1px solid #aaa;
+}
+.grid .column:last-child {
+  border-right: 1px solid #aaa;
+}
 #header {
   position: fixed;
   top: 0;
@@ -623,25 +642,6 @@ button {
 .menu-overlay.is-active .menu-links {
   opacity: 1;
   transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms;
-}
-.menu-overlay .grid {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  opacity: 0.1;
-  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
-}
-.menu-overlay .grid .column {
-  flex: 1;
-  height: 100%;
-  border-left: 1px solid #aaa;
-}
-.menu-overlay .grid .column:last-child {
-  border-right: 1px solid #aaa;
 }
 .menu-overlay .menu-links {
   opacity: 0;
@@ -1213,4 +1213,159 @@ button {
 }
 .grid-gallery-wrapper .grid-block[data-project="vans"] .imagery {
   background-image: url('../projects/vans-cover.jpg');
+}
+#about {
+  background-color: #E5E5E5;
+  overflow: hidden;
+}
+#about .wrapper {
+  position: relative;
+  width: 90%;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 100px 0;
+}
+#about .grid {
+  z-index: 0;
+  border-left: 1px solid #888;
+}
+#about .content {
+  position: relative;
+  z-index: 1;
+  padding-top: 50px;
+}
+#about .back {
+  font-size: 20px;
+  font-weight: 200;
+}
+#about .back span {
+  color: #fff;
+  padding-right: 10px;
+}
+#about .intro {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  padding: 180px 0 0;
+}
+#about .intro .bio p,
+#about .intro .role,
+#about .intro .company {
+  margin: 0 0;
+  font-size: 20px;
+}
+#about .intro .bio {
+  flex: 2;
+}
+#about .intro .bio p {
+  max-width: 300px;
+}
+#about .intro .role {
+  flex: 1;
+}
+#about .intro .company {
+  flex: 1;
+  color: #fff;
+  font-weight: 100;
+}
+#about .intro .company span {
+  margin-left: 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #fff;
+}
+#about h2 {
+  white-space: nowrap;
+  text-align: center;
+  font-size: 18.5vw;
+  margin-left: -94%;
+  margin-right: -100%;
+  margin-top: 50px;
+  margin-bottom: 150px;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+}
+#about h2 span {
+  color: #fff;
+}
+#about .detail {
+  display: flex;
+  align-items: flex-start;
+}
+#about .detail .label,
+#about .detail .bio {
+  flex: 1;
+}
+#about .detail .label {
+  font-size: 20px;
+  text-transform: none;
+  color: #000;
+  opacity: 1;
+  letter-spacing: 0.01em;
+}
+#about .detail .bio p {
+  padding-right: 5%;
+  font-size: 20px;
+  line-height: 1.7em;
+}
+#about .detail .brands {
+  font-size: 26px;
+  font-weight: 200;
+  line-height: 2.2em;
+  max-width: 500px;
+  margin: 100px 0;
+}
+#about .detail .social-links {
+  display: flex;
+  align-items: flex-start;
+}
+#about .detail .social-links .column {
+  flex: 1;
+}
+#about .detail .social-links .link {
+  display: block;
+  font-size: 20px;
+  font-weight: 200;
+  line-height: 1.6em;
+  color: #000;
+  text-decoration: none;
+}
+#about .detail .social-links .link span {
+  vertical-align: bottom;
+  font-size: 18px;
+  color: #fff;
+  padding-right: 10px;
+}
+#about .footer {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 200px;
+}
+#about .footer .back-to-the-top,
+#about .footer .development-by,
+#about .footer .cha {
+  font-size: 20px;
+  font-weight: 200;
+}
+#about .footer .back-to-the-top {
+  flex: 2;
+  color: #000;
+}
+#about .footer .back-to-the-top span {
+  color: #fff;
+  padding-right: 5px;
+}
+#about .footer .development-by {
+  flex: 1;
+  color: #000;
+}
+#about .footer .cha {
+  flex: 1;
+  text-decoration: none;
+}
+#about .footer .cha span {
+  color: #fff;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #fff;
 }

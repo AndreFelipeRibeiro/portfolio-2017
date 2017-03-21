@@ -3,6 +3,7 @@ var webpack = require('webpack')
 module.exports = {
   entry: {
     "/pages/Home.js": "./scripts/src/pages/Home.js",
+    "/pages/About.js": "./scripts/src/pages/About.js",
     "/Global.js": "./scripts/src/Global.js"
   },
   output: {

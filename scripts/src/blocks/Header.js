@@ -9,7 +9,8 @@ class Header {
 
     // state
     this.menuIsActive = false
-    this.$activeLink  = null
+    this.currentUrl   = this.$menuOverlay.dataset.activeLink
+    this.$activeLink  = this.$menuOverlay.querySelector(`.link[data-link=${this.currentUrl}]`)
 
     // cache bound methods
     this.handleClickHamburger = this.handleClickHamburger.bind(this)
@@ -50,15 +51,16 @@ class Header {
     this.$main.classList[fn]('is-transparent')
     this.$hamburger.classList[fn]('is-active')
     this.$menuOverlay.classList[fn]('is-active')
+    this.$header.classList[fn]('has-menu-overlay')
     this.$menuLinks.forEach($link => $link.classList.remove('is-active'))
 
-    if (this.$activeLink) {
-      const hoverType = this.$activeLink.dataset.type || 'normal'
-      this.$menuOverlay.dataset.hoverType = hoverType
-      this.$activeLink.classList.add('is-active')
-    } else {
-      this.$menuOverlay.removeAttribute('data-hover-type')
+    if (!this.$activeLink) {
+      this.$activeLink  = this.$menuOverlay.querySelector(`.link[data-link=${this.currentUrl}]`)
     }
+
+    this.$menuOverlay.dataset.activeLink = this.$activeLink.dataset.link
+    this.$header.dataset.activeLink = this.$activeLink.dataset.link
+    this.$activeLink.classList.add('is-active')
   }
 }
 

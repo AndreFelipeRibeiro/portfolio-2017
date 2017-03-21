@@ -1,4 +1,4 @@
-<div class="menu-overlay">
+<div class="menu-overlay" data-active-link="{collection.urlId}">
   <ul class="menu-links">
 
     <div class="grid">
@@ -8,19 +8,19 @@
       <div class="column"></div>
     </div>
 
-    <li class="link">
+    <li class="link" data-link="work">
       <a href="">work</a>
     </li>
     <br />
-    <li class="link">
+    <li class="link" data-link="about">
       <a href="">about</a>
     </li>
     <br />
-    <li class="link" data-type="crazy">
+    <li class="link" data-link="labs">
       <a href="">labs</a>
     </li>
     <br />
-    <li class="link" data-type="outlined">
+    <li class="link" data-link="archive">
       <a href="">archive</a>
     </li>
 

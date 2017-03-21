@@ -30,7 +30,7 @@
                 visibility @transition-duration step-start,
                 background-color @transition-duration @cubic;
 
-    &[data-hover-type] {
+    &[data-active-link="work"] {
       background-color: #000;
 
       .grid { opacity: 0.1; }
@@ -39,14 +39,25 @@
       .link.is-active { opacity: 1; }
     }
 
-    &[data-hover-type="crazy"] {
-      background-color: #ff0000;
+    &[data-active-link="about"] {
+      background-color: #E5E5E5;
 
-      .link { opacity: 1; }
-      .link.is-active a { color: #000; }
+      .link { opacity: 0.15; }
+      .link a { color: #000; }
+      .link.is-active { opacity: 1; }
+      .link.is-active a { color: #fff; }
     }
 
-    &[data-hover-type="outlined"] {
+    &[data-active-link="labs"] {
+      background-color: #ff0000;
+
+      .link { opacity: 0.2; }
+      .link a { color: #000; }
+      .link.is-active { opacity: 1; }
+      .link.is-active a { color: #fff; }
+    }
+
+    &[data-active-link="archive"] {
       background-color: #ffffff;
 
       .link { opacity: 0.1; }
@@ -63,38 +74,13 @@
   /*----------------------
   CONTENT
   ----------------------*/
-  .grid {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-
-    display: flex;
-    width: 100%;
-    height: 100%;
-
-    opacity: 0.1;
-
-    transition: opacity @transition-duration @cubic;
-
-    .column {
-      flex: 1;
-      height: 100%;
-      border-left:  1px solid #aaa;
-
-      &:last-child {
-        border-right: 1px solid #aaa;
-      }
-    }
-  }
-
   .menu-links {
     opacity: 0;
     position: relative;
 
-    width: @header-width;
+    width: @page-width;
     height: 100%;
-    margin: 0 auto;
+    margin: 100px auto;
 
     list-style: none;
     padding-top: @header-height;
@@ -106,7 +92,7 @@
   .link {
     display: inline-block;
 
-    font-size: 15vmin;
+    font-size: 12vmin;
     font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 1.2em;
@@ -115,11 +101,6 @@
     cursor: pointer;
 
     transition: opacity @transition-duration-quick @cubic;
-
-    &[data-type="outlined"] a {
-      color: #fff;
-      text-shadow: 0 0 1px #666;
-    }
 
     a {
       color: #c3c3c3;
