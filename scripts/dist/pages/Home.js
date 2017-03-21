@@ -115,7 +115,7 @@
 	      window.addEventListener('resize', this.handleResize);
 
 	      this.$gridBlocks.forEach(function ($block) {
-	        $block.addEventListener('mousemove', function () {
+	        $block.addEventListener('mouseenter', function () {
 	          if (_this.isTransitioning) return;
 	          _this.hoveredBlock = $block;
 	          _this.$gridGallery.classList.add('has-hovered-block');
@@ -135,6 +135,8 @@
 	    key: 'setTimer',
 	    value: function setTimer() {
 	      var _this2 = this;
+
+	      if (this.timer) clearInterval(this.timer);
 
 	      this.lastCoverChange = new Date().getTime();
 
@@ -179,6 +181,8 @@
 	  }, {
 	    key: 'handleScroll',
 	    value: function handleScroll(e) {
+	      if (this.layout === 'grid') return;
+
 	      var section = Math.floor(this.currentPageYOffset / this.sectionHeight);
 	      var nextIndex = section % this.$coverImages.length;
 
@@ -189,37 +193,52 @@
 	      if (nextIndex === this.coverIndex) return;
 
 	      this.coverGalleryImagery.goToIndex(nextIndex);
-	      this.pagination.update(nextIndex);
 	    }
 	  }, {
 	    key: 'handleCoverChange',
 	    value: function handleCoverChange(index, indexWithClones, $activeChild) {
+	      var _this4 = this;
+
 	      if (indexWithClones === this.coverIndex) return;
 
 	      this.lastCoverChange = new Date().getTime();
 
+	      var handleTransitionEnd = function handleTransitionEnd(e) {
+	        if (e.propertyName !== 'opacity') return;
+	        if (!e.target.classList.contains('imagery')) return;
+	        if (e.elapsedTime < 1) return;
+
+	        $activeChild.removeEventListener(transitionEnd, handleTransitionEnd);
+	        _this4.isTransitioning = false;
+	      };
+
+	      this.isTransitioning = true;
+	      $activeChild.addEventListener(transitionEnd, handleTransitionEnd);
+
 	      this.coverIndex = indexWithClones;
 	      this.coverGalleryText.goToIndex(this.coverIndex);
+	      this.pagination.update(this.coverIndex);
 
 	      this.$coverGalleryImagery.dataset.project = $activeChild.dataset.project;
 	    }
 	  }, {
 	    key: 'initSideNav',
 	    value: function initSideNav() {
-	      var _this4 = this;
+	      var _this5 = this;
 
 	      this.$sideNavOptions.forEach(function ($option) {
 	        $option.addEventListener('click', function (e) {
 	          var layout = e.target.dataset.view;
-	          if (layout === _this4.layout) return;
+	          if (layout === _this5.layout) return;
+	          if (_this5.isTransitioning) return;
 
-	          _this4.layout = layout;
-	          _this4.$portfolio.dataset.view = _this4.layout;
-	          _this4.$sideNav.dataset.view = _this4.layout;
+	          _this5.layout = layout;
+	          _this5.$portfolio.dataset.view = _this5.layout;
+	          _this5.$sideNav.dataset.view = _this5.layout;
 
-	          _this4.$gridBlocks = Array.from(_this4.$gridGallery.querySelectorAll('.grid-block'));
+	          _this5.$gridBlocks = Array.from(_this5.$gridGallery.querySelectorAll('.grid-block'));
 
-	          _this4.updateLayout();
+	          _this5.updateLayout();
 	        });
 	      });
 	    }
@@ -256,7 +275,7 @@
 	  }, {
 	    key: 'updateLayout',
 	    value: function updateLayout() {
-	      var _this5 = this;
+	      var _this6 = this;
 
 	      this.isTransitioning = true;
 	      this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleLayoutChange);
@@ -269,10 +288,10 @@
 	          var scale = $block.dataset.scale;
 	          var $image = $block.querySelector('.imagery');
 
-	          var isActiveProject = $block.dataset.project === _this5.$coverGalleryImagery.dataset.project;
+	          var isActiveProject = $block.dataset.project === _this6.$coverGalleryImagery.dataset.project;
 	          if (isActiveProject) $block.classList.add('is--active');
 
-	          if (!_this5.isFirstLoad && isActiveProject) {
+	          if (!_this6.isFirstLoad && isActiveProject) {
 	            var _$block$dataset = $block.dataset,
 	                diffX = _$block$dataset.diffX,
 	                diffY = _$block$dataset.diffY;
@@ -293,14 +312,17 @@
 	      }
 
 	      if (this.layout === 'cover') {
-	        this.setTimer();
+	        this.$gridGallery.classList.remove('has-hovered-block');
+	        this.hoveredBlock = null;
 
 	        this.$gridBlocks.forEach(function ($block) {
+	          $block.classList.remove('is-hovered');
+
 	          var $image = $block.querySelector('.imagery');
 	          var scale = $block.dataset.scale;
-	          var isActiveProject = $block.dataset.project === _this5.$coverGalleryImagery.dataset.project;
+	          var isActiveProject = $block.dataset.project === _this6.$coverGalleryImagery.dataset.project;
 
-	          if (!_this5.isFirstLoad && isActiveProject) {
+	          if (!_this6.isFirstLoad && isActiveProject) {
 	            var _$block$dataset2 = $block.dataset,
 	                diffX = _$block$dataset2.diffX,
 	                diffY = _$block$dataset2.diffY;
@@ -311,6 +333,8 @@
 	            $image.style.transform = 'scale(' + scale + ')';
 	          }
 	        });
+
+	        this.setTimer();
 	      }
 
 	      this.isFirstLoad = false;
@@ -356,15 +380,15 @@
 	  }, {
 	    key: 'setGridBlockSizes',
 	    value: function setGridBlockSizes() {
-	      var _this6 = this;
+	      var _this7 = this;
 
 	      this.$coverImages.forEach(function ($image) {
 	        var project = $image.dataset.project;
-	        var $gridBlock = _this6.$gridGallery.querySelector('.grid-block[data-project=' + project + ']');
+	        var $gridBlock = _this7.$gridGallery.querySelector('.grid-block[data-project=' + project + ']');
 	        var $gridBlockImage = $gridBlock.getElementsByClassName('imagery')[0];
 	        var scale = parseFloat($gridBlock.dataset.scale);
 
-	        _this6.gridBlocks[project] = $gridBlock;
+	        _this7.gridBlocks[project] = $gridBlock;
 
 	        $gridBlockImage.style.width = $image.clientWidth + 'px';
 	        $gridBlockImage.style.height = $image.clientHeight + 'px';

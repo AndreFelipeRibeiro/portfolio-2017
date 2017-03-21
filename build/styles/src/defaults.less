@@ -30,6 +30,10 @@ body {
   }
 }
 
+main {
+  transition: opacity @transition-duration @cubic;
+}
+
 p {
   font-size: 14px;
   font-weight: 200;
@@ -85,4 +89,8 @@ button {
 
 .no-transitions {
   transition: none !important;
+}
+
+.is-transparent {
+  opacity: 0;
 }

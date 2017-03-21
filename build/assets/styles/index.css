@@ -437,6 +437,9 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+main {
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
+}
 p {
   font-size: 14px;
   font-weight: 200;
@@ -482,6 +485,9 @@ button {
 }
 .no-transitions {
   transition: none !important;
+}
+.is-transparent {
+  opacity: 0;
 }
 #header {
   position: fixed;
@@ -556,6 +562,7 @@ button {
 .menu-overlay {
   opacity: 0;
   visibility: hidden;
+  transform: translate3d(0, -100%, 0);
   width: 100%;
   height: 100%;
   background-color: #fff;
@@ -563,7 +570,7 @@ button {
   top: 0;
   left: 0;
   z-index: 3;
-  transition: opacity 400ms cubic-bezier(0.8, 0, 0.55, 0.94), visibility 400ms step-end;
+  transition: opacity 700ms step-end, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94), visibility 700ms step-end, background-color 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
   /*----------------------
   ALTERNATE STATES
   ----------------------*/
@@ -574,25 +581,48 @@ button {
 .menu-overlay.is-active {
   opacity: 1;
   visibility: visible;
-  transition: opacity 400ms cubic-bezier(0.8, 0, 0.55, 0.94), visibility 400ms step-start;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 700ms step-start, transform 700ms cubic-bezier(0.8, 0, 0.55, 0.94), visibility 700ms step-start, background-color 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
 }
 .menu-overlay.is-active[data-hover-type] {
   background-color: #000;
 }
+.menu-overlay.is-active[data-hover-type] .grid {
+  opacity: 0.1;
+}
+.menu-overlay.is-active[data-hover-type] .link {
+  opacity: 0.1;
+}
+.menu-overlay.is-active[data-hover-type] .link a {
+  color: #fff;
+}
+.menu-overlay.is-active[data-hover-type] .link.is-active {
+  opacity: 1;
+}
 .menu-overlay.is-active[data-hover-type="crazy"] {
   background-color: #ff0000;
 }
-.menu-overlay.is-active[data-hover-type="oulined"] {
+.menu-overlay.is-active[data-hover-type="crazy"] .link {
+  opacity: 1;
+}
+.menu-overlay.is-active[data-hover-type="crazy"] .link.is-active a {
+  color: #000;
+}
+.menu-overlay.is-active[data-hover-type="outlined"] {
   background-color: #ffffff;
 }
-.menu-overlay .menu-links {
-  position: relative;
-  width: 90%;
-  height: 100%;
-  margin: 0 auto;
-  list-style: none;
-  padding-top: 100px;
-  padding-left: 0;
+.menu-overlay.is-active[data-hover-type="outlined"] .link {
+  opacity: 0.1;
+}
+.menu-overlay.is-active[data-hover-type="outlined"] .link a {
+  color: #000;
+}
+.menu-overlay.is-active[data-hover-type="outlined"] .link.is-active {
+  opacity: 1;
+}
+.menu-overlay.is-active .menu-links {
+  opacity: 1;
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94) 700ms;
 }
 .menu-overlay .grid {
   position: absolute;
@@ -602,14 +632,27 @@ button {
   display: flex;
   width: 100%;
   height: 100%;
+  opacity: 0.1;
+  transition: opacity 700ms cubic-bezier(0.8, 0, 0.55, 0.94);
 }
 .menu-overlay .grid .column {
   flex: 1;
   height: 100%;
-  border-left: 1px solid #f1f1f1;
+  border-left: 1px solid #aaa;
 }
 .menu-overlay .grid .column:last-child {
-  border-right: 1px solid #f1f1f1;
+  border-right: 1px solid #aaa;
+}
+.menu-overlay .menu-links {
+  opacity: 0;
+  position: relative;
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  list-style: none;
+  padding-top: 100px;
+  padding-left: 0;
+  transition: opacity 400ms cubic-bezier(0.8, 0, 0.55, 0.94);
 }
 .menu-overlay .link {
   display: inline-block;
@@ -618,14 +661,17 @@ button {
   letter-spacing: -0.03em;
   line-height: 1.2em;
   user-select: none;
+  cursor: pointer;
+  transition: opacity 400ms cubic-bezier(0.8, 0, 0.55, 0.94);
 }
-.menu-overlay .link [data-type="outlined"] a {
+.menu-overlay .link[data-type="outlined"] a {
   color: #fff;
   text-shadow: 0 0 1px #666;
 }
 .menu-overlay .link a {
   color: #c3c3c3;
   text-decoration: none;
+  transition: color 400ms cubic-bezier(0.8, 0, 0.55, 0.94);
 }
 .side-nav {
   position: fixed;

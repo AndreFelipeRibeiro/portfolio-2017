@@ -58,7 +58,7 @@ class Home {
     window.addEventListener('resize', this.handleResize)
 
     this.$gridBlocks.forEach($block => {
-      $block.addEventListener('mousemove', () => {
+      $block.addEventListener('mouseenter', () => {
         if (this.isTransitioning) return
         this.hoveredBlock = $block
         this.$gridGallery.classList.add('has-hovered-block')
@@ -76,6 +76,8 @@ class Home {
   }
 
   setTimer() {
+    if (this.timer) clearInterval(this.timer)
+
     this.lastCoverChange = new Date().getTime()
 
     this.timer = setInterval(() => {
@@ -113,6 +115,8 @@ class Home {
   }
 
   handleScroll(e) {
+    if (this.layout === 'grid') return
+
     const section = Math.floor(this.currentPageYOffset / this.sectionHeight)
     const nextIndex = section % this.$coverImages.length
 
@@ -124,7 +128,6 @@ class Home {
     if (nextIndex === this.coverIndex) return
 
     this.coverGalleryImagery.goToIndex(nextIndex)
-    this.pagination.update(nextIndex)
   }
 
   handleCoverChange(index, indexWithClones, $activeChild) {
@@ -132,8 +135,21 @@ class Home {
 
     this.lastCoverChange = new Date().getTime()
 
+    const handleTransitionEnd = (e) => {
+      if (e.propertyName !== 'opacity') return
+      if (!e.target.classList.contains('imagery')) return
+      if (e.elapsedTime < 1) return
+
+      $activeChild.removeEventListener(transitionEnd, handleTransitionEnd)
+      this.isTransitioning = false
+    }
+
+    this.isTransitioning = true
+    $activeChild.addEventListener(transitionEnd, handleTransitionEnd)
+
     this.coverIndex = indexWithClones
     this.coverGalleryText.goToIndex(this.coverIndex)
+    this.pagination.update(this.coverIndex)
 
     this.$coverGalleryImagery.dataset.project = $activeChild.dataset.project
   }
@@ -143,6 +159,7 @@ class Home {
       $option.addEventListener('click', (e) => {
         const layout = e.target.dataset.view
         if (layout === this.layout) return
+        if (this.isTransitioning) return
 
         this.layout = layout
         this.$portfolio.dataset.view = this.layout
@@ -217,9 +234,12 @@ class Home {
     }
 
     if (this.layout === 'cover') {
-      this.setTimer()
+      this.$gridGallery.classList.remove('has-hovered-block')
+      this.hoveredBlock = null
 
       this.$gridBlocks.forEach($block => {
+        $block.classList.remove('is-hovered')
+
         const $image = $block.querySelector(`.imagery`)
         const scale = $block.dataset.scale
         const isActiveProject = $block.dataset.project === this.$coverGalleryImagery.dataset.project
@@ -234,6 +254,8 @@ class Home {
           $image.style.transform = `scale(${scale})`
         }
       })
+
+      this.setTimer()
     }
 
     this.isFirstLoad = false
