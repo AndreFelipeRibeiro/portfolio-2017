@@ -1,0 +1,4 @@
+<main id="about">
+</main>
+
+<squarespace:script src="dist/pages/About.js" combo="false"/>

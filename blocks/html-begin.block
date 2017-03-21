@@ -11,3 +11,4 @@
   </head>
   <body>
     {@|apply header.block}
+    {@|apply menu-overlay.block}

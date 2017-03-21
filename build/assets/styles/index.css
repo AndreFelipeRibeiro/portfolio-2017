@@ -656,7 +656,7 @@ button {
 }
 .menu-overlay .link {
   display: inline-block;
-  font-size: 12vw;
+  font-size: 15vmin;
   font-weight: 400;
   letter-spacing: -0.03em;
   line-height: 1.2em;
@@ -1109,7 +1109,7 @@ button {
 }
 .cover-gallery-wrapper .cover-gallery-pagination .divider {
   position: relative;
-  width: 4.5vw;
+  width: 9.5vw;
   height: 1px;
   background-color: rgba(0, 0, 0, 0.1);
   margin: 0 15px;

@@ -1,5 +1,3 @@
-{@|apply menu-overlay.block}
-
 <main id="portfolio" data-view="cover">
   {@|apply side-nav.block}
   {@|apply grid-gallery.block}
