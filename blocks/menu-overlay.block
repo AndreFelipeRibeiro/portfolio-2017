@@ -9,11 +9,11 @@
     </div>
 
     <li class="link" data-link="work">
-      <a href="">work</a>
+      <a href="/">work</a>
     </li>
     <br />
     <li class="link" data-link="about">
-      <a href="">about</a>
+      <a href="/about">about</a>
     </li>
     <br />
     <li class="link" data-link="labs">
