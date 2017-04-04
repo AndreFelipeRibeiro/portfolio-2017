@@ -184,6 +184,7 @@
 	      this.vh = window.innerHeight;
 	      this.bodyHeight = document.body.clientHeight;
 
+	      this.setGalleryHeights();
 	      this.setGridBlockSizes();
 	    }
 	  }, {
@@ -223,9 +224,14 @@
 	  }, {
 	    key: 'setGalleryHeights',
 	    value: function setGalleryHeights() {
-	      if (!IS_MOBILE_OS || this.$coverGalleryWrapper.style.height) return;
-	      this.$coverGalleryWrapper.style.height = this.getGalleryHeight();
-	      this.$gridGalleryWrapper.style.height = this.getGalleryHeight();
+	      if (IS_MOBILE_OS) {
+	        var galleryHeight = this.getGalleryHeight();
+	        this.$coverGalleryWrapper.style.height = galleryHeight;
+	        this.$gridGalleryWrapper.style.height = galleryHeight;
+	      } else {
+	        this.$coverGalleryWrapper.style.removeProperty('height');
+	        this.$gridGalleryWrapper.style.removeProperty('height');
+	      }
 	    }
 	  }, {
 	    key: 'handleCoverChange',

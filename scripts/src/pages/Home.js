@@ -119,6 +119,7 @@ class Home {
     this.vh = window.innerHeight
     this.bodyHeight = document.body.clientHeight
 
+    this.setGalleryHeights()
     this.setGridBlockSizes()
   }
 
@@ -152,9 +153,14 @@ class Home {
 
   // Manually set this hero height so it doesn't jump up and down on scroll.
   setGalleryHeights() {
-    if (!IS_MOBILE_OS || this.$coverGalleryWrapper.style.height) return
-    this.$coverGalleryWrapper.style.height = this.getGalleryHeight()
-    this.$gridGalleryWrapper.style.height = this.getGalleryHeight()
+    if (IS_MOBILE_OS) {
+      const galleryHeight = this.getGalleryHeight()
+      this.$coverGalleryWrapper.style.height = galleryHeight
+      this.$gridGalleryWrapper.style.height = galleryHeight
+    } else {
+      this.$coverGalleryWrapper.style.removeProperty('height')
+      this.$gridGalleryWrapper.style.removeProperty('height')
+    }
   }
 
   handleCoverChange(index, indexWithClones, $activeChild) {
