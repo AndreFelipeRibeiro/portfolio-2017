@@ -4,8 +4,12 @@
     left: 0;
     bottom: @header-height * -0.5;
     z-index: 3;
+    height: 16px; // Exact height of a single .text box. Sorry, future self.
 
     .text {
+      transition: opacity @transition-duration @cubic,
+                  transform @transition-duration @cubic;
+
       &[data-arrival-index="0"] {
         opacity: 1;
         transform: translate3d(0,0,0);
@@ -18,22 +22,24 @@
         .title {
           opacity: 1;
           transform: translate3d(0,0,0);
-          transition: opacity @transition-duration @cubic @transition-duration,
-                      transform @transition-duration @cubic @transition-duration;
+          transition: opacity @transition-duration-quick @cubic @transition-duration-quick,
+                      transform @transition-duration-quick @cubic @transition-duration-quick;
         }
       }
+    }
 
-      .eyebrow, p, button { display: none; }
+    .eyebrow, p, button { display: none; }
 
-      .title {
-        opacity: 0;
-        transition: opacity @transition-duration @cubic, transform @transition-duration @cubic;
-      }
+    .title {
+      opacity: 0;
+      transition: opacity @transition-duration-quick @cubic,
+                  transform @transition-duration-quick @cubic;
     }
 
     @media @tablet {
       top: 0;
       bottom: auto;
+      height: auto;
 
       .text {
         position: absolute;
@@ -50,7 +56,8 @@
 
         opacity: 0;
 
-        transition: opacity @transition-duration @cubic, transform @transition-duration @cubic;
+        transition: opacity @transition-duration @cubic,
+                    transform @transition-duration @cubic;
 
         &[data-project="squarespace"] {
           right: auto;
@@ -150,7 +157,8 @@
         display: block;
 
         opacity: 0;
-        transition: opacity @transition-duration @cubic, transform @transition-duration @cubic;
+        transition: opacity @transition-duration @cubic,
+                    transform @transition-duration @cubic;
       }
 
       p {

@@ -5,6 +5,8 @@ const transitionEnd = require('../lib/transition-end')
 const BaseGallery = require('../blocks/Gallery')
 const Pagination = require('../blocks/Pagination')
 
+const IS_MOBILE_OS = require('../lib/is-mobile-os')
+
 
 class Home {
   constructor() {
@@ -24,6 +26,8 @@ class Home {
     this.$gridGalleryWrapper  = this.$portfolio.getElementsByClassName('grid-gallery-wrapper')[0]
     this.$gridGallery         = this.$portfolio.getElementsByClassName('grid-gallery')[0]
     this.$gridBlocks          = Array.from(this.$gridGallery.getElementsByClassName('grid-block'))
+
+    this.$header              = document.getElementById('header')
 
     this.$sideNav             = this.$portfolio.getElementsByClassName('side-nav')[0]
     this.$sideNavOptions      = Array.from(this.$sideNav.getElementsByClassName('label'))
@@ -46,6 +50,8 @@ class Home {
     this.initCoverGalleries()
     this.initGridGallery()
     this.initTouch()
+
+    this.setGalleryHeights()
 
     this.updateLayout(this.layout)
 
@@ -130,6 +136,25 @@ class Home {
     if (nextIndex === this.coverIndex) return
 
     this.coverGalleryImagery.goToIndex(nextIndex)
+  }
+
+  /**
+   * Calculate the height from the address bars and such.
+   * This should only ever be called once.
+   */
+  getGalleryHeight() {
+    const headerHeight       = this.$header.clientHeight
+    const addressBarHeight   = window.screen.availHeight - window.innerHeight
+    const adjustedHeroHeight = window.screen.availHeight - addressBarHeight
+
+    return adjustedHeroHeight - headerHeight + 'px'
+  }
+
+  // Manually set this hero height so it doesn't jump up and down on scroll.
+  setGalleryHeights() {
+    if (!IS_MOBILE_OS || this.$coverGalleryWrapper.style.height) return
+    this.$coverGalleryWrapper.style.height = this.getGalleryHeight()
+    this.$gridGalleryWrapper.style.height = this.getGalleryHeight()
   }
 
   handleCoverChange(index, indexWithClones, $activeChild) {
