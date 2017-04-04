@@ -1,3 +1,5 @@
 {@|apply html-begin.block}
-  {squarespace.main-content}
+  <main data-content-field="main-content">
+    {squarespace.main-content}
+  </main>
 {@|apply html-end.block}

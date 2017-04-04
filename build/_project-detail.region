@@ -1,14 +1,16 @@
 {@|apply html-begin.block}
+  <main data-content-field="main-content">
 
-  {.main-image?}
-    <div class="hero" data-use-bg-image="true" data-src="{mainImage.assetUrl}">
-    </div>
-  {.end}
+    {.main-image?}
+      <div class="hero" data-use-bg-image="true" data-src="{mainImage.assetUrl}">
+      </div>
+    {.end}
 
-  {.repeated section items}
-    <div class="block" data-type="{customContent.customType}">
-      {body}
-    </div>
-  {.end}
+    {.repeated section items}
+      <div class="block" data-type="{customContent.customType}">
+        {body}
+      </div>
+    {.end}
 
+  </main>
 {@|apply html-end.block}
