@@ -1,0 +1,112 @@
+@gutter: 30px;
+
+.grid-gallery-wrapper {
+  text-align: center;
+
+  .grid-gallery {
+    width: auto;
+    height: 100%;
+    display: inline;
+
+    margin: auto;
+  }
+
+  .grid-column {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: auto;
+    height: 100%;
+
+    text-align: right;
+    padding-right: 3vw;
+
+    &:last-child {
+      text-align: left;
+      padding-right: 0;
+    }
+  }
+
+  .grid-block {
+    // opacity: 0;
+
+    width: 100%;
+    display: block;
+    position: relative;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .imagery {
+      opacity: 0;
+
+      background-position: center;
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+
+      transform-origin: top left;
+    }
+
+    .label {
+      opacity: 0;
+      position: absolute;
+      bottom: -20px;
+
+      transition: opacity @transition-duration * 0.1 @cubic;
+    }
+
+    .label.number {
+
+    }
+
+    .label.title {
+      color: #000;
+      right: 0;
+    }
+
+    &.is--active {
+      z-index: 2;
+      opacity: 1;
+    }
+
+    &[data-project="squarespace"] {
+      .imagery {
+        background-image: url('../projects/squarespace-cover.jpg');
+      }
+    }
+
+    &[data-project="apple"] {
+      .imagery {
+        background-image: url('../projects/apple-cover.jpg');
+      }
+    }
+
+    &[data-project="bloomingdales"] {
+      margin-left: auto;
+      margin-right: 0;
+
+      .imagery {
+        background-image: url('../projects/bloomingdales-cover.jpg');
+      }
+    }
+
+    &[data-project="morgan-stanley"] {
+      .imagery {
+        background-image: url('../projects/morgan-stanley-cover.jpg');
+      }
+    }
+
+    &[data-project="vans"] {
+      .imagery {
+        background-image: url('../projects/vans-cover.jpg');
+      }
+    }
+  }
+}

@@ -1,0 +1,119 @@
+.menu-overlay {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, -100%, 0);
+
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+
+  transition: opacity @transition-duration step-end,
+              transform @transition-duration @cubic,
+              visibility @transition-duration step-end,
+              background-color @transition-duration @cubic;
+
+  /*----------------------
+  ALTERNATE STATES
+  ----------------------*/
+  &.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+
+    transition: opacity @transition-duration step-start,
+                transform @transition-duration @cubic,
+                visibility @transition-duration step-start,
+                background-color @transition-duration @cubic;
+
+    &[data-active-link="work"] {
+      background-color: #000;
+
+      .grid { opacity: 0.1; }
+      .link { opacity: 0.1; }
+      .link a { color: #fff; }
+      .link.is-active { opacity: 1; }
+    }
+
+    &[data-active-link="about"] {
+      background-color: #E5E5E5;
+
+      .link { opacity: 0.15; }
+      .link a { color: #000; }
+      .link.is-active { opacity: 1; }
+      .link.is-active a { color: #fff; }
+    }
+
+    &[data-active-link="labs"] {
+      background-color: #ff0000;
+
+      .link { opacity: 0.2; }
+      .link a { color: #000; }
+      .link.is-active { opacity: 1; }
+      .link.is-active a { color: #fff; }
+    }
+
+    &[data-active-link="archive"] {
+      background-color: #ffffff;
+
+      .link { opacity: 0.1; }
+      .link a { color: #000; }
+      .link.is-active { opacity: 1; }
+    }
+
+    .menu-links {
+      opacity: 1;
+      transition: opacity @transition-duration @cubic @transition-duration;
+    }
+  }
+
+  /*----------------------
+  CONTENT
+  ----------------------*/
+  .menu-links {
+    opacity: 0;
+    position: relative;
+
+    width: @page-width;
+    height: 100%;
+    margin: 100px auto;
+
+    list-style: none;
+    padding-top: @header-height;
+    padding-left: 0;
+
+    transition: opacity @transition-duration-quick @cubic;
+  }
+
+  .link {
+    display: inline-block;
+
+    font-size: 12vmin;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.2em;
+
+    user-select: none;
+    cursor: pointer;
+
+    transition: opacity @transition-duration-quick @cubic;
+
+    a {
+      color: #c3c3c3;
+      text-decoration: none;
+
+      transition: color @transition-duration-quick @cubic;
+    }
+  }
+
+  @media @tablet {
+    .menu-links {
+      width: @page-width-tablet;
+      padding-top: @header-height-tablet;
+    }
+  }
+}
