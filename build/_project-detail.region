@@ -1,0 +1,14 @@
+{@|apply html-begin.block}
+
+  {.main-image?}
+    <div class="hero" data-use-bg-image="true" data-src="{mainImage.assetUrl}">
+    </div>
+  {.end}
+
+  {.repeated section items}
+    <div class="block" data-type="{customContent.customType}">
+      {body}
+    </div>
+  {.end}
+
+{@|apply html-end.block}
