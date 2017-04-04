@@ -96,7 +96,7 @@
 	    this.layout = this.$portfolio.dataset.view;
 	    this.lastPageYOffset = window.pageYOffset;
 	    this.currentPageYOffset = window.pageYOffset;
-	    this.sectionHeight = 2000;
+	    this.sectionHeight = IS_MOBILE_OS ? 1000 : 2000;
 
 	    this.initSideNav();
 	    this.initPagination();
@@ -191,6 +191,7 @@
 	    key: 'handleScroll',
 	    value: function handleScroll(e) {
 	      if (this.layout === 'grid') return;
+	      if (IS_MOBILE_OS) return;
 
 	      var section = Math.floor(this.currentPageYOffset / this.sectionHeight);
 	      var nextIndex = section % this.$coverImages.length;
@@ -288,7 +289,7 @@
 	        recognizers: [[Hammer.Swipe, {
 	          threshold: 5,
 	          velocity: 0.35,
-	          direction: Hammer.DIRECTION_HORIZONTAL
+	          direction: Hammer.DIRECTION_ALL
 	        }]]
 	      });
 
@@ -300,8 +301,13 @@
 	      var direction = e.direction;
 
 
-	      if (direction === Hammer.DIRECTION_LEFT) this.coverGalleryImagery.next(); // handle left swipe
-	      if (direction === Hammer.DIRECTION_RIGHT) this.coverGalleryImagery.prev(); // handle right swipe
+	      console.log(direction);
+
+	      if (direction === Hammer.DIRECTION_LEFT) this.coverGalleryImagery.next();
+	      if (direction === Hammer.DIRECTION_UP) this.coverGalleryImagery.next();
+
+	      if (direction === Hammer.DIRECTION_RIGHT) this.coverGalleryImagery.prev();
+	      if (direction === Hammer.DIRECTION_DOWN) this.coverGalleryImagery.prev();
 	    }
 	  }, {
 	    key: 'handleLayoutChange',
