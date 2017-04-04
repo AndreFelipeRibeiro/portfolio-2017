@@ -5,7 +5,7 @@
     left: 0;
     right: 0;
     width: 100%;
-    text-align: center;
+    text-align: right;
 
     .active-page-mask,
     .divider,
@@ -17,7 +17,7 @@
 
     .divider {
       position: relative;
-      width: 9.5vw;
+      width: 16vw;
       height: 1px;
       background-color: rgba(0,0,0,0.1);
       margin: 0 15px;
@@ -49,6 +49,15 @@
 
     .active-page {
       opacity: 1;
+    }
+
+    @media @tablet {
+      bottom: @header-height-tablet * -0.5;
+      text-align: center;
+
+      .divider {
+        width: 9.5vw;
+      }
     }
 
     @media @desktop_lg {

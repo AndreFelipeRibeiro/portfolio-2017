@@ -33,6 +33,7 @@ class Home {
     this.handleScroll       = this.handleScroll.bind(this)
     this.requestScroll      = this.requestScroll.bind(this)
     this.handleLayoutChange = this.handleLayoutChange.bind(this)
+    this.handleTouch        = this.handleTouch.bind(this)
 
     this.isFirstLoad         = true
     this.layout              = this.$portfolio.dataset.view
@@ -44,6 +45,7 @@ class Home {
     this.initPagination()
     this.initCoverGalleries()
     this.initGridGallery()
+    this.initTouch()
 
     this.updateLayout(this.layout)
 
@@ -170,6 +172,27 @@ class Home {
         this.updateLayout()
       })
     })
+  }
+
+  initTouch() {
+    const touch = new Hammer(this.$coverGalleryWrapper, {
+      recognizers: [[
+        Hammer.Swipe, {
+          threshold: 5,
+          velocity: 0.35,
+          direction: Hammer.DIRECTION_HORIZONTAL
+        }
+      ]]
+    })
+
+    touch.on('swipe', this.handleTouch)
+  }
+
+  handleTouch(e) {
+    const { direction } = e
+
+    if (direction === Hammer.DIRECTION_LEFT)  this.coverGalleryImagery.next() // handle left swipe
+    if (direction === Hammer.DIRECTION_RIGHT) this.coverGalleryImagery.prev() // handle right swipe
   }
 
   handleLayoutChange(e) {

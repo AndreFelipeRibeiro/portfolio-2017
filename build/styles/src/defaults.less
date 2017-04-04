@@ -1,5 +1,7 @@
-@page-width: 90%;
-@header-height: 100px;
+@page-width: 85%;
+@page-width-tablet: 90%;
+@header-height: 65px;
+@header-height-tablet: 100px;
 @header-height-desktop-lg: 6vw;
 
 @side-header-height: 5vw;
@@ -67,10 +69,21 @@ button {
 }
 
 .title {
-  font-size: 8.5vw;
-  letter-spacing: -0.04em;
+  font-size: 11px;
   font-weight: 400;
-  margin: -1.2vw 0 20px;
+  letter-spacing: 0.08em;
+
+  margin: 0 0;
+  text-transform: uppercase;
+
+  @media @tablet {
+    font-size: 8.5vw;
+    letter-spacing: -0.04em;
+    font-weight: 400;
+    margin: -1.2vw 0 20px;
+
+    text-transform: none;
+  }
 
   @media @desktop_xl {
     font-size: 8vw;

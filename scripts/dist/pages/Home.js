@@ -86,6 +86,7 @@
 	    this.handleScroll = this.handleScroll.bind(this);
 	    this.requestScroll = this.requestScroll.bind(this);
 	    this.handleLayoutChange = this.handleLayoutChange.bind(this);
+	    this.handleTouch = this.handleTouch.bind(this);
 
 	    this.isFirstLoad = true;
 	    this.layout = this.$portfolio.dataset.view;
@@ -97,6 +98,7 @@
 	    this.initPagination();
 	    this.initCoverGalleries();
 	    this.initGridGallery();
+	    this.initTouch();
 
 	    this.updateLayout(this.layout);
 
@@ -241,6 +243,28 @@
 	          _this5.updateLayout();
 	        });
 	      });
+	    }
+	  }, {
+	    key: 'initTouch',
+	    value: function initTouch() {
+	      var touch = new Hammer(this.$coverGalleryWrapper, {
+	        recognizers: [[Hammer.Swipe, {
+	          threshold: 5,
+	          velocity: 0.35,
+	          direction: Hammer.DIRECTION_HORIZONTAL
+	        }]]
+	      });
+
+	      touch.on('swipe', this.handleTouch);
+	    }
+	  }, {
+	    key: 'handleTouch',
+	    value: function handleTouch(e) {
+	      var direction = e.direction;
+
+
+	      if (direction === Hammer.DIRECTION_LEFT) this.coverGalleryImagery.next(); // handle left swipe
+	      if (direction === Hammer.DIRECTION_RIGHT) this.coverGalleryImagery.prev(); // handle right swipe
 	    }
 	  }, {
 	    key: 'handleLayoutChange',

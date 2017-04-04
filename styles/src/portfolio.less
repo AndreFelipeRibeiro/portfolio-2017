@@ -107,6 +107,15 @@
     padding-bottom: @header-height;
   }
 
+  @media @tablet {
+    .cover-gallery-wrapper,
+    .grid-gallery-wrapper {
+      top: @header-height-tablet;
+      height: ~'calc(100vh - @{header-height-tablet})';
+      padding-bottom: @header-height-tablet;
+    }
+  }
+
   @media @desktop_lg {
     .cover-gallery-wrapper,
     .grid-gallery-wrapper {
