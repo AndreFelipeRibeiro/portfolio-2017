@@ -18,7 +18,7 @@ gulp.task('webpack', function() {
 gulp.task('less', function() {
   const src  = 'styles/src/index.less'
   const path = ['styles/src']
-  const dist = 'assets/styles'
+  const dist = 'build/assets/styles'
 
   return gulp.src(src)
     .pipe(less({ path }))

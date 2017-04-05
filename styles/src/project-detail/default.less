@@ -1,0 +1,37 @@
+#project-detail {
+  .block[data-type="default"] {
+
+    padding: 100px 0;
+
+    .sqs-layout {
+      width: @page-width;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 200;
+      color: rgba(0,0,0,0.1);
+
+      strong {
+        font-weight: 300;
+        color: rgba(0,0,0,1);
+      }
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    @media @tablet {
+      .sqs-layout {
+        width: @page-width-tablet;
+      }
+    }
+
+    @media @desktop_lg {
+      h1 { font-size: 48px; }
+      p { font-size: 18px; }
+    }
+  }
+}

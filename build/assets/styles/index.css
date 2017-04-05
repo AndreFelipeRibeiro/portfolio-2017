@@ -1358,6 +1358,53 @@ button {
 .grid-gallery-wrapper .grid-block[data-project="vans"] .imagery {
   background-image: url('../projects/vans-cover.jpg');
 }
+#project-detail .hero {
+  width: 100%;
+  height: 80vh;
+}
+#project-detail .hero-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+#project-detail .hero-image img {
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+}
+#project-detail .block[data-type="default"] {
+  padding: 100px 0;
+}
+#project-detail .block[data-type="default"] .sqs-layout {
+  width: 85%;
+  margin: 0 auto;
+}
+#project-detail .block[data-type="default"] h1 {
+  font-size: 36px;
+  font-weight: 200;
+  color: rgba(0, 0, 0, 0.1);
+}
+#project-detail .block[data-type="default"] h1 strong {
+  font-weight: 300;
+  color: #000000;
+}
+#project-detail .block[data-type="default"] p {
+  font-size: 16px;
+}
+@media all and (min-width: 768px) {
+  #project-detail .block[data-type="default"] .sqs-layout {
+    width: 90%;
+  }
+}
+@media all and (min-width: 1440px) {
+  #project-detail .block[data-type="default"] h1 {
+    font-size: 48px;
+  }
+  #project-detail .block[data-type="default"] p {
+    font-size: 18px;
+  }
+}
 #about {
   background-color: #E5E5E5;
   overflow: hidden;

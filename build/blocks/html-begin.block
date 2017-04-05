@@ -9,6 +9,6 @@
     {squarespace-headers}
     <link id="stylesheet" rel="stylesheet" href="/assets/styles/index.css?{squarespace.template-revision}">
   </head>
-  <body data-content-field="main-content">
+  <body>
     {@|apply header.block}
     {@|apply menu-overlay.block}

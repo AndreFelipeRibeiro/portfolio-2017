@@ -4,11 +4,11 @@ module.exports = {
   entry: {
     "/pages/Home.js": "./scripts/src/pages/Home.js",
     "/pages/About.js": "./scripts/src/pages/About.js",
+    "/regions/ProjectDetail.js": "./scripts/src/regions/ProjectDetail.js",
     "/Global.js": "./scripts/src/Global.js"
   },
   output: {
-    publicPath: "./scripts/dist/",
-    path: __dirname + "/scripts/dist",
+    path: __dirname + "/build/scripts/",
     filename: "[name]"
   },
   module: {

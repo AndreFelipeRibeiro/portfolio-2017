@@ -4,4 +4,4 @@
   {@|apply cover-gallery.block}
 </main>
 
-<squarespace:script src="dist/pages/Home.js" combo="false"/>
+<squarespace:script src="pages/Home.js" combo="false"/>

@@ -1,5 +1,5 @@
     {squarespace-footers}
 
-    <squarespace:script src="dist/Global.js" combo="false"/>
+    <squarespace:script src="Global.js" combo="false"/>
   </body>
 </html>

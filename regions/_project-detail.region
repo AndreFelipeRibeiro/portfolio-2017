@@ -1,11 +1,18 @@
 {@|apply html-begin.block}
-  <main data-content-field="main-content">
+  <main id="project-detail" data-content-field="main-content">
 
-    {.main-image?}
-      <div class="hero" data-use-bg-image="true" data-src="{mainImage.assetUrl}">
-      </div>
+    {# HERO}
+    {.section collection}
+      {.section mainImage}
+        <div class="hero" style="background-color:#{colorData.suggestedBgColor};">
+          <div class="hero-image">
+            <img data-use-bg-image="true" data-load="false" data-src="{assetUrl}" />
+          </div>
+        </div>
+      {.end}
     {.end}
 
+    {# BLOCKS}
     {.repeated section items}
       <div class="block" data-type="{customContent.customType}">
         {body}
@@ -13,4 +20,6 @@
     {.end}
 
   </main>
+
+  <squarespace:script src="regions/ProjectDetail.js" combo="false"/>
 {@|apply html-end.block}
