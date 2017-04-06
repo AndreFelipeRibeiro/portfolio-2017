@@ -4,6 +4,7 @@
   "description": "Pretty self-explanatory.",
   "main": "index.html",
   "scripts": {
+    "deploy": "squarespace deploy https://andre-ribeiro-j82g.squarespace.com/template.git",
     "dev": "squarespace assemble && npm run build && gulp watch",
     "server": "squarespace-server https://andre-ribeiro-j82g.squarespace.com --directory=./build",
     "start": "npm run dev",
