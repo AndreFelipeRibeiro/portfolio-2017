@@ -14,9 +14,13 @@
 
     {# BLOCKS}
     {.repeated section items}
-      <div class="block" data-type="{customContent.customType}">
-        {body}
-      </div>
+      {.equal? recordTypeLabel "gallery"}
+        {@|apply project-detail/gallery.block}
+      {.or}
+        <div class="block" data-type="{customContent.customType}">
+          {body}
+        </div>
+      {.end}
     {.end}
 
   </main>

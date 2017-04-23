@@ -1,5 +1,34 @@
 #project-detail {
   .block {
 
+    &.background-medium-gray {
+      background-color: #F3F3F3;
+    }
+
+    .sqs-layout {
+      width: @page-width;
+      margin: 0 auto;
+    }
+
+    .sqs-layout > .sqs-row {
+      display: flex;
+      align-items: center;
+    }
+
+    [class*=sqs-col] .sqs-block {
+      padding-left: 4vw;
+      padding-right: 4vw;
+    }
+
+    .sqs-block-horizontalrule {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    @media @tablet {
+      .sqs-layout {
+        width: @page-width-tablet;
+      }
+    }
   }
 }

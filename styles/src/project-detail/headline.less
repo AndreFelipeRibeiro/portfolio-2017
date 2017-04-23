@@ -1,5 +1,33 @@
 #project-detail {
   .block[data-type="headline"] {
 
+    padding: 100px 0;
+
+    .sqs-layout > .sqs-row {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 200;
+      color: rgba(0,0,0,0.1);
+
+      margin-top: -0.4em;
+
+      strong {
+        font-weight: 300;
+        color: rgba(0,0,0,1);
+      }
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    @media @desktop_lg {
+      h1 { font-size: 48px; }
+      p { font-size: 18px; }
+    }
   }
 }
