@@ -12,6 +12,23 @@
       {.end}
     {.end}
 
+    {# INDEX}
+    <div class="block page-index background-light-gray">
+      <div class="sqs-layout">
+        <h2 class="title">Index</h2>
+        <div class="links">
+          {.repeated section items}
+            {.equal? customContent.customType "headline"}
+              <a class="link" href="#{customContent.title|slugify}">
+                <h2><span class="index"></span>{customContent.title}</h2>
+                <img class="link-thumbnail" {customContent.thumbnailImage|image-meta} />
+              </a>
+            {.end}
+          {.end}
+        </div>
+      </div>
+    </div>
+
     {# BLOCKS}
     {.repeated section items}
       {.equal? recordTypeLabel "gallery"}
@@ -20,9 +37,13 @@
         {.equal? customContent.customType "phone-collage"}
           {@|apply project-detail/phone-collage.block}
         {.or}
-          <div class="block {.repeated section categories}{@}{.end}" data-type="{customContent.customType}">
-            {body}
-          </div>
+          {.equal? customContent.customType "headline"}
+            {@|apply project-detail/headline.block}
+          {.or}
+            <div class="block {.repeated section categories}{@}{.end}" data-type="{customContent.customType}">
+              {body}
+            </div>
+          {.end}
         {.end}
       {.end}
     {.end}

@@ -12,8 +12,11 @@ class ProjectDetail {
     this.$main           = document.getElementsByTagName('main')[0]
     this.$blocks = Array.from(this.$main.getElementsByClassName('block'))
 
+    this.$headlines = []
+
     this.addEventListeners()
     this.initBlocks()
+    this.initIndex()
     this.loadImages()
   }
 
@@ -26,6 +29,7 @@ class ProjectDetail {
       const { type } = $block.dataset
 
       if (type === 'gallery') this.initGallery($block)
+      if (type === 'headline') this.$headlines.push($block)
     })
   }
 
@@ -43,6 +47,20 @@ class ProjectDetail {
 
     if (!this.galleries) this.galleries = []
     this.galleries.push(gallery)
+  }
+
+  initIndex() {
+    this.$pageIndex = this.$main.getElementsByClassName('page-index')[0]
+    this.$links = Array.from(this.$pageIndex.getElementsByClassName('link'))
+
+    this.$headlines.forEach(($headline, i) => {
+      const $headlineIndex = $headline.getElementsByClassName('index')[0]
+      const $linkIndex = this.$links[i].getElementsByTagName('span')[0]
+      const linkText = `0${i + 1}.`
+
+      $headlineIndex.textContent = linkText
+      $linkIndex.textContent = linkText
+    })
   }
 
   loadImages() {

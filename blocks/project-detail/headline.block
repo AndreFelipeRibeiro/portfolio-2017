@@ -1,0 +1,17 @@
+<div id="{customContent.title|slugify}" class="block {.repeated section categories}{@}{.end}" data-type="headline">
+
+  <div class="sqs-layout">
+    <div class="index-wrapper">
+      <h1 class="index"></h1>
+    </div>
+
+    <div class="title-wrapper">
+      <h1 class="title">{customContent.title}</h1>
+    </div>
+
+    <div class="description-wrapper">
+      <p class="description">{customContent.description}</p>
+      <a class="link" href="{customContent.linkUrl}">{customContent.linkText}</a>
+    </div>
+  </div>
+</div>

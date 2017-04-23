@@ -1,0 +1,58 @@
+#project-detail {
+  .block.page-index {
+    padding: 50px 0;
+
+    .sqs-layout {
+      display: flex;
+    }
+
+    .title,
+    .links {
+      display: inline-block;
+      width: 50%;
+    }
+
+    .links {
+
+    }
+
+    .link {
+      color: #000;
+      text-decoration: none;
+
+      span {
+        opacity: 0.2;
+        padding-right: 10px;
+      }
+    }
+
+    .link-thumbnail {
+      display: none;
+    }
+
+    @media @tablet_lg {
+      .link {
+        position: relative;
+      }
+
+      .link:hover {
+        .link-thumbnail {
+          display: block;
+        }
+      }
+
+      .link-thumbnail {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 300px;
+
+        z-index: 1;
+      }
+    }
+
+    @media @desktop_lg {
+      padding: 5vw 0;
+    }
+  }
+}

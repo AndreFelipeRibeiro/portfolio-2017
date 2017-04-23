@@ -31,9 +31,28 @@
     .eyebrow, p, button { display: none; }
 
     .title {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin: 1px 0;
+      text-transform: uppercase;
+
       opacity: 0;
       transition: opacity @transition-duration-quick @cubic,
                   transform @transition-duration-quick @cubic;
+
+      @media @tablet {
+        font-size: 8.5vw;
+        letter-spacing: -0.04em;
+        font-weight: 400;
+        margin: -1.2vw 0 20px;
+
+        text-transform: none;
+      }
+
+      @media @desktop_xl {
+        font-size: 8vw;
+      }
     }
 
     @media @tablet {
