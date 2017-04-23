@@ -1,0 +1,36 @@
+#project-detail {
+  .block[data-type="gallery"] {
+    position: relative;
+    width: 100%;
+    height: 50vw;
+    overflow: hidden;
+
+    .gallery-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+
+      width: 65%;
+      height: auto;
+
+      img {
+        width: 100%;
+      }
+
+      &[data-arrival-index="0"] {
+
+      }
+
+      &[data-arrival-index="1"] {
+        transform: translate3d(-120%,0,0);
+      }
+
+      &[data-departure-index="1"] {
+        transform: translate3d(120%,0,0);
+      }
+    }
+  }
+}

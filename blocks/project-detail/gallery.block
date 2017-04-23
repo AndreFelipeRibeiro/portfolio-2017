@@ -1,0 +1,7 @@
+<div class="block" data-type="gallery">
+  {.repeated section items}
+    <div class="gallery-item">
+      <img {@|image-meta} />
+    </div>
+  {.end}
+</div>

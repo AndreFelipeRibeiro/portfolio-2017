@@ -9,13 +9,39 @@ const Pagination = require('../blocks/Pagination')
 class ProjectDetail {
   constructor() {
     this.$main           = document.getElementsByTagName('main')[0]
+    this.$blocks = Array.from(this.$main.getElementsByClassName('block'))
 
     this.addEventListeners()
+    this.initBlocks()
     this.loadImages()
   }
 
   addEventListeners() {
 
+  }
+
+  initBlocks() {
+    this.$blocks.forEach($block => {
+      const { type } = $block.dataset
+
+      if (type === 'gallery') this.initGallery($block)
+    })
+  }
+
+  initGallery($block) {
+    const handleChange = (index, indexWithClones, $activeChild) => {
+      console.log(index)
+    }
+
+    const gallery = new BaseGallery({
+      galleryNode: $block,
+      childSelector: '.gallery-item',
+      shouldAutoplay: false,
+      handleChange
+    })
+
+    if (!this.galleries) this.galleries = []
+    this.galleries.push(gallery)
   }
 
   loadImages() {

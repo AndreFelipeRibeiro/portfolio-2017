@@ -1,7 +1,0 @@
-<main id="portfolio" data-view="cover">
-  {@|apply side-nav.block}
-  {@|apply grid-gallery.block}
-  {@|apply cover-gallery.block}
-</main>
-
-<squarespace:script src="pages/Home.js" combo="false"/>
