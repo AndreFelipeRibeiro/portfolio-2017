@@ -1,4 +1,4 @@
-<div class="block" data-type="gallery">
+<div class="block {.repeated section categories}{@}{.end}" data-type="gallery">
   {.repeated section items}
     <div class="gallery-item">
       <img {@|image-meta} />
