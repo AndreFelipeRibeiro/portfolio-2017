@@ -15,7 +15,7 @@
       position: relative;
       margin-top: 5vw;
       width: 25vw;
-      transform: translate3d(3vw, 0, 0);
+      transform: translate3d(3.7vw, 0, 0); // Centered (taking the shadows into consideration)
 
       img {
         position: relative;
@@ -25,11 +25,19 @@
 
       .screencap-video {
         position: absolute;
-        top: 4.7vw;
+        top: 4.65vw;
         left: 4.05vw;
         width: 20vw;
         height: 34.5vw;
       }
+    }
+
+    .text {
+      position: absolute;
+      top: 27vw;
+      left: 10vw;
+
+      max-width: 400px;
     }
 
     .image-1,
@@ -44,7 +52,7 @@
     }
 
     .image-2 {
-      right: -10vw;
+      right: -5vw;
       width: 100%;
     }
 
@@ -56,6 +64,46 @@
 
     @media @desktop {
       padding: 10vw 0;
+    }
+
+    @media @desktop_xxl {
+      .iphone {
+        width: 405px;
+
+        img {
+          height: 761px;
+        }
+
+        .screencap-video {
+          width: 324px;
+          height: 559px;
+          top: 76px;
+          left: 64px;
+        }
+      }
+
+      .text {
+        left: auto;
+        right: -1vw;
+      }
+
+      .image-1 {
+        left: auto;
+        right: 7vw;
+        width: 40%;
+      }
+
+      .image-2 {
+        left: 3vw;
+        right: auto;
+        width: 80%;
+      }
+
+      .image-3 {
+        top: 30vw;
+        left: 1.5vw;
+        width: 30%;
+      }
     }
   }
 }

@@ -3,6 +3,22 @@
 
     padding: 100px 0;
 
+    &.background-black {
+      h1 { color: rgba(255,255,255,0.2); }
+      h1 strong {
+        font-weight: 200;
+        color: rgba(255,255,255,1);
+      }
+
+      p {
+        font-weight: 100;
+        color: rgba(255,255,255,0.7);
+      }
+
+      a { color: #FFF; }
+      a::after { border-bottom: 1px solid rgba(255,255,255,0.2); }
+    }
+
     .sqs-layout > .sqs-row {
       display: flex;
       align-items: flex-start;
@@ -23,15 +39,41 @@
 
     p {
       font-size: 16px;
+      line-height: 1.8em;
+    }
+
+    a {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: #000;
+      text-transform: uppercase;
+      text-decoration: none;
+
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+      }
     }
 
     @media @desktop {
-      padding: 20vw 0;
+      padding: 15vw 0;
     }
 
     @media @desktop_lg {
       h1 { font-size: 48px; }
       p { font-size: 18px; }
+    }
+
+    @media @desktop_xxl {
+      padding: 250px 0;
     }
   }
 }

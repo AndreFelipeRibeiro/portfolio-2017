@@ -4,7 +4,8 @@
     <div class="column">
       <img class="image-1" {customContent.image1|image-meta} />
       <div class="text">
-        <h5 class="video-title">{customContent.videoTitle}</h5>
+        <h3 class="video-title">{customContent.videoTitle}</h5>
+        <hr>
         <p class="video-description">{customContent.videoDescription}</p>
       </div>
     </div>
@@ -14,7 +15,7 @@
         <img data-src="assets/projects/squarespace/afr_iphone_white_2.png" />
         <iframe
           class="screencap-video"
-          src="https://player.vimeo.com/video/{customContent.videoId}?autoplay=true"
+          src="https://player.vimeo.com/video/{customContent.videoId}?background=1"
           frameborder="0"
           webkitallowfullscreen
           mozallowfullscreen
