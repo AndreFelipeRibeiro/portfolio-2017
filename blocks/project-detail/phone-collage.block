@@ -1,0 +1,31 @@
+<div class="block {.repeated section categories}{@}{.end}" data-type="phone-collage">
+
+  <div class="sqs-layout">
+    <div class="column">
+      <img class="image-1" {customContent.image1|image-meta} />
+      <div class="text">
+        <h5 class="video-title">{customContent.videoTitle}</h5>
+        <p class="video-description">{customContent.videoDescription}</p>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="iphone">
+        <img data-src="assets/projects/squarespace/afr_iphone_white_2.png" />
+        <iframe
+          class="screencap-video"
+          src="https://player.vimeo.com/video/{customContent.videoId}?autoplay=true"
+          frameborder="0"
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+
+    <div class="column">
+      <img class="image-2" {customContent.image2|image-meta} />
+      <img class="image-3" {customContent.image3|image-meta} />
+    </div>
+  </div>
+</div>

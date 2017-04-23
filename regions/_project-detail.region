@@ -17,9 +17,13 @@
       {.equal? recordTypeLabel "gallery"}
         {@|apply project-detail/gallery.block}
       {.or}
-        <div class="block {.repeated section categories}{@}{.end}" data-type="{customContent.customType}">
-          {body}
-        </div>
+        {.equal? customContent.customType "phone-collage"}
+          {@|apply project-detail/phone-collage.block}
+        {.or}
+          <div class="block {.repeated section categories}{@}{.end}" data-type="{customContent.customType}">
+            {body}
+          </div>
+        {.end}
       {.end}
     {.end}
 

@@ -1,4 +1,5 @@
 const Hammer = require('hammerjs')
+const axios = require('axios')
 
 const transitionEnd = require('../lib/transition-end')
 

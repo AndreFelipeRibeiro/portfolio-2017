@@ -1,0 +1,61 @@
+#project-detail {
+  .block[data-type="phone-collage"] {
+    padding: 100px 0;
+
+    .sqs-layout {
+      display: flex;
+    }
+
+    .column {
+      position: relative;
+      width: 33.33%;
+    }
+
+    .iphone {
+      position: relative;
+      margin-top: 5vw;
+      width: 25vw;
+      transform: translate3d(3vw, 0, 0);
+
+      img {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+      }
+
+      .screencap-video {
+        position: absolute;
+        top: 4.7vw;
+        left: 4.05vw;
+        width: 20vw;
+        height: 34.5vw;
+      }
+    }
+
+    .image-1,
+    .image-2,
+    .image-3 {
+      position: absolute;
+    }
+
+    .image-1 {
+      left: 5vw;
+      width: 50%;
+    }
+
+    .image-2 {
+      right: -10vw;
+      width: 100%;
+    }
+
+    .image-3 {
+      top: 35vw;
+      left: 6vw;
+      width: 35%;
+    }
+
+    @media @desktop {
+      padding: 10vw 0;
+    }
+  }
+}

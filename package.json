@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/AndreFelipeRibeiro/portfolio-2017#readme",
   "dependencies": {
+    "axios": "^0.16.1",
     "hammerjs": "^2.0.8",
     "platform": "^1.3.4"
   },
