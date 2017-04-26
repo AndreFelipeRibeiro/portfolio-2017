@@ -171,11 +171,12 @@
         margin-top: 50px;
 
         span {
+          cursor: pointer;
           display: inline-block;
           background-color: @white-0;
           padding-right: 20px;
 
-          transition: transform @transition-duration @cubic;
+          transition: transform @transition-duration-quick @cubic;
         }
 
         &::before {
@@ -197,8 +198,20 @@
 
     @media @desktop_lg {
       .text {
+        padding-top: 20vh;
+
         &[data-project="vans"] {
-          left: 12vw;
+          left: 9vw;
+        }
+      }
+    }
+
+    @media @desktop_xl {
+      .text {
+        padding-top: 23vh;
+
+        &[data-project="vans"] {
+          left: 11vw;
         }
       }
     }

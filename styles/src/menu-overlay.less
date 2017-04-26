@@ -1,12 +1,11 @@
 .menu-overlay {
-  opacity: 0;
+  // opacity: 1;
   visibility: hidden;
   transform: translate3d(0, -100%, 0);
 
   width: 100%;
   height: 100%;
-  background-color: #fff;
-
+  background-color: #000;
   position: fixed;
   top: 0;
   left: 0;
@@ -21,7 +20,7 @@
   ALTERNATE STATES
   ----------------------*/
   &.is-active {
-    opacity: 1;
+    // opacity:x 1;
     visibility: visible;
     transform: translate3d(0, 0, 0);
 
@@ -40,28 +39,29 @@
     }
 
     &[data-active-link="about"] {
-      background-color: #E5E5E5;
+      background-color: #000;
 
-      .link { opacity: 0.15; }
-      .link a { color: #000; }
+      .grid { opacity: 0.1; }
+      .link { opacity: 0.1; }
+      .link a { color: #fff; }
       .link.is-active { opacity: 1; }
-      .link.is-active a { color: #fff; }
     }
 
     &[data-active-link="labs"] {
-      background-color: #ff0000;
+      background-color: #000;
 
-      .link { opacity: 0.2; }
-      .link a { color: #000; }
+      .grid { opacity: 0.1; }
+      .link { opacity: 0.1; }
+      .link a { color: #fff; }
       .link.is-active { opacity: 1; }
-      .link.is-active a { color: #fff; }
     }
 
     &[data-active-link="archive"] {
-      background-color: #ffffff;
+      background-color: #000;
 
+      .grid { opacity: 0.1; }
       .link { opacity: 0.1; }
-      .link a { color: #000; }
+      .link a { color: #fff; }
       .link.is-active { opacity: 1; }
     }
 
@@ -92,7 +92,7 @@
   .link {
     display: inline-block;
 
-    font-size: 12vmin;
+    font-size: 14vmin;
     font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 1.2em;
