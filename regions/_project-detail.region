@@ -31,7 +31,7 @@
 
     {# BLOCKS}
     {.repeated section items}
-      {.equal? recordTypeLabel "gallery"}
+      {.equal? customContent.customType "custom-gallery"}
         {@|apply project-detail/gallery.block}
       {.or}
         {.equal? customContent.customType "phone-collage"}
