@@ -35,13 +35,14 @@ class ProjectDetail {
 
   initGallery($block) {
     const handleChange = (index, indexWithClones, $activeChild) => {
-      console.log(index)
+      // something?
     }
 
     const gallery = new BaseGallery({
       galleryNode: $block,
       childSelector: '.gallery-item',
-      shouldAutoplay: false,
+      shouldAutoplay: true,
+      slideSpeed: 5000,
       handleChange
     })
 

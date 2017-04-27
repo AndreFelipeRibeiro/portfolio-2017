@@ -4,6 +4,20 @@
     width: 100%;
     height: 50vw;
     overflow: hidden;
+    text-align: center;
+
+    &.homepage-carousel {
+      height: auto;
+      padding-bottom: 100px;
+
+      .main-image {
+        width: 67.3%;
+      }
+
+      .gallery-item {
+        top: 3.8vw;
+      }
+    }
 
     .gallery-item {
       position: absolute;
@@ -16,8 +30,22 @@
       width: 65%;
       height: auto;
 
+      visibility: hidden;
+
+      transition: transform @transition-duration @cubic,
+                  visibility @transition-duration step-end;
+
       img {
         width: 100%;
+      }
+
+      &[data-arrival-index="0"],
+      &[data-arrival-index="1"],
+      &[data-departure-index="1"] {
+        visibility: visible;
+
+        transition: transform @transition-duration @cubic,
+                    visibility @transition-duration step-start;
       }
 
       &[data-arrival-index="0"] {
@@ -25,11 +53,21 @@
       }
 
       &[data-arrival-index="1"] {
-        transform: translate3d(-120%,0,0);
+        transform: translate3d(120%,0,0);
+      }
+
+      &[data-arrival-index="2"] {
+        transform: translate3d(240%,0,0);
+        visibility: hidden;
       }
 
       &[data-departure-index="1"] {
-        transform: translate3d(120%,0,0);
+        transform: translate3d(-120%,0,0);
+      }
+
+      &[data-departure-index="2"] {
+        transform: translate3d(-240%,0,0);
+        visibility: hidden;
       }
     }
   }
