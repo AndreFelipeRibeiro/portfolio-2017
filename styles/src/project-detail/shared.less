@@ -14,7 +14,7 @@
 
      * {
        color: @white-0;
-     }
+      }
     }
 
     .sqs-layout {
@@ -24,12 +24,18 @@
 
     .sqs-layout > .sqs-row {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
     }
 
     [class*=sqs-col] .sqs-block {
       padding-left: 4vw;
       padding-right: 4vw;
+    }
+
+    .sqs-col-4 {
+      width: 100%;
+      margin: 25px 0;
     }
 
     .sqs-block-horizontalrule {
@@ -40,6 +46,15 @@
     @media @tablet {
       .sqs-layout {
         width: @page-width-tablet;
+      }
+
+      .sqs-layout > .sqs-row {
+        flex-wrap: nowrap;
+      }
+
+      .sqs-col-4 {
+        width: 33.33%;
+        margin: 0;
       }
     }
   }

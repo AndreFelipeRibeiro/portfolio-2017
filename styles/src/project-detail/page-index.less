@@ -9,7 +9,11 @@
     .title,
     .links {
       display: inline-block;
-      width: 50%;
+      width: 100%;
+    }
+
+    .title {
+      display: none;
     }
 
     .links {
@@ -24,15 +28,38 @@
         opacity: 0.2;
         padding-right: 10px;
       }
+
+      h2 {
+        font-size: 18px;
+      }
     }
 
     .link-thumbnail {
       display: none;
     }
 
+    @media @phone_lg {
+      .link h2 {
+        font-size: 20px;
+      }
+    }
+
     @media @tablet_lg {
+      .title {
+        display: block;
+        width: 50%;
+      }
+
+      .links {
+        width: 50%;
+      }
+
       .link {
         position: relative;
+
+        h2 {
+          font-size: 24px;
+        }
       }
 
       .link:hover {

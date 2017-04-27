@@ -1,23 +1,29 @@
 #project-detail {
   .block[data-type="phone-collage"] {
-    padding: 100px 0;
+    padding: 30px 0;
 
     .sqs-layout {
       display: flex;
+      flex-wrap: wrap;
     }
 
     .column {
       position: relative;
-      width: 33.33%;
+      width: 100%;
+    }
+
+    img {
+      display: none;
     }
 
     .iphone {
       position: relative;
       margin-top: 5vw;
-      width: 25vw;
-      transform: translate3d(3.7vw, 0, 0); // Centered (taking the shadows into consideration)
+      width: 75vw;
+      transform: translate3d(3vw, 0, 0); // Centered (taking the shadows into consideration)
 
       img {
+        display: block;
         position: relative;
         z-index: 1;
         width: 100%;
@@ -25,17 +31,18 @@
 
       .screencap-video {
         position: absolute;
-        top: 4.65vw;
-        left: 4.05vw;
-        width: 20vw;
-        height: 34.5vw;
+        top: 13.65vw;
+        left: 12.05vw;
+        width: 60vw;
+        height: 103.5vw;
       }
     }
 
     .text {
+      display: none;
       position: absolute;
       top: 27vw;
-      left: 10vw;
+      left: 5vw;
 
       max-width: 400px;
     }
@@ -60,6 +67,46 @@
       top: 35vw;
       left: 6vw;
       width: 35%;
+    }
+
+    @media @tablet {
+      .sqs-layout {
+        flex-wrap: nowrap;
+      }
+
+      .column {
+        width: 33.33%;
+      }
+
+      img {
+        display: block;
+      }
+
+      .text {
+        display: block;
+      }
+
+      .iphone {
+        width: 25vw;
+        transform: translate3d(3.7vw, 0, 0); // Centered (taking the shadows into consideration)
+
+        .screencap-video {
+          position: absolute;
+          top: 4.65vw;
+          left: 4.05vw;
+          width: 20vw;
+          height: 34.5vw;
+        }
+      }
+    }
+
+    @media @tablet_lg {
+      padding: 100px 0;
+
+      .text {
+        display: block;
+        left: 10vw;
+      }
     }
 
     @media @desktop {
