@@ -74,8 +74,10 @@
         justify-content: center;
 
         opacity: 0;
+        visibility: hidden;
 
         transition: opacity @transition-duration @cubic,
+                    visibility @transition-duration step-end,
                     transform @transition-duration @cubic;
 
         &[data-project="squarespace"] {
@@ -121,9 +123,12 @@
 
         &[data-arrival-index="0"] {
           opacity: 1;
+          visibility: visible;
           transform: translate3d(0,0,0);
 
-          transition: opacity @transition-duration @cubic @transition-duration, transform @transition-duration @cubic @transition-duration;
+          transition: opacity @transition-duration @cubic @transition-duration,
+                      visibility @transition-duration step-start @transition-duration,
+                      transform @transition-duration @cubic @transition-duration;
 
           z-index: 1;
 

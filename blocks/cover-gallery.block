@@ -2,9 +2,13 @@
   <div class="cover-gallery">
 
     <div class="cover-gallery-imagery">
-      <div class="imagery" data-project="squarespace" data-arrival-index="1">
-        <div class="label">2016 — Present</div>
-      </div>
+
+      <a href="/squarespace">
+        <div class="imagery" data-project="squarespace" data-arrival-index="1">
+          <div class="label">2016 — Present</div>
+        </div>
+      </a>
+
       <div class="imagery" data-project="apple">
         <div class="label">2014</div>
       </div>
@@ -23,17 +27,19 @@
     </div>
 
     <div class="cover-gallery-text">
-      <article class="text" data-project="squarespace" data-arrival-index="1">
-        <div class="text-content">
-          <h3 class="eyebrow">Frontsite</h3>
-          <h2 class="title">Squarespace</h2>
-          <p>
-            Squarespace mission is to empower our users through accessible technology and design. The work of our front site team help inform and inspire millions of visitors every year.
-            <br />
-            <button><span>Learn More</span></button>
-          </p>
-        </div>
-      </article>
+      <a href="/squarespace">
+        <article class="text" data-project="squarespace" data-arrival-index="1">
+          <div class="text-content">
+            <h3 class="eyebrow">Frontsite</h3>
+            <h2 class="title">Squarespace</h2>
+            <p>
+              Squarespace mission is to empower our users through accessible technology and design. The work of our front site team help inform and inspire millions of visitors every year.
+              <br />
+              <button><span>Learn More</span></button>
+            </p>
+          </div>
+        </article>
+      </a>
 
       <article class="text" data-project="apple">
         <div class="text-content">

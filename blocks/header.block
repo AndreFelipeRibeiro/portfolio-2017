@@ -1,7 +1,9 @@
 <nav id="header">
   <div class="header-content">
     <div class="content-left">
-      <h1>Andre Ribeiro</h1>
+      <a href="/">
+        <h1>Andre Ribeiro</h1>
+      </a>
     </div>
 
     <div class="content-right">

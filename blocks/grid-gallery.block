@@ -2,11 +2,13 @@
   <div class="grid-gallery">
 
     <div class="grid-column">
-      <div class="grid-block" data-project="squarespace" data-scale="0.45">
-        <div class="imagery"></div>
-        <div class="label number">01</div>
-        <div class="label title">Squarespace</div>
-      </div>
+      <a href="/squarespace">
+        <div class="grid-block" data-project="squarespace" data-scale="0.45">
+          <div class="imagery"></div>
+          <div class="label number">01</div>
+          <div class="label title">Squarespace</div>
+        </div>
+      </a>
       <div class="grid-block" data-project="bloomingdales" data-scale="0.45">
         <div class="imagery"></div>
         <div class="label number">03</div>

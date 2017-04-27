@@ -262,7 +262,7 @@ class Home {
   }
 
   updateLayout() {
-    this.isTransitioning = true
+    if (!this.isFirstLoad) this.isTransitioning = true
     this.$gridGalleryWrapper.removeEventListener(transitionEnd, this.handleLayoutChange)
     this.$gridGalleryWrapper.addEventListener(transitionEnd, this.handleLayoutChange)
 
