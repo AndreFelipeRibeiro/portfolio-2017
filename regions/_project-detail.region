@@ -31,21 +31,26 @@
 
     {# BLOCKS}
     {.repeated section items}
-      {.equal? customContent.customType "custom-gallery"}
-        {@|apply project-detail/gallery.block}
-      {.or}
-        {.equal? customContent.customType "phone-collage"}
-          {@|apply project-detail/phone-collage.block}
+      <div
+        id="{.section customContent.title}{@|slugify}{.end}"
+        class="block {.repeated section categories}{@} {.end}"
+        style="{.section customContent.backgroundColor}background-color: {@}{.end}"
+        data-type="{.section customContent.customType}{@}{.end}"
+      >
+        {.equal? customContent.customType "custom-gallery"}
+          {@|apply project-detail/gallery.block}
         {.or}
-          {.equal? customContent.customType "headline"}
-            {@|apply project-detail/headline.block}
+          {.equal? customContent.customType "phone-collage"}
+            {@|apply project-detail/phone-collage.block}
           {.or}
-            <div class="block {.repeated section categories}{@}{.end}" data-type="{customContent.customType}">
-              {body}
-            </div>
+            {.equal? customContent.customType "headline"}
+              {@|apply project-detail/headline.block}
+            {.or}
+                {body}
+            {.end}
           {.end}
         {.end}
-      {.end}
+      </div>
     {.end}
 
   </main>

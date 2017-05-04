@@ -9,7 +9,7 @@ const Pagination = require('../blocks/Pagination')
 
 class ProjectDetail {
   constructor() {
-    this.$main           = document.getElementsByTagName('main')[0]
+    this.$main   = document.getElementsByTagName('main')[0]
     this.$blocks = Array.from(this.$main.getElementsByClassName('block'))
 
     this.$headlines = []
@@ -28,7 +28,7 @@ class ProjectDetail {
     this.$blocks.forEach($block => {
       const { type } = $block.dataset
 
-      if (type === 'gallery') this.initGallery($block)
+      if (type === 'custom-gallery') this.initGallery($block)
       if (type === 'headline') this.$headlines.push($block)
     })
   }
