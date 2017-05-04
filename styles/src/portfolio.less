@@ -9,6 +9,9 @@
     }
 
     .grid-gallery-wrapper {
+      visibility: hidden;
+      opacity: 0;
+
       transition: opacity @transition-duration step-end @transition-duration,
                   visibility @transition-duration step-end @transition-duration;
 
@@ -31,13 +34,19 @@
 
   &[data-view="grid"] {
     .cover-gallery-wrapper {
-      .text {
-        opacity: 0;
-        transition: opacity @transition-duration @cubic;
-      }
+      visibility: hidden;
+      opacity: 0;
 
       transition: opacity @transition-duration @cubic,
                   visibility @transition-duration step-end;
+
+      .text {
+        visibility: hidden;
+        opacity: 0;
+
+        transition: opacity @transition-duration @cubic,
+                    visibility @transition-duration step-end;
+      }
     }
 
     .grid-gallery-wrapper {
