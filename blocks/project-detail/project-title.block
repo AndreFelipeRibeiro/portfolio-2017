@@ -1,0 +1,14 @@
+<div class="sqs-layout">
+  <div class="time-period-wrapper">
+    <p class="time-period">{customContent.timePeriod}</p>
+  </div>
+
+  <div class="title-wrapper">
+    <p class="eyebrow">{customContent.eyebrow}</p>
+    <h1 class="title">{customContent.title}</h1>
+  </div>
+
+  <div class="description-wrapper">
+    <p class="description">{customContent.description}</p>
+  </div>
+</div>

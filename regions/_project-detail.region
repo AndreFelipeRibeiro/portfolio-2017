@@ -23,6 +23,7 @@
                 <h2><span class="index"></span>{customContent.title}</h2>
                 <img class="link-thumbnail" {customContent.thumbnailImage|image-meta} />
               </a>
+              <br />
             {.end}
           {.end}
         </div>
@@ -32,10 +33,10 @@
     {# BLOCKS}
     {.repeated section items}
       <div
-        id="{.section customContent.title}{@|slugify}{.end}"
+        {.section customContent.title}id="{@|slugify}"{.end}
         class="block {.repeated section categories}{@} {.end}"
-        style="{.section customContent.backgroundColor}background-color: {@}{.end}"
-        data-type="{.section customContent.customType}{@}{.end}"
+        {.section customContent.backgroundColor}style="background-color: {@}"{.end}
+        {.section customContent.customType}data-type="{@}"{.end}
       >
         {.equal? customContent.customType "custom-gallery"}
           {@|apply project-detail/gallery.block}
@@ -46,7 +47,11 @@
             {.equal? customContent.customType "headline"}
               {@|apply project-detail/headline.block}
             {.or}
+              {.equal? customContent.customType "project-title"}
+                {@|apply project-detail/project-title.block}
+              {.or}
                 {body}
+              {.end}
             {.end}
           {.end}
         {.end}

@@ -56,23 +56,42 @@
 
       .link {
         position: relative;
+        display: inline-block;
 
         h2 {
+          display: inline-block;
           font-size: 24px;
         }
       }
 
       .link:hover {
         .link-thumbnail {
-          display: block;
+          visibility: visible;
+          opacity: 1;
+          transform: translate3d(0,0,0);
+
+          transition: opacity @transition-duration-quick ease-in-out,
+                      visibility @transition-duration-quick step-start,
+                      transform @transition-duration-quick ease-in-out;
         }
       }
 
       .link-thumbnail {
+        display: block;
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 300px;
+        top: 100%;
+        right: 0;
+        width: 600px;
+
+        visibility: hidden;
+        opacity: 0;
+        transform: translate3d(0,10px,0);
+
+        transition: opacity @transition-duration-quick ease-in-out,
+                    visibility @transition-duration-quick step-end,
+                    transform @transition-duration-quick ease-in-out;
+
+        box-shadow: 0 30px 50px -25px rgba(0, 0, 0, 0.2);
 
         z-index: 1;
       }

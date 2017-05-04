@@ -1,9 +1,11 @@
-{.main-image?}
-  <img class="main-image" {@|image-meta} />
-{.end}
+<div class="gallery-wrapper">
+  {.main-image?}
+    <img class="main-image" {@|image-meta} />
+  {.end}
 
-{.repeated section items}
-  <div class="gallery-item">
-    <img {@|image-meta} />
-  </div>
-{.end}
+  {.repeated section items}
+    <div class="gallery-item">
+      <img {@|image-meta} />
+    </div>
+  {.end}
+</div>

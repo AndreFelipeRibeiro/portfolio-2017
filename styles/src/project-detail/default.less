@@ -3,6 +3,12 @@
 
     padding: 30px 0;
 
+    &.background-black {
+      p {
+        opacity: 0.5;
+      }
+    }
+
     &.full-width {
       .sqs-layout {
         width: 100%;
@@ -26,6 +32,7 @@
       font-size: 13px;
       font-weight: 100;
       line-height: 2em;
+      opacity: 0.7;
     }
 
     iframe {
@@ -37,8 +44,37 @@
     }
 
     .sqs-block-html {
+      max-width: 500px;
       padding-top: 0;
       padding-bottom: 0;
+    }
+
+    .sqs-col-6 > .sqs-block-html,
+    .sqs-col-7 > .sqs-block-html,
+    .sqs-col-8 > .sqs-block-html,
+    .sqs-col-9 > .sqs-block-html,
+    .sqs-col-10 > .sqs-block-html,
+    .sqs-col-11 > .sqs-block-html,
+    .sqs-col-12 > .sqs-block-html {
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .sqs-block-horizontalrule {
+      max-width: 500px;
+    }
+
+    .sqs-col-6 > .sqs-block-horizontalrule,
+    .sqs-col-7 > .sqs-block-horizontalrule,
+    .sqs-col-8 > .sqs-block-horizontalrule,
+    .sqs-col-9 > .sqs-block-horizontalrule,
+    .sqs-col-10 > .sqs-block-horizontalrule,
+    .sqs-col-11 > .sqs-block-horizontalrule,
+    .sqs-col-12 > .sqs-block-horizontalrule {
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     @media @tablet {
@@ -49,6 +85,14 @@
 
     @media @tablet_lg {
       padding: 100px 0;
+
+      p {
+        font-size: 14px;
+      }
+    }
+
+    @media @desktop_lg {
+      padding: 150px 0;
     }
   }
 }
