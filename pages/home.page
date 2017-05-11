@@ -3,5 +3,3 @@
   {@|apply grid-gallery.block}
   {@|apply cover-gallery.block}
 </main>
-
-<squarespace:script src="pages/Home.js" combo="false"/>

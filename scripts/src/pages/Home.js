@@ -32,12 +32,14 @@ class Home {
     this.$sideNav             = this.$portfolio.getElementsByClassName('side-nav')[0]
     this.$sideNavOptions      = Array.from(this.$sideNav.getElementsByClassName('label'))
 
-    this.handleCoverChange  = this.handleCoverChange.bind(this)
-    this.handleResize       = this.handleResize.bind(this)
-    this.handleScroll       = this.handleScroll.bind(this)
-    this.requestScroll      = this.requestScroll.bind(this)
-    this.handleLayoutChange = this.handleLayoutChange.bind(this)
-    this.handleTouch        = this.handleTouch.bind(this)
+    this.handleCoverChange     = this.handleCoverChange.bind(this)
+    this.handleResize          = this.handleResize.bind(this)
+    this.handleScroll          = this.handleScroll.bind(this)
+    this.requestScroll         = this.requestScroll.bind(this)
+    this.handleLayoutChange    = this.handleLayoutChange.bind(this)
+    this.handleTouch           = this.handleTouch.bind(this)
+    this.handleBlockMouseEnter = this.handleBlockMouseEnter.bind(this)
+    this.handleBlockMouseLeave = this.handleBlockMouseLeave.bind(this)
 
     this.isFirstLoad         = true
     this.layout              = this.$portfolio.dataset.view
@@ -66,21 +68,39 @@ class Home {
     window.addEventListener('resize', this.handleResize)
 
     this.$gridBlocks.forEach($block => {
-      $block.addEventListener('mouseenter', () => {
-        if (this.isTransitioning) return
-        this.hoveredBlock = $block
-        this.$gridGallery.classList.add('has-hovered-block')
-        $block.classList.add('is-hovered')
-      })
-
-      $block.addEventListener('mouseleave', () => {
-        if (this.isTransitioning) return
-        if (this.hoveredBlock !== $block) return
-        this.$gridGallery.classList.remove('has-hovered-block')
-        $block.classList.remove('is-hovered')
-        this.hoveredBlock = null
-      })
+      $block.addEventListener('mouseenter', this.handleBlockMouseEnter)
+      $block.addEventListener('mouseleave', this.handleBlockMouseLeave)
     })
+  }
+
+  removeEventListeners() {
+    window.removeEventListener('scroll', this.requestScroll)
+    window.removeEventListener('resize', this.handleResize)
+
+    this.$gridBlocks.forEach($block => {
+      $block.removeEventListener('mouseenter', this.handleBlockMouseEnter)
+      $block.removeEventListener('mouseleave', this.handleBlockMouseLeave)
+    })
+  }
+
+  out() {
+    this.removeEventListeners()
+    document.body.style.removeProperty('height')
+  }
+
+  handleBlockMouseEnter() {
+    if (this.isTransitioning) return
+    this.hoveredBlock = $block
+    this.$gridGallery.classList.add('has-hovered-block')
+    $block.classList.add('is-hovered')
+  }
+
+  handleBlockMouseLeave() {
+    if (this.isTransitioning) return
+    if (this.hoveredBlock !== $block) return
+    this.$gridGallery.classList.remove('has-hovered-block')
+    $block.classList.remove('is-hovered')
+    this.hoveredBlock = null
   }
 
   setTimer() {
@@ -397,4 +417,4 @@ class Home {
   }
 }
 
-new Home()
+module.exports = Home

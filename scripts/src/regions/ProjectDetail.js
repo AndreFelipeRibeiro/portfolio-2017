@@ -20,9 +20,10 @@ class ProjectDetail {
 
     this.$headlines = []
 
-    this.handleResize  = this.handleResize.bind(this)
-    this.handleScroll  = this.handleScroll.bind(this)
-    this.requestScroll = this.requestScroll.bind(this)
+    this.handleResize    = this.handleResize.bind(this)
+    this.handleScroll    = this.handleScroll.bind(this)
+    this.requestScroll   = this.requestScroll.bind(this)
+    this.handleBackToTop = this.handleBackToTop.bind(this)
 
     this.loadImages()
 
@@ -34,6 +35,24 @@ class ProjectDetail {
 
     this.handleResize()
     this.addEventListeners()
+  }
+
+  addEventListeners() {
+    window.addEventListener('scroll', this.requestScroll)
+    window.addEventListener('resize', this.handleResize)
+
+    this.$backToTop.addEventListener('click', this.handleBackToTop)
+  }
+
+  removeEventListeners() {
+    window.removeEventListener('scroll', this.requestScroll)
+    window.removeEventListener('resize', this.handleResize)
+
+    this.$backToTop.removeEventListener('click', this.handleBackToTop)
+  }
+
+  out() {
+    this.removeEventListeners()
   }
 
   requestScroll(e) {
@@ -81,14 +100,9 @@ class ProjectDetail {
     this.$backToTop.classList[shouldShowBackToTop ? 'add' : 'remove']('is-active')
   }
 
-  addEventListeners() {
-    window.addEventListener('scroll', this.requestScroll)
-    window.addEventListener('resize', this.handleResize)
-
-    this.$backToTop.addEventListener('click', () => {
-      const duration = Math.max(800, this.currentPageYOffset / 20)
-      CSSScroll(0, this.$scrollWrapper, 800)
-    })
+  handleBackToTop() {
+    const duration = Math.max(800, this.currentPageYOffset / 20)
+    CSSScroll(0, this.$scrollWrapper, 800)
   }
 
   initBlocks() {
@@ -154,4 +168,4 @@ class ProjectDetail {
   }
 }
 
-new ProjectDetail()
+module.exports = ProjectDetail

@@ -65,6 +65,4 @@
 
     </div>
   </main>
-
-  <squarespace:script src="regions/ProjectDetail.js" combo="false"/>
 {@|apply html-end.block}

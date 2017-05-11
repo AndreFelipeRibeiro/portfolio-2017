@@ -34,6 +34,14 @@ body {
 
 main {
   transition: opacity @transition-duration @cubic;
+
+  &.exiting-content {
+    opacity: 0;
+  }
+
+  &.incoming-content {
+    opacity: 0;
+  }
 }
 
 a {
