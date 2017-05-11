@@ -2,6 +2,7 @@ const Hammer = require('hammerjs')
 const axios = require('axios')
 
 const transitionEnd = require('../lib/transition-end')
+const CSSScroll = require('../lib/css-scroll')
 
 const BaseGallery = require('../blocks/Gallery')
 const Pagination = require('../blocks/Pagination')
@@ -9,11 +10,13 @@ const Pagination = require('../blocks/Pagination')
 
 class ProjectDetail {
   constructor() {
-    this.$main        = document.getElementsByTagName('main')[0]
-    this.$hero        = document.getElementsByClassName('hero')[0]
-    this.$blocks      = Array.from(this.$main.getElementsByClassName('block'))
-    this.$scrollNodes = Array.from(this.$main.querySelectorAll('[data-scrolled-into-view]'))
-    this.$pageIndex   = this.$main.getElementsByClassName('page-index')[0]
+    this.$main          = document.getElementsByTagName('main')[0]
+    this.$hero          = document.getElementsByClassName('hero')[0]
+    this.$scrollWrapper = this.$main.getElementsByClassName('scroll-wrapper')[0]
+    this.$pageIndex     = this.$main.getElementsByClassName('page-index')[0]
+    this.$backToTop     = this.$main.getElementsByClassName('back-to-top')[0]
+    this.$blocks        = Array.from(this.$main.getElementsByClassName('block'))
+    this.$scrollNodes   = Array.from(this.$main.querySelectorAll('[data-scrolled-into-view]'))
 
     this.$headlines = []
 
@@ -21,13 +24,13 @@ class ProjectDetail {
     this.handleScroll  = this.handleScroll.bind(this)
     this.requestScroll = this.requestScroll.bind(this)
 
-    this.initBlocks()
-    this.initIndex()
-
     this.loadImages()
 
     this.lastPageYOffset    = window.pageYOffset
     this.currentPageYOffset = window.pageYOffset
+
+    this.initBlocks()
+    this.initIndex()
 
     this.handleResize()
     this.addEventListeners()
@@ -54,7 +57,13 @@ class ProjectDetail {
   handleResize(e) {
     this.vh = window.innerHeight
 
-    this.$scrollNodes.forEach($node => {
+    const $nodesToWatch = [].concat(
+      this.$scrollNodes,
+      this.$headlines,
+      [this.$blocks[0]]
+    )
+
+    $nodesToWatch.forEach($node => {
       $node.dataset.top = $node.getBoundingClientRect().top + this.currentPageYOffset
     })
   }
@@ -65,11 +74,21 @@ class ProjectDetail {
       const isInView = top < this.currentPageYOffset + this.vh
       $node.dataset.scrolledIntoView = isInView.toString()
     })
+
+    const top = parseInt(this.$blocks[0].dataset.top)
+    const shouldShowBackToTop = top < this.currentPageYOffset
+
+    this.$backToTop.classList[shouldShowBackToTop ? 'add' : 'remove']('is-active')
   }
 
   addEventListeners() {
     window.addEventListener('scroll', this.requestScroll)
     window.addEventListener('resize', this.handleResize)
+
+    this.$backToTop.addEventListener('click', () => {
+      const duration = Math.max(800, this.currentPageYOffset / 20)
+      CSSScroll(0, this.$scrollWrapper, 800)
+    })
   }
 
   initBlocks() {
@@ -113,6 +132,12 @@ class ProjectDetail {
 
       $headlineIndex.textContent = linkText
       $linkIndex.textContent = linkText
+
+      this.$links[i].addEventListener('click', () => {
+        const top = parseInt($headline.dataset.top)
+        const duration = Math.max(800, top / 20)
+        CSSScroll(top, this.$scrollWrapper, duration)
+      })
     })
   }
 

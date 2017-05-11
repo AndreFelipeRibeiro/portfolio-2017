@@ -1,65 +1,69 @@
 {@|apply html-begin.block}
   <main id="project-detail" data-content-field="main-content">
 
-    {# HERO}
-    {.section collection}
-      {.section mainImage}
-        <div class="hero" style="background-color:#{colorData.suggestedBgColor};">
-          <div class="hero-image">
-            <img data-use-bg-image="true" data-load="false" data-src="{assetUrl}" />
+    <div class="back-to-top">Back To Top</div>
+
+    <div class="scroll-wrapper">
+      {# HERO}
+      {.section collection}
+        {.section mainImage}
+          <div class="hero" style="background-color:#{colorData.suggestedBgColor};">
+            <div class="hero-image">
+              <img data-use-bg-image="true" data-load="false" data-src="{assetUrl}" />
+            </div>
+          </div>
+        {.end}
+      {.end}
+
+      {# INDEX}
+      <div class="page-index background-light-gray">
+        <div class="sqs-layout">
+          <h2 class="title">Index</h2>
+          <div class="links">
+            {.repeated section items}
+              {.equal? customContent.customType "headline"}
+                <a class="link">
+                  <h2><span class="index"></span>{customContent.title}</h2>
+                  <img class="link-thumbnail" {customContent.thumbnailImage|image-meta} />
+                </a>
+                <br />
+              {.end}
+            {.end}
           </div>
         </div>
-      {.end}
-    {.end}
-
-    {# INDEX}
-    <div class="block page-index background-light-gray">
-      <div class="sqs-layout">
-        <h2 class="title">Index</h2>
-        <div class="links">
-          {.repeated section items}
-            {.equal? customContent.customType "headline"}
-              <a class="link" href="#{customContent.title|slugify}">
-                <h2><span class="index"></span>{customContent.title}</h2>
-                <img class="link-thumbnail" {customContent.thumbnailImage|image-meta} />
-              </a>
-              <br />
-            {.end}
-          {.end}
-        </div>
       </div>
-    </div>
 
-    {# BLOCKS}
-    {.repeated section items}
-      <div
-        {.section customContent.title}id="{@|slugify}"{.end}
-        class="block {.repeated section categories}{@} {.end}"
-        {.section customContent.backgroundColor}style="background-color: {@}"{.end}
-        {.section customContent.customType}data-type="{@}"{.end}
-      >
-        {.equal? customContent.customType "custom-gallery"}
-          {@|apply project-detail/gallery.block}
-        {.or}
-          {.equal? customContent.customType "phone-collage"}
-            {@|apply project-detail/phone-collage.block}
+      {# BLOCKS}
+      {.repeated section items}
+        <div
+          {.section customContent.title}id="{@|slugify}"{.end}
+          class="block {.repeated section categories}{@} {.end}"
+          {.section customContent.backgroundColor}style="background-color: {@}"{.end}
+          {.section customContent.customType}data-type="{@}"{.end}
+        >
+          {.equal? customContent.customType "custom-gallery"}
+            {@|apply project-detail/gallery.block}
           {.or}
-            {.equal? customContent.customType "headline"}
-              {@|apply project-detail/headline.block}
+            {.equal? customContent.customType "phone-collage"}
+              {@|apply project-detail/phone-collage.block}
             {.or}
-              {.equal? customContent.customType "project-title"}
-                {@|apply project-detail/project-title.block}
+              {.equal? customContent.customType "headline"}
+                {@|apply project-detail/headline.block}
               {.or}
-                <div class="block-content" data-scrolled-into-view="false">
-                  {body}
-                </div>
+                {.equal? customContent.customType "project-title"}
+                  {@|apply project-detail/project-title.block}
+                {.or}
+                  <div class="block-content" data-scrolled-into-view="false">
+                    {body}
+                  </div>
+                {.end}
               {.end}
             {.end}
           {.end}
-        {.end}
-      </div>
-    {.end}
+        </div>
+      {.end}
 
+    </div>
   </main>
 
   <squarespace:script src="regions/ProjectDetail.js" combo="false"/>

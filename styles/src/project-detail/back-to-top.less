@@ -1,0 +1,25 @@
+#project-detail {
+  .back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background-color: blue;
+    cursor: pointer;
+
+    z-index: 100;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity @transition-duration-quick @cubic,
+                visibility @transition-duration-quick step-end;
+
+    &.is-active {
+      opacity: 1;
+      visibility: visible;
+
+      transition: opacity @transition-duration-quick @cubic,
+                  visibility @transition-duration-quick step-start;
+    }
+  }
+}
