@@ -10,13 +10,15 @@ class Router {
     this.$main = document.getElementsByTagName('main')[0]
 
     this.handleLinkClick = this.handleLinkClick.bind(this)
+    this.handlePopState  = this.handlePopState.bind(this)
 
-    this.in()
+    this.updateView(location.pathname)
     this.addEventListeners()
   }
 
   addEventListeners() {
     window.addEventListener('click', this.handleLinkClick)
+    window.addEventListener('popstate', this.handlePopState)
   }
 
   handleLinkClick(e) {
@@ -25,7 +27,16 @@ class Router {
 
     e.preventDefault()
 
-    axios.get($link.href).then(response => {
+    this.updateView($link.href)
+  }
+
+  handlePopState(e) {
+    const prevWindow = e.currentTarget
+    this.updateView(prevWindow.location.pathname)
+  }
+
+  updateView(path) {
+    axios.get(path).then(response => {
 
       const $html = document.createElement('html')
       $html.innerHTML = response.data
@@ -38,15 +49,23 @@ class Router {
         this.$main.removeEventListener('transitionend', handleTransitionEnd)
 
         document.body.replaceChild($main, this.$main)
+        scrollTo(0,0)
+
         $main.classList.add('incoming-content')
         this.$main = $main
 
         setTimeout(() => {
           $main.classList.remove('incoming-content')
 
-          history.pushState({}, "Title", $link.href)
-          scrollTo(0,0)
-          this.in()
+          history.pushState({}, "Title", path)
+
+          if (this.module) this.module.out()
+
+          this.path = this.getCleanUrlPath(path)
+
+          const Module = this.getModule()
+
+          if (Module) this.module = new Module
         }, 0)
       }
 
@@ -56,19 +75,8 @@ class Router {
     }).catch(error => console.log(error))
   }
 
-  in() {
-    if (this.module) this.module.out()
-
-    this.path = this.getCleanUrlPath()
-
-    const Module = this.getModule()
-
-    if (Module) this.module = new Module
-  }
-
   // Helpers
-  getCleanUrlPath() {
-    let url = location.pathname
+  getCleanUrlPath(url) {
     let urlParts = url.split('')
 
     if (

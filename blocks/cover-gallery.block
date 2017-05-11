@@ -9,18 +9,29 @@
         </div>
       </a>
 
-      <div class="imagery" data-project="apple">
-        <div class="label">2014</div>
-      </div>
-      <div class="imagery" data-project="bloomingdales">
-        <div class="label">2015</div>
-      </div>
-      <div class="imagery" data-project="morgan-stanley">
-        <div class="label">2015</div>
-      </div>
-      <div class="imagery" data-project="vans">
-        <div class="label">2012</div>
-      </div>
+      <a href="/apple">
+        <div class="imagery" data-project="apple">
+          <div class="label">2014</div>
+        </div>
+      </a>
+
+      <a href="/bloomingdales">
+        <div class="imagery" data-project="bloomingdales">
+          <div class="label">2015</div>
+        </div>
+      </a>
+
+      <a href="/morgan-stanley">
+        <div class="imagery" data-project="morgan-stanley">
+          <div class="label">2015</div>
+        </div>
+      </a>
+
+      <a href="/vans">
+        <div class="imagery" data-project="vans">
+          <div class="label">2012</div>
+        </div>
+      </a>
 
       <div class="concealer left"></div>
       <div class="concealer right"></div>
@@ -41,53 +52,61 @@
         </article>
       </a>
 
-      <article class="text" data-project="apple">
-        <div class="text-content">
-          <h3 class="eyebrow">Redesign Concepts</h3>
-          <h2 class="title">Apple</h2>
-          <p>
-            In 2014 I was part of the first team Huge sent to work at Apple in their San Francisco HQ. Our mission was to explore blue-sky concepts for their website redesign.
-            <br />
-            <button><span>Learn More</span></button>
-          </p>
-        </div>
-      </article>
+      <a href="/apple">
+        <article class="text" data-project="apple">
+          <div class="text-content">
+            <h3 class="eyebrow">Redesign Concepts</h3>
+            <h2 class="title">Apple</h2>
+            <p>
+              In 2014 I was part of the first team Huge sent to work at Apple in their San Francisco HQ. Our mission was to explore blue-sky concepts for their website redesign.
+              <br />
+              <button><span>Learn More</span></button>
+            </p>
+          </div>
+        </article>
+      </a>
 
-      <article class="text" data-project="bloomingdales">
-        <div class="text-content">
-          <h3 class="eyebrow">Frontsite</h3>
-          <h2 class="title">Bloomingdale's</h2>
-          <p>
-            Reimagining Bloomingdale's online magazine by creating new ways of combining their editorial content with their vast range of high-end product offering.
-            <br />
-            <button><span>Learn More</span></button>
-          </p>
-        </div>
-      </article>
+      <a href="/bloomingdales">
+        <article class="text" data-project="bloomingdales">
+          <div class="text-content">
+            <h3 class="eyebrow">Frontsite</h3>
+            <h2 class="title">Bloomingdale's</h2>
+            <p>
+              Reimagining Bloomingdale's online magazine by creating new ways of combining their editorial content with their vast range of high-end product offering.
+              <br />
+              <button><span>Learn More</span></button>
+            </p>
+          </div>
+        </article>
+      </a>
 
-      <article class="text" data-project="morgan-stanley">
-        <div class="text-content">
-          <h3 class="eyebrow">Website Redesign</h3>
-          <h2 class="title">Morgan&nbsp;Stanley</h2>
-          <p>
-            A complete overhaul of the Morgan Stanley digital presence with a twofold mission: to better promote their thought leadership as well as to create a compelling platform to attract new talents.
-            <br />
-            <button><span>Learn More</span></button>
-          </p>
-        </div>
-      </article>
+      <a href="/morgan-stanley">
+        <article class="text" data-project="morgan-stanley">
+          <div class="text-content">
+            <h3 class="eyebrow">Website Redesign</h3>
+            <h2 class="title">Morgan&nbsp;Stanley</h2>
+            <p>
+              A complete overhaul of the Morgan Stanley digital presence with a twofold mission: to better promote their thought leadership as well as to create a compelling platform to attract new talents.
+              <br />
+              <button><span>Learn More</span></button>
+            </p>
+          </div>
+        </article>
+      </a>
 
-      <article class="text" data-project="vans">
-        <div class="text-content">
-          <h3 class="eyebrow">Creative Pitch</h3>
-          <h2 class="title">Vans</h2>
-          <p>
-            When Huge pitched Vans in 2012, some designer got invited by the company leadership to submit internally ideas and visual concepts. This was my contribution.
-            <br />
-            <button><span>Learn More</span></button>
-          </p>
-        </div>
-      </article>
+      <a href="/vans">
+        <article class="text" data-project="vans">
+          <div class="text-content">
+            <h3 class="eyebrow">Creative Pitch</h3>
+            <h2 class="title">Vans</h2>
+            <p>
+              When Huge pitched Vans in 2012, some designer got invited by the company leadership to submit internally ideas and visual concepts. This was my contribution.
+              <br />
+              <button><span>Learn More</span></button>
+            </p>
+          </div>
+        </article>
+      </a>
     </div>
 
     <div class="cover-gallery-pagination">
