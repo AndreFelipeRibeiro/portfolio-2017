@@ -2,8 +2,7 @@
   .back-to-top {
     position: fixed;
     bottom: 40px;
-    right: 40px;
-    background-color: blue;
+    right: 7.5%;
     cursor: pointer;
 
     z-index: 100;
@@ -20,6 +19,20 @@
 
       transition: opacity @transition-duration-quick @cubic,
                   visibility @transition-duration-quick step-start;
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+
+      polyline {
+        stroke: #000;
+        fill: none;
+      }
+    }
+
+    @media @tablet {
+      right: 5%;
     }
   }
 }

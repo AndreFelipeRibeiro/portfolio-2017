@@ -139,6 +139,10 @@ class ProjectDetail {
   initIndex() {
     this.$links = Array.from(this.$pageIndex.getElementsByClassName('link'))
 
+    if (this.$headlines.length < 1) {
+      this.$pageIndex.classList.add('is-hidden')
+    }
+
     this.$headlines.forEach(($headline, i) => {
       const $headlineIndex = $headline.getElementsByClassName('index')[0]
       const $linkIndex = this.$links[i].getElementsByTagName('span')[0]

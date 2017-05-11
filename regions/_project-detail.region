@@ -1,7 +1,11 @@
 {@|apply html-begin.block}
   <main id="project-detail" data-content-field="main-content">
 
-    <div class="back-to-top">Back To Top</div>
+    <div class="back-to-top">
+      <svg viewBox="0 0 31.6 19.9">
+        <polyline class="st0" points="1,18.8 15.7,1 30.5,18.8 "/>
+      </svg>
+    </div>
 
     <div class="scroll-wrapper">
       {# HERO}
