@@ -1,3 +1,5 @@
+require('scroll-restoration-polyfill')
+
 const Router = require('./Router')
 const Header = require('./blocks/Header')
 
@@ -13,6 +15,7 @@ const Global = {
   },
 
   initRouter() {
+    history.scrollRestoration = 'manual'
     this.router = new Router()
   }
 }

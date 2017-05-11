@@ -27,7 +27,8 @@
   "dependencies": {
     "axios": "^0.16.1",
     "hammerjs": "^2.0.8",
-    "platform": "^1.3.4"
+    "platform": "^1.3.4",
+    "scroll-restoration-polyfill": "^0.6.1"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",

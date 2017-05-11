@@ -31,6 +31,7 @@ class Router {
   }
 
   handlePopState(e) {
+    e.preventDefault()
     const prevWindow = e.currentTarget
     this.updateView(prevWindow.location.pathname)
   }
@@ -41,6 +42,8 @@ class Router {
       const $html = document.createElement('html')
       $html.innerHTML = response.data
       const $main = $html.getElementsByTagName('main')[0]
+
+      if (this.module) this.module.out()
 
       const handleTransitionEnd = (e) => {
         if (e.target !== this.$main) return
@@ -59,7 +62,6 @@ class Router {
 
           history.pushState({}, "Title", path)
 
-          if (this.module) this.module.out()
 
           this.path = this.getCleanUrlPath(path)
 
