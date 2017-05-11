@@ -1,4 +1,4 @@
-<div class="sqs-layout">
+<div class="sqs-layout" data-scrolled-into-view="false">
   <div class="index-wrapper">
     <h1 class="index"></h1>
   </div>

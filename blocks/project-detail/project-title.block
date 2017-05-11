@@ -1,4 +1,4 @@
-<div class="sqs-layout">
+<div class="sqs-layout" data-scrolled-into-view="false">
   <div class="time-period-wrapper">
     <p class="time-period">{customContent.timePeriod}</p>
   </div>

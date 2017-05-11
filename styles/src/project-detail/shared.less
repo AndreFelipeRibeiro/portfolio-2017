@@ -21,6 +21,21 @@
       }
     }
 
+    [data-scrolled-into-view] {
+      transition: opacity @transition-duration @cubic,
+                  transform @transition-duration @cubic;
+    }
+
+    [data-scrolled-into-view="false"] {
+      opacity: 0;
+      transform: translate3d(0,20px,0);
+    }
+
+    [data-scrolled-into-view="true"] {
+      opacity: 1;
+      transform: translate3d(0,0,0);
+    }
+
     .sqs-layout {
       width: @page-width;
       margin: 0 auto;

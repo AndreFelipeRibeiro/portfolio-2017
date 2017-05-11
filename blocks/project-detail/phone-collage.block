@@ -1,7 +1,7 @@
 <div class="sqs-layout">
   <div class="column">
-    <img class="image-1" {customContent.image1|image-meta} />
-    <div class="text">
+    <img class="image-1" {customContent.image1|image-meta} data-scrolled-into-view="false" />
+    <div class="text" data-scrolled-into-view="false">
       <h3 class="video-title">{customContent.videoTitle}</h5>
       <hr>
       <p class="video-description">{customContent.videoDescription}</p>
@@ -9,7 +9,7 @@
   </div>
 
   <div class="column">
-    <div class="iphone">
+    <div class="iphone" data-scrolled-into-view="false">
       <img data-src="assets/projects/squarespace/afr_iphone_white_2.png" />
       <iframe
         class="screencap-video"
@@ -23,7 +23,7 @@
   </div>
 
   <div class="column">
-    <img class="image-2" {customContent.image2|image-meta} />
-    <img class="image-3" {customContent.image3|image-meta} />
+    <img class="image-2" {customContent.image2|image-meta} data-scrolled-into-view="false" />
+    <img class="image-3" {customContent.image3|image-meta} data-scrolled-into-view="false" />
   </div>
 </div>

@@ -50,7 +50,9 @@
               {.equal? customContent.customType "project-title"}
                 {@|apply project-detail/project-title.block}
               {.or}
-                {body}
+                <div class="block-content" data-scrolled-into-view="false">
+                  {body}
+                </div>
               {.end}
             {.end}
           {.end}

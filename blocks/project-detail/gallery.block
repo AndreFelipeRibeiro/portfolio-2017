@@ -1,4 +1,4 @@
-<div class="gallery-wrapper">
+<div class="gallery-wrapper" data-scrolled-into-view="false">
   {.main-image?}
     <img class="main-image" {@|image-meta} />
   {.end}
