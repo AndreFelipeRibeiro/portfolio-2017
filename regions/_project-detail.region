@@ -57,9 +57,13 @@
                 {.equal? customContent.customType "project-title"}
                   {@|apply project-detail/project-title.block}
                 {.or}
-                  <div class="block-content" data-scrolled-into-view="false">
-                    {body}
-                  </div>
+                  {.equal? customContent.customType "credits"}
+                    {@|apply project-detail/credits.block}
+                  {.or}
+                    <div class="block-content" data-scrolled-into-view="false">
+                      {body}
+                    </div>
+                  {.end}
                 {.end}
               {.end}
             {.end}
