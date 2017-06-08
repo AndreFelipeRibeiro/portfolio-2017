@@ -23,7 +23,9 @@ class Router {
 
   handleLinkClick(e) {
     const $link = this.getParentByTagName(e.target, 'A')
-    if (!$link || !$link.href) return
+
+    if (!$link || !$link.getAttribute('href')) return
+    if ($link.getAttribute('href').indexOf('http') > -1) return
 
     e.preventDefault()
 
@@ -37,6 +39,7 @@ class Router {
   }
 
   updateView(path) {
+    console.log('updates')
     axios.get(path).then(response => {
 
       const $html = document.createElement('html')
