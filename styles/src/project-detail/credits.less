@@ -31,8 +31,6 @@
 
     .body {
       flex: 1;
-      font-size: 16px;
-      line-height: 2em;
 
       .sqs-layout {
         width: 100%;
@@ -42,9 +40,14 @@
           padding-right: 17px;
         }
       }
+    }
+
+    .title, .body p {
+      font-size: 16px;
+      line-height: 2em;
 
       @media @desktop_lg {
-        font-size: 18px;
+        p { font-size: 18px; }
       }
     }
   }
