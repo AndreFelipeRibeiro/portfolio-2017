@@ -1,4 +1,9 @@
 {@|apply html-begin.block}
+  <div id="loading-screen">
+    <div class="scrim"></div>
+    <h1 class="project-title">{collection.title}</h1>
+  </div>
+
   <main id="project-detail" class="incoming-content collection-{collection.urlId}" data-content-field="main-content">
 
     <div class="back-to-top">

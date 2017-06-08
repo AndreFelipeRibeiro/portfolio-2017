@@ -33,14 +33,21 @@ body {
 }
 
 main {
-  transition: opacity @transition-duration @cubic;
+  position: relative;
+  z-index: 0;
+  transition: opacity @transition-duration @cubic @transition-duration;
 
   &.exiting-content {
     opacity: 0;
+    transition: opacity @transition-duration @cubic;
   }
 
   &.incoming-content {
     opacity: 0;
+    height: 100vh;
+    position: fixed;
+
+    transition: opacity @transition-duration @cubic @transition-duration;
   }
 }
 

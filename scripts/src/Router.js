@@ -76,8 +76,6 @@ class Router {
   }
 
   loadContent() {
-    this.$main.classList.remove('incoming-content')
-
     const Module = this.getModule()
     if (Module) this.module = new Module
   }
