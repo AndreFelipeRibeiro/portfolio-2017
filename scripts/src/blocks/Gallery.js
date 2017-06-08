@@ -26,6 +26,7 @@ class Gallery {
 
     this.originalNumOfChildren = this.$children.length
 
+    if (this.originalNumOfChildren < 5) config.numOfClones = 1
     if (config.numOfClones) this.makeClones(config.numOfClones)
 
     this.index = 0
