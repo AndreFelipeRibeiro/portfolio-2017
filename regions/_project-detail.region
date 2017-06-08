@@ -1,5 +1,5 @@
 {@|apply html-begin.block}
-  <main id="project-detail" data-content-field="main-content">
+  <main id="project-detail" class="incoming-content" data-content-field="main-content">
 
     <div class="back-to-top">
       <svg viewBox="0 0 31.6 19.9">

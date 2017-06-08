@@ -12,7 +12,7 @@ class Router {
     this.handleLinkClick = this.handleLinkClick.bind(this)
     this.handlePopState  = this.handlePopState.bind(this)
 
-    this.updateView(location.pathname)
+    this.loadContent()
     this.addEventListeners()
   }
 
@@ -60,15 +60,9 @@ class Router {
         this.$main = $main
 
         setTimeout(() => {
-          $main.classList.remove('incoming-content')
-
           history.pushState({}, "Title", path)
-
           this.path = this.getCleanUrlPath(path)
-
-          const Module = this.getModule()
-
-          if (Module) this.module = new Module
+          this.loadContent()
         }, 0)
       }
 
@@ -76,6 +70,13 @@ class Router {
       this.$main.classList.add('exiting-content')
 
     }).catch(error => console.log(error))
+  }
+
+  loadContent() {
+    this.$main.classList.remove('incoming-content')
+
+    const Module = this.getModule()
+    if (Module) this.module = new Module
   }
 
   // Helpers
