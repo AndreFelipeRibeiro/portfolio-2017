@@ -1,0 +1,51 @@
+#project-detail {
+  .block[data-type="credits"] {
+    padding-top: 80px;
+    padding-bottom: 80px;
+
+    @media @tablet {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    .credits {
+      width: @page-width;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+
+      @media @tablet {
+        flex-direction: row;
+        width: @page-width-tablet;
+      }
+    }
+
+    .title {
+      flex: 1;
+      margin-bottom: 30px;
+
+      @media @tablet {
+        margin-bottom: 0;
+      }
+    }
+
+    .body {
+      flex: 1;
+      font-size: 16px;
+      line-height: 2em;
+
+      .sqs-layout {
+        width: 100%;
+
+        .sqs-block-html {
+          padding-left: 17px;
+          padding-right: 17px;
+        }
+      }
+
+      @media @desktop_lg {
+        font-size: 18px;
+      }
+    }
+  }
+}

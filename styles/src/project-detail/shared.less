@@ -22,6 +22,12 @@
       }
     }
 
+    &:last-child {
+      padding-bottom: 120px !important;
+      @media @tablet { padding-bottom: 160px !important; }
+      @media @desktop_lg { padding-bottom: 200px !important; }
+    }
+
     [data-scrolled-into-view] {
       transition: opacity @transition-duration @cubic,
                   transform @transition-duration @cubic;
@@ -58,9 +64,17 @@
       margin: 25px 0;
     }
 
+    .sqs-col-10 {
+      width: 100%;
+    }
+
     .sqs-block-horizontalrule {
       padding-top: 0;
       padding-bottom: 0;
+    }
+
+    .sqs-block-spacer {
+      height: 0;
     }
 
     @media @tablet {
@@ -75,6 +89,14 @@
       .sqs-col-4 {
         width: 33.33%;
         margin: 0;
+      }
+
+      .sqs-col-10 {
+        width: 83.3333&;
+      }
+
+      .sqs-block-spacer {
+        height: auto;
       }
     }
   }

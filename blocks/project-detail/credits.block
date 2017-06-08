@@ -1,8 +1,8 @@
-<div data-scrolled-into-view="false">
+<div class="credits" data-scrolled-into-view="false">
   <div class="title">
     {customContent.title}
   </div>
-  <div class="credits">
+  <div class="body">
     {body}
   </div>
 </div>
