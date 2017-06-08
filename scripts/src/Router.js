@@ -54,6 +54,8 @@ class Router {
         document.body.replaceChild($main, this.$main)
         scrollTo(0,0)
 
+        this.injectHTML($main)
+
         $main.classList.add('incoming-content')
         this.$main = $main
 
@@ -61,7 +63,6 @@ class Router {
           $main.classList.remove('incoming-content')
 
           history.pushState({}, "Title", path)
-
 
           this.path = this.getCleanUrlPath(path)
 
@@ -106,6 +107,25 @@ class Router {
     const id = '/' + $main.id
 
     return MODULES[id] || null
+  }
+
+  injectHTML($page) {
+    const $videoWrappers = Array.from($page.querySelectorAll('.sqs-video-wrapper[data-html]'))
+
+    $videoWrappers.forEach($wrapper => {
+      const html = $wrapper.dataset.html
+
+      const $intrinsic = document.createElement('div')
+      $intrinsic.classList.add('intrinsic')
+
+      const $intrinsicInner = document.createElement('div')
+      $intrinsicInner.classList.add('intrinsic-inner')
+      $intrinsicInner.style.paddingBottom = '56.3%'
+      $intrinsicInner.innerHTML = html
+
+      $intrinsic.appendChild($intrinsicInner)
+      $wrapper.appendChild($intrinsic)
+    })
   }
 }
 
