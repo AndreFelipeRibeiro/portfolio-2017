@@ -8,7 +8,7 @@
       <div class="column"></div>
     </div>
 
-    <li class="link" data-link="work">
+    <li class="current-section">
       <a href="/">work</a>
     </li>
     <br />
@@ -23,6 +23,23 @@
     <li class="link" data-link="archive">
       <a href="">archive</a>
     </li>
-
+    <div class="menu-icons-row">
+      <li class="menu-icon">
+        {# @|apply - import svg icons}
+        {@|apply icons/twitter.svg.block}
+      </li>
+      <li class="menu-icon">
+        {@|apply icons/linkedin.svg.block}
+      </li>
+      <li class="menu-icon icon-instagram">
+        {@|apply icons/instagram.svg.block}
+      </li>
+      <li class="menu-icon icon-mail">
+        {@|apply icons/mail.svg.block}
+      </li>
+      <li class="menu-icon icon-dribbble">
+        {@|apply icons/dribbble.svg.block}
+      </li>
+    </div>
   </ul>
 </div>
