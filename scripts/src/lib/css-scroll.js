@@ -1,6 +1,3 @@
-const transitionend = require('./transition-end')
-
-
 const getPrefixedProperties = () => {
   if ('transition' in document.body.style)       return { transition: 'transition',       transform: 'transform' }
   if ('WebkitTransition' in document.body.style) return { transition: 'WebkitTransition', transform: 'WebkitTransform' }

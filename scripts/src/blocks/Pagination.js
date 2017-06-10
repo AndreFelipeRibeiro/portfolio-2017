@@ -1,4 +1,3 @@
-const transitionEnd = require('../lib/transition-end')
 const transform = require('../lib/transform')
 
 
@@ -31,7 +30,7 @@ class Pagination {
   }
 
   update(i, withTransitions = true) {
-    this.$parent.removeEventListener(transitionEnd, this.handleTransitionEnd)
+    this.$parent.removeEventListener('transitionend', this.handleTransitionEnd)
 
     const index = i + 1
     const destination = index * this.activePageHeight * -1
@@ -61,7 +60,7 @@ class Pagination {
     const fakeDestination = fakeIndex * this.activePageHeight * -1
 
     this.handleTransitionEnd = () => this.update(i, false)
-    this.$parent.addEventListener(transitionEnd, this.handleTransitionEnd)
+    this.$parent.addEventListener('transitionend', this.handleTransitionEnd)
 
     this.$parent.style[transform] = `translate3d(0,${fakeDestination}px, 0)`
   }

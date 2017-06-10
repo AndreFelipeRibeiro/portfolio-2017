@@ -1,19 +1,18 @@
 const Hammer = require('hammerjs')
 const axios = require('axios')
 
-const transitionEnd = require('../lib/transition-end')
-const CSSScroll = require('../lib/css-scroll')
+const transitionEnd = require('../../lib/transition-end')
+const CSSScroll = require('../../lib/css-scroll')
 
-const BaseGallery = require('../blocks/Gallery')
-const Pagination = require('../blocks/Pagination')
+const BaseGallery = require('../../blocks/Gallery')
+const Pagination = require('../../blocks/Pagination')
+const LoadingScreen = require('./LoadingScreen')
 
 
 class ProjectDetail {
   constructor() {
     this.$main          = document.getElementsByTagName('main')[0]
     this.$hero          = document.getElementsByClassName('hero')[0]
-    this.$loadingScreen = document.getElementById('loading-screen')
-    this.$scrim         = this.$loadingScreen.getElementsByClassName('scrim')[0]
     this.$scrollWrapper = this.$main.getElementsByClassName('scroll-wrapper')[0]
     this.$pageIndex     = this.$main.getElementsByClassName('page-index')[0]
     this.$backToTop     = this.$main.getElementsByClassName('back-to-top')[0]
@@ -111,40 +110,7 @@ class ProjectDetail {
   initLoadingState() {
     document.body.classList.add('is-loading')
 
-    this.loadProgress = 0
-
-    this.loadingInterval = setInterval(() => {
-      if (!this.imageLoadProgress) return
-
-      let progress
-
-      if (this.imageLoadProgress >= this.loadProgress) {
-        progress = this.loadProgress
-      } else {
-        return
-      }
-
-      this.$scrim.style.transform = `translate3d(${progress * 100}%, 0, 0)`
-
-      // If we are done loading all the images, then cancel the loading state!
-      if (progress >= 1) {
-        clearInterval(this.loadingInterval)
-
-        this.$main.classList.remove('incoming-content')
-        document.body.classList.remove('is-loading')
-      }
-
-      if (this.imageLoadProgress >= 1) {
-        this.loadProgress += 1
-      } else {
-        this.loadProgress += 0.2
-      }
-
-    }, 700)
-  }
-
-  updateLoadingState() {
-
+    this.loadingScreen = new LoadingScreen()
   }
 
   initBlocks() {
@@ -211,7 +177,7 @@ class ProjectDetail {
       $image.addEventListener('load', () => {
         this.handleResize()
         this.imageLoadProgress += 1 / this.imageCount
-        this.updateLoadingState()
+        this.loadingScreen.updateProgress(this.imageLoadProgress)
       })
 
       $image.dataset.load = 'true'

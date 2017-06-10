@@ -33,21 +33,27 @@ body {
 }
 
 main {
-  position: relative;
-  z-index: 0;
-  transition: opacity @transition-duration @cubic @transition-duration;
+  .content-wrapper {
+    position: relative;
+    z-index: 0;
+    transition: opacity @transition-duration @cubic @transition-duration;
+  }
 
   &.exiting-content {
-    opacity: 0;
-    transition: opacity @transition-duration @cubic;
+    .content-wrapper {
+      opacity: 0;
+      transition: opacity @transition-duration @cubic;
+    }
   }
 
   &.incoming-content {
-    opacity: 0;
-    height: 100vh;
-    position: fixed;
+    .content-wrapper {
+      opacity: 0;
+      height: 100vh;
+      position: fixed;
 
-    transition: opacity @transition-duration @cubic @transition-duration;
+      transition: opacity @transition-duration @cubic @transition-duration;
+    }
   }
 }
 

@@ -1,44 +1,78 @@
-#loading-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  opacity: 0;
-  visibility: hidden;
-
-  transition: opacity @transition-duration @cubic @transition-duration * 2,
-              visibility @transition-duration step-end @transition-duration * 2;
-
-  .is-loading & {
-    opacity: 1;
-    visibility: visible;
-
-    transition: opacity @transition-duration @cubic @transition-duration,
-                visibility @transition-duration step-start @transition-duration;
-  }
-
-  .scrim {
+#project-detail {
+  #loading-screen {
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
+    z-index: 1;
 
     width: 100%;
     height: 100%;
 
-    background-color: #EFEFEF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    transition: transform 800ms linear;
-  }
+    opacity: 0;
+    visibility: hidden;
 
-  .project-title {
-    position: fixed;
+    transition: opacity @transition-duration @cubic @transition-duration * 4,
+                visibility @transition-duration step-end @transition-duration * 4;
+
+    .is-loading & {
+      position: fixed;
+      opacity: 1;
+      visibility: visible;
+
+      transition: opacity @transition-duration @cubic @transition-duration,
+                  visibility @transition-duration step-start @transition-duration;
+
+      .scrim {
+        &::before { opacity: 0.05; }
+      }
+
+      .project-title {
+        color: black;
+        transform: scale(1);
+      }
+    }
+
+    .scrim {
+      position: absolute;
+      top: 0;
+      left: -100%;
+
+      width: 100%;
+      height: 100%;
+
+      transition-property: transform;
+      transition-timing-function: @cubic;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0;
+
+        transition: opacity @transition-duration @cubic @transition-duration;
+      }
+    }
+
+    .project-title {
+      position: fixed;
+
+      color: white;
+      font-size: 7vw;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+
+      transform: scale(1.01);
+
+      transition: color @transition-duration @cubic,
+                  transform @transition-duration @cubic;
+    }
   }
 }

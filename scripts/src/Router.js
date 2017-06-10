@@ -8,17 +8,23 @@ const MODULES = {
 class Router {
   constructor() {
     this.$main = document.getElementsByTagName('main')[0]
+    this.$contentWrapper = this.$main.getElementsByClassName('content-wrapper')[0]
 
-    this.handleLinkClick = this.handleLinkClick.bind(this)
-    this.handlePopState  = this.handlePopState.bind(this)
+    this.handleDOMContentLoaded = this.handleDOMContentLoaded.bind(this)
+    this.handleLinkClick        = this.handleLinkClick.bind(this)
+    this.handlePopState         = this.handlePopState.bind(this)
 
-    this.loadContent()
     this.addEventListeners()
   }
 
   addEventListeners() {
+    window.addEventListener('DOMContentLoaded', this.handleDOMContentLoaded)
     window.addEventListener('click', this.handleLinkClick)
     window.addEventListener('popstate', this.handlePopState)
+  }
+
+  handleDOMContentLoaded() {
+    this.loadContentScripts()
   }
 
   handleLinkClick(e) {
@@ -39,9 +45,7 @@ class Router {
   }
 
   updateView(path) {
-    console.log('updates')
     axios.get(path).then(response => {
-
       const $html = document.createElement('html')
       $html.innerHTML = response.data
       const $main = $html.getElementsByTagName('main')[0]
@@ -49,23 +53,24 @@ class Router {
       if (this.module) this.module.out()
 
       const handleTransitionEnd = (e) => {
-        if (e.target !== this.$main) return
+        if (e.target !== this.$contentWrapper) return
         if (e.propertyName !== 'opacity') return
 
         this.$main.removeEventListener('transitionend', handleTransitionEnd)
-
         document.body.replaceChild($main, this.$main)
         scrollTo(0,0)
 
         this.injectHTML($main)
 
         $main.classList.add('incoming-content')
+
         this.$main = $main
+        this.$contentWrapper = this.$main.getElementsByClassName('content-wrapper')[0]
 
         setTimeout(() => {
           history.pushState({}, "Title", path)
           this.path = this.getCleanUrlPath(path)
-          this.loadContent()
+          this.loadContentScripts()
         }, 0)
       }
 
@@ -75,7 +80,7 @@ class Router {
     }).catch(error => console.log(error))
   }
 
-  loadContent() {
+  loadContentScripts() {
     const Module = this.getModule()
     if (Module) this.module = new Module
   }
