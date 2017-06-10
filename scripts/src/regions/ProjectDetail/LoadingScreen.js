@@ -1,6 +1,7 @@
 const prefixedTransform = require('../../lib/transform')
 
 const TRANSITION_DURATION = 200
+const ORIGINAL_PX_PER_MILLISECOND = 0.02
 
 class LoadingScreen {
   constructor() {
@@ -14,7 +15,7 @@ class LoadingScreen {
 
     this.vw = window.innerWidth
     this.lastFrameTime = new Date().getTime()
-    this.pxPerMillisecond = 0.02
+    this.pxPerMillisecond = ORIGINAL_PX_PER_MILLISECOND
     this.progress = 0
 
     setTimeout(this.init, 0)
@@ -33,7 +34,7 @@ class LoadingScreen {
     const pxDiff = this.pxPerMillisecond * timeDiff
 
     // If we've already "fake-loaded" 33% and the images are all done, force a complete.
-    const forceLoadComplete = this.requestedComplete && this.progress > this.vw / 3
+    const forceLoadComplete = this.requestedComplete && this.progress > this.vw / 4
     if (forceLoadComplete || this.progress >= this.vw - pxDiff) return this.handleLoadComplete(timeDiff)
 
     this.lastFrameTime = now

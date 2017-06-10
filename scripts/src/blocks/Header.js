@@ -10,7 +10,6 @@ class Header {
     // state
     this.menuIsActive = false
     this.currentUrl   = this.$menuOverlay.dataset.activeLink
-    this.$activeLink  = this.$menuOverlay.querySelector(`.link[data-link=${this.currentUrl}]`)
 
     // cache bound methods
     this.handleClickHamburger = this.handleClickHamburger.bind(this)
@@ -54,13 +53,7 @@ class Header {
     this.$header.classList[fn]('has-menu-overlay')
     this.$menuLinks.forEach($link => $link.classList.remove('is-active'))
 
-    if (!this.$activeLink) {
-      this.$activeLink  = this.$menuOverlay.querySelector(`.link[data-link=${this.currentUrl}]`)
-    }
-
-    this.$menuOverlay.dataset.activeLink = this.$activeLink.dataset.link
-    this.$header.dataset.activeLink = this.$activeLink.dataset.link
-    this.$activeLink.classList.add('is-active')
+    this.$menuOverlay.classList[!!this.$activeLink ? 'add' : 'remove']('has-hovered-link')
   }
 }
 

@@ -11,17 +11,6 @@
   left: 0;
   z-index: 3;
 
-  //trying to create the stroke line state (activate page). This still needs to be hooked to the specific URLS
-  .current-section {
-    display: inline-block;
-    transition: font-size .3s @cubic;
-
-    //stroke styling
-    opacity: 1;
-    color: black;
-    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
-    }
-
   transition: opacity @transition-duration step-end,
               transform @transition-duration @cubic,
               visibility @transition-duration step-end,
@@ -41,39 +30,19 @@
                 visibility @transition-duration step-start,
                 background-color @transition-duration @cubic;
 
-    &[data-active-link="work"] {
-      .link { opacity: 0.1; }
-      .link a { color: #fff; }
-      .link.is-active { opacity: 1; }
-    }
-
-    &[data-active-link="about"] {
-      // background-color: #000;
-      // .grid { opacity: 0.15; }
-      .link { opacity: 0.1; }
-      .link a { color: #fff; }
-      .link.is-active { opacity: 1; }
-    }
-
-    &[data-active-link="labs"] {
-      // background-color: #000;
-      // .grid { opacity: 0.15; }
-      .link { opacity: 0.1; }
-      .link a { color: #fff; }
-      .link.is-active { opacity: 1; }
-    }
-
-    &[data-active-link="archive"] {
-      // background-color: #000;
-      // .grid { opacity: 0.15; }
-      .link { opacity: 0.1; }
-      .link a { color: #fff; }
-      .link.is-active { opacity: 1; }
-    }
-
     .menu-links {
       opacity: 1;
       transition: opacity @transition-duration @cubic @transition-duration;
+    }
+  }
+
+  &.has-hovered-link {
+    .link {
+      color: rgba(255,255,255,0.1);
+
+      &:hover:not(.active-page) {
+        color: #fff;
+      }
     }
   }
 
@@ -135,43 +104,43 @@
 
   .link {
     display: inline-block;
+    color: #FFF;
 
     user-select: none;
     cursor: pointer;
 
-    transition: opacity @transition-duration-quick @cubic;
-    transition: font-size .3s @cubic;
+    margin-top: 0.1em;
+
+    transition: color @transition-duration-quick @cubic;
+
+    &.active-page {
+      //stroke styling
+      opacity: 1;
+      color: black;
+      text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    }
 
     a {
-      color: #ffffff;
       text-decoration: none;
-
-      transition: color @transition-duration-quick @cubic;
+      line-height: 0.6;
     }
   }
 
   @media @tablet {
     .menu-links {
       width: @page-width-tablet;
-      padding-top: 0;
       font-size: 12vmin;
-    }
-    .current-section{
-      margin-top: 9vmin;
+      padding-top: 9vmin;
     }
   }
 
   @media @desktop {
     .menu-links {
       font-size: 14vmin;
+      padding-top: 7vmin;
     }
     .menu-icons-row {
       margin-top: 100px;
-    }
-    .current-section {
-      font-size: 14vmin;
-      //moves the menu down in larger screens
-      margin-top: 7vmin;
     }
   }
 }
