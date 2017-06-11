@@ -2,6 +2,11 @@
   background-color: #E5E5E5;
   overflow: hidden;
 
+ p {
+   color: black; //overwrites a weird .7 transparency that I couldn't figure from where it was coming from
+    // opacity: 1 !important;
+  }
+
   .wrapper {
     position: relative;
 
@@ -46,6 +51,7 @@
     .company {
       margin: 0 0;
       font-size: 20px;
+      line-height: 1.7em;
     }
 
     .bio {
@@ -107,11 +113,12 @@
       color: #000;
       opacity: 1;
       letter-spacing: 0.01em;
+      font-weight: 200;
     }
 
     .bio {
       p {
-        padding-right: 5%;
+        padding-right: 8%;
         font-size: 20px;
         line-height: 1.7em;
       }
@@ -143,6 +150,8 @@
 
         color: #000;
         text-decoration: none;
+
+        padding-top: 12px;
 
         span {
           vertical-align: bottom;
