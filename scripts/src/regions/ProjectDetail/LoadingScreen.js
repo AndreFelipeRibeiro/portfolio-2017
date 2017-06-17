@@ -33,7 +33,7 @@ class LoadingScreen {
 
     const pxDiff = this.pxPerMillisecond * timeDiff
 
-    // If we've already "fake-loaded" 33% and the images are all done, force a complete.
+    // If we've already "fake-loaded" 25% and the images are all done, force a complete.
     const forceLoadComplete = this.requestedComplete && this.progress > this.vw / 4
     if (forceLoadComplete || this.progress >= this.vw - pxDiff) return this.handleLoadComplete(timeDiff)
 
@@ -80,7 +80,6 @@ class LoadingScreen {
     this.$scrim.style.transitionDuration = `${transitionDuration}ms`
 
     document.body.classList.remove('is-loading')
-    this.$main.classList.remove('incoming-content')
   }
 }
 

@@ -60,8 +60,6 @@ class Home {
     this.handleResize()
 
     this.addEventListeners()
-
-    this.$main.classList.remove('incoming-content')
   }
 
   addEventListeners() {

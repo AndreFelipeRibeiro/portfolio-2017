@@ -14,6 +14,8 @@ class Router {
     this.handleLinkClick        = this.handleLinkClick.bind(this)
     this.handlePopState         = this.handlePopState.bind(this)
 
+    this.history = []
+
     this.addEventListeners()
   }
 
@@ -49,11 +51,10 @@ class Router {
       const $html = document.createElement('html')
       $html.innerHTML = response.data
       const $main = $html.getElementsByTagName('main')[0]
-
       if (this.module) this.module.out()
 
       const handleTransitionEnd = (e) => {
-        if (e.target !== this.$contentWrapper) return
+        if (e.target !== this.$main) return
         if (e.propertyName !== 'opacity') return
 
         this.$main.removeEventListener('transitionend', handleTransitionEnd)
@@ -74,8 +75,8 @@ class Router {
         }, 0)
       }
 
-      this.$main.addEventListener('transitionend', handleTransitionEnd)
       this.$main.classList.add('exiting-content')
+      this.$main.addEventListener('transitionend', handleTransitionEnd)
 
     }).catch(error => console.log(error))
   }
@@ -83,6 +84,8 @@ class Router {
   loadContentScripts() {
     const Module = this.getModule()
     if (Module) this.module = new Module
+
+    this.$main.classList.remove('incoming-content')
   }
 
   // Helpers
