@@ -2,8 +2,8 @@
   <div class="wrapper">
 
     <div class="grid">
-      <div class="column"></div>
-      <div class="column"></div>
+      <div class="column mobile"></div>
+      <div class="column mobile"></div>
       <div class="column"></div>
       <div class="column"></div>
     </div>
@@ -12,7 +12,7 @@
       {# <div class="back"><span>←</span>back</div> }
 
       <div class="intro">
-        <div class="bio"><p>Brazilian born Designer and Art&nbspDirector living in Brooklyn,  New York.</p></div>
+        <div class="bio"><p>Brazilian born Designer and Art&nbspDirector living in Brooklyn,  New&nbspYork.</p></div>
         <p class="role">Team Lead, Design</p>
         <a class="company">@<span>Squarespace</span></a>
       </div>
@@ -48,15 +48,15 @@
 
           <div class="social-links">
             <div class="column left">
-              <a class="link" href=""><span>↗</span>LinkedIn</a>
-              <a class="link" href=""><span>↗</span>Twitter</a>
-              <a class="link" href=""><span>↗</span>Instagram</a>
-              <a class="link" href=""><span>↗</span>Exposure</a>
+              <a class="link" href="https://www.linkedin.com/in/andre-felipe-ribeiro-b95a061b/" target="_blank"><span>↗</span>LinkedIn</a>
+              <a class="link" href="https://twitter.com/feliperibeiros" target="_blank"><span>↗</span>Twitter</a>
+              <a class="link" href="https://www.instagram.com/andre_felipe_ribeiro/" target="_blank"><span>↗</span>Instagram</a>
+              <a class="link" href="https://afr.exposure.co/" target="_blank"><span>↗</span>Exposure</a>
             </div>
             <div class="column right">
-              <a class="link" href=""><span>↗</span>Dribbble</a>
-              <a class="link" href=""><span>↗</span>Email</a>
-              <a class="link" href=""><span>↗</span>Archive</a>
+              <a class="link" href="https://dribbble.com/AFR" target="_blank"><span>↗</span>Dribbble</a>
+              <a class="link" href="mailto:andre.felipe@gmail.com" target="_blank"><span>↗</span>Email</a>
+              <a class="link" href="http://archive.andrefeliperibeiro.com/" target="_blank"><span>↗</span>Archive</a>
             </div>
           </div>
         </div>
