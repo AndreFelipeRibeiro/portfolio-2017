@@ -5,5 +5,6 @@
 -- Portfolio: Cover View*
 -- Portfolio: Detail View*
 -- About
+-- Labs
 
 *Handled within a single page.

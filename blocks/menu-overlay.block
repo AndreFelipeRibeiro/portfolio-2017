@@ -17,7 +17,7 @@
     </li>
     <br />
     <li class='link {.equal? collection.urlId "labs"}active-page{.end}' data-link="labs">
-      <a href="">labs</a>
+      <a href="labs">labs</a>
     </li>
     <br />
     <li class='link {.equal? collection.urlId "archive"}active-page{.end}' data-link="archive">
