@@ -10,8 +10,6 @@
 
     <div class="content">
       {# <div class="back"><span>←</span>back</div> }
-
-      </div>
     </div>
   </div>
 </main>
