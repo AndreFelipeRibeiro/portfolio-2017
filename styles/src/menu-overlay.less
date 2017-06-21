@@ -1,5 +1,5 @@
 .menu-overlay {
-  // opacity: 1;
+  opacity: 0;
   visibility: hidden;
   transform: translate3d(0, -100%, 0);
 
@@ -68,7 +68,6 @@
     // padding-top: 9vmin;
 
     transition: opacity @transition-duration-quick @cubic;
-    transition: font-size .3s @cubic;
   }
 
   .menu-icons-row {
@@ -114,10 +113,11 @@
     transition: color @transition-duration-quick @cubic;
 
     &.active-page {
-      //stroke styling
-      opacity: 1;
       color: black;
       text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+
+      transition: text-shadow @transition-duration-quick @cubic @transition-duration,
+                  color @transition-duration-quick @cubic @transition-duration;
     }
 
     a {

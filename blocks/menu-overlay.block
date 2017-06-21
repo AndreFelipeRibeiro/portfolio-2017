@@ -8,7 +8,7 @@
       <div class="column"></div>
     </div>
 
-    <li class='link {.equal? collection.regionName "project-detail"}active-page{.end}' data-link="work">
+    <li class='link {.equal? collection.regionName "project-detail"}active-page{.end}{.equal? collection.urlId "home"}active-page{.end}' data-link="work">
       <a href="/">work</a>
     </li>
     <br />

@@ -55,6 +55,8 @@ class ProjectDetail {
 
   out() {
     this.removeEventListeners()
+
+    document.body.classList.remove('is-loading')
   }
 
   requestScroll(e) {
