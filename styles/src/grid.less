@@ -13,12 +13,32 @@
   transition: opacity @transition-duration @cubic;
 
   .column {
+    border-left: 1px solid #888;
     flex: 1;
-    height: 100%;
-    border-left:  1px solid #aaa;
+    height: 110%;
+    display: none; //hide 6 columns grid on mobile
 
     &:last-child {
-      border-right: 1px solid #aaa;
+      border-right: 1px solid #888;
     }
+
+    &.mobile {
+      display: block; //show only 2 columns on mobile
+
+      &:nth-child(2) {
+        border-right: 1px solid #888;
+      }
+    }
+
+    @media @phone_lg {
+      display: block;
+
+      &.mobile {
+        &:nth-child(2) {
+          border-left: 1px solid #888;
+          border-right: 0px;
+        }
+    }
+  }
   }
 }

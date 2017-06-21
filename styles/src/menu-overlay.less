@@ -53,27 +53,27 @@
     opacity: 0;
     position: relative;
 
-    font-size: 17vmin;
+    font-size: 18vmin;
     font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 1.05em;
 
     width: @page-width;
     height: 100%;
-    margin: 80px auto;
-    margin-top: 11vmin !important;
+    padding-left: 0;
+    margin: 22vmin auto;
 
     list-style: none;
     padding-top: @header-height;
-    padding-left: 0;
+    // padding-top: 9vmin;
 
-    transition: opacity @transition-duration-quick @cubic; //hover transition is clashing with the font-size transition. Hover is broken
+    transition: opacity @transition-duration-quick @cubic;
     transition: font-size .3s @cubic;
   }
 
   .menu-icons-row {
     display: block;
-    margin-top: 60px;
+    margin-top: 40px;
     height: auto;
 
     .menu-icon {
@@ -82,7 +82,6 @@
       display: inline-block;
       width: 18px;
       height: 18px;
-      // margin-right: 20px;
     }
 
     .menu-icon:hover {
@@ -109,7 +108,8 @@
     user-select: none;
     cursor: pointer;
 
-    margin-top: 0.1em;
+    margin-top: 0em;
+
 
     transition: color @transition-duration-quick @cubic;
 
@@ -126,21 +126,22 @@
     }
   }
 
-  @media @tablet {
+  @media @phone_lg{
     .menu-links {
-      width: @page-width-tablet;
-      font-size: 12vmin;
-      padding-top: 9vmin;
+      margin: 20vmin auto;
     }
   }
 
+  @media @tablet {
+    .menu-links {
+      width: @page-width-tablet;
+      font-size: 14vmin;
+      margin-top: 14vmin;
+    }
+  }
   @media @desktop {
     .menu-links {
-      font-size: 14vmin;
-      padding-top: 7vmin;
-    }
-    .menu-icons-row {
-      margin-top: 100px;
+      font-size: 13.5vmin;
     }
   }
 }

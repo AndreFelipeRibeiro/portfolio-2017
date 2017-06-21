@@ -62,17 +62,32 @@
     }
 
     .project-title {
-      position: fixed;
+      // position: fixed;
+
+      //forces the centering (vertical and horizontal) of the parent content (project-title)
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       color: white;
-      font-size: 7vw;
-      font-weight: 400;
-      letter-spacing: -0.04em;
+      font-size: 11vw;
+      font-weight: 300;
+      letter-spacing: -0.02em;
 
       transform: scale(1.01);
 
       transition: color @transition-duration @cubic,
                   transform @transition-duration @cubic;
+
+      @media @tablet {
+        font-size: 8.5vw;
+        font-weight: 400;
+        letter-spacing: -0.04em;
+      }
+
+      @media @desktop_xl {
+        font-size: 8vw;
+      }
     }
   }
 }

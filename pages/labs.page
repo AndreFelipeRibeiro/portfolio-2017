@@ -1,0 +1,15 @@
+<main id="labs">
+  <div class="wrapper">
+
+    <div class="grid">
+      <div class="column mobile"></div>
+      <div class="column mobile"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+    </div>
+
+    <div class="content">
+      {# <div class="back"><span>←</span>back</div> }
+    </div>
+  </div>
+</main>
