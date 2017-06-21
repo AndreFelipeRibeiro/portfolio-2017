@@ -2,6 +2,7 @@ const axios = require('axios')
 
 const MODULES = {
   '/': require('./pages/Home'),
+  '/about': require('./pages/About'),
   '/project-detail': require('./regions/ProjectDetail')
 }
 
@@ -15,6 +16,8 @@ class Router {
     this.handlePopState         = this.handlePopState.bind(this)
 
     this.history = []
+
+    this.path = this.getCleanUrlPath(location.pathname)
 
     this.addEventListeners()
   }
@@ -37,7 +40,7 @@ class Router {
 
     e.preventDefault()
 
-    this.updateView($link.href)
+    this.updateView($link.getAttribute('href'))
   }
 
   handlePopState(e) {
@@ -51,6 +54,7 @@ class Router {
       const $html = document.createElement('html')
       $html.innerHTML = response.data
       const $main = $html.getElementsByTagName('main')[0]
+
       if (this.module) this.module.out()
 
       const handleTransitionEnd = (e) => {
@@ -58,7 +62,7 @@ class Router {
         if (e.propertyName !== 'opacity') return
 
         this.$main.removeEventListener('transitionend', handleTransitionEnd)
-        document.body.replaceChild($main, this.$main)
+        this.$main.parentNode.replaceChild($main, this.$main)
         scrollTo(0,0)
 
         this.injectHTML($main)
@@ -84,7 +88,6 @@ class Router {
   loadContentScripts() {
     const Module = this.getModule()
     if (Module) this.module = new Module
-
     this.$main.classList.remove('incoming-content')
   }
 

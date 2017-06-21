@@ -47,6 +47,12 @@ main {
 
     transition: opacity @transition-duration @cubic @transition-duration;
   }
+
+  .has-menu-overlay & {
+    visibility: hidden;
+
+    transition: visibility @transition-duration step-end;
+  }
 }
 
 .content-wrapper {
