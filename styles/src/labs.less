@@ -4,10 +4,17 @@
 
   .wrapper {
     position: relative;
-    width: 90%;
+
+    width: @page-width;
     height: 100%;
     min-height: 100vh;
+
     margin: 0 auto;
+    padding: @header-height 0;
+
+    @media @tablet {
+      width: 90%;
+    }
   }
 
   .grid {
