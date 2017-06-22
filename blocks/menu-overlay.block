@@ -21,7 +21,7 @@
     </li>
     <br />
     <li class='link {.equal? collection.urlId "archive"}active-page{.end}' data-link="archive">
-      <a href="">archive</a>
+      <a href="http://archive.andrefeliperibeiro.com/" target="_blank">archive</a>
     </li>
     <div class="menu-icons-row">
       <li class="menu-icon">
