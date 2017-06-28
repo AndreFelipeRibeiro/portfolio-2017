@@ -1,7 +1,7 @@
 <main id="labs">
   <div class="wrapper">
 
-    <div class="grid">
+    <div class="grid-labs">
       <div class="column mobile"></div>
       <div class="column mobile"></div>
       <div class="column"></div>
@@ -10,6 +10,16 @@
 
     <div class="content">
       {# <div class="back"><span>←</span>back</div> }
+      <div class="labs-logo">labs</div>
+
+      <div class="links">
+        <div>
+          <a class="link" href="http://labs.andrefeliperibeiro.com/three_js/06_spining_and_rotate/" target="_blank"><span>↗</span>three_js/isometric_spining</a>
+          <a class="link" href="http://labs.andrefeliperibeiro.com/intro_3/" target="_blank"><span>↗</span>portfolio/cover_page</a>
+          <a class="link" href="https://www.dropbox.com/sh/7csyr10ammtntfc/AAA6KX5v4CzOxYfp1pK9tJA0a?dl=0" target="_blank"><span>↗</span>portfolio/2017_designs</a>
+          <a class="link" href="http://labs.andrefeliperibeiro.com/hello.html" target="_blank"><span>↗</span>hello_world</a>
+        </div>
+      </div>
     </div>
   </div>
 </main>

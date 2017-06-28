@@ -1,2 +1,68 @@
 #labs {
+  background-color: #EC3535;
+  overflow: hidden;
+
+  .wrapper {
+    position: relative;
+
+    width: @page-width;
+    height: 100%;
+    min-height: 100vh;
+
+    margin: 0 auto;
+    padding: @header-height 0;
+
+    @media @tablet {
+      width: 90%;
+    }
+  }
+
+  .grid {
+    z-index: 0;
+    // border-left: 1px solid #888; remove duplicate left grid line
+  }
+
+  .content {
+    // position: relative;
+    z-index: 1;
+  }
+
+  .labs-logo {
+    font-size: 20vmin;
+    letter-spacing: -0.06em;
+    transform: rotate(-90deg);
+    position: absolute;
+    right: -8vmin;
+    top: 180px;
+  }
+
+  .link {
+    display: block;
+
+    font-size: 20px;
+    font-weight: 200;
+    line-height: 1.6em;
+
+    color: #000;
+    text-decoration: none;
+
+    padding-top: 8px;
+
+    transition: opacity @transition-duration-quick @cubic;
+
+    span {
+      vertical-align: bottom;
+      font-size: 18px;
+      color: #fff;
+      padding-right: 10px;
+    }
+  }
+  .link:hover {
+    opacity: .5;
+  }
+
+  .links {
+    position: absolute;
+    top: 42vh;
+  }
 }

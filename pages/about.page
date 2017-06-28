@@ -43,16 +43,17 @@
               <a class="link" href="https://twitter.com/feliperibeiros" target="_blank"><span>↗</span>Twitter</a>
               <a class="link" href="https://www.instagram.com/andre_felipe_ribeiro/" target="_blank"><span>↗</span>Instagram</a>
               <a class="link" href="https://afr.exposure.co/" target="_blank"><span>↗</span>Exposure</a>
+              <a class="link" href="https://dribbble.com/AFR" target="_blank"><span>↗</span>Dribbble</a>
             </div>
             <div class="column right">
-              <a class="link" href="https://dribbble.com/AFR" target="_blank"><span>↗</span>Dribbble</a>
               <a class="link" href="mailto:andre.felipe@gmail.com" target="_blank"><span>↗</span>Email</a>
               <a class="link" href="https://archive.andrefeliperibeiro.com/" target="_blank"><span>↗</span>Archive</a>
+              <a class="link" href="https://www.linkedin.com/in/andre-felipe-ribeiro-b95a061b#awards" target="_blank"><span>↗</span>Awards</a>
+              <a class="link" href="https://www.linkedin.com/in/andre-felipe-ribeiro-b95a061b#publications" target="_blank"><span>↗</span>Publications</a>            
             </div>
           </div>
         </div>
       </div>
-
       <div class="footer">
         {# <div class="back-to-the-top"><span>↑</span> back to the top</div> }
         <div class="development-by">development by</div>
