@@ -40,8 +40,9 @@
     .link {
       color: rgba(255,255,255,0.1);
 
-      &:hover:not(.active-page) {
+      &:hover {
         color: #fff;
+        text-shadow: none;
       }
     }
   }
@@ -109,15 +110,17 @@
 
     margin-top: 0em;
 
+    transition: text-shadow @transition-duration-quick @cubic @transition-duration,
+                color @transition-duration-quick @cubic @transition-duration;
 
-    transition: color @transition-duration-quick @cubic;
+    .has-menu-overlay & {
+      transition: text-shadow @transition-duration-quick @cubic,
+                  color @transition-duration-quick @cubic;
+    }
 
     &.active-page {
       color: black;
       text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
-
-      transition: text-shadow @transition-duration-quick @cubic @transition-duration,
-                  color @transition-duration-quick @cubic @transition-duration;
     }
 
     a {

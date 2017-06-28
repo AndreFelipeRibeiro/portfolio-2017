@@ -31,10 +31,13 @@ class MenuOverlay {
   }
 
   handleClickLink(e, $target) {
-    if ($target.classList.contains('active-page')) {
+    const isActiveLink = $target.classList.contains('active-page')
+    const isWorkLink = $target.dataset.link === 'work'
+    const shouldOverrideHome = isWorkLink && location.pathname !== '/'
+
+    if (isActiveLink && !shouldOverrideHome) {
       e.preventDefault()
       e.stopImmediatePropagation()
-      return
     }
 
     // Only update the active page classes if we're still in the same window
