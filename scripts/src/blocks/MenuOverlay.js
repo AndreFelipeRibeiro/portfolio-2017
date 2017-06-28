@@ -37,8 +37,13 @@ class MenuOverlay {
       return
     }
 
-    this.$menuLinks.forEach($link => $link.classList.remove('active-page'))
-    $target.classList.add('active-page')
+    // Only update the active page classes if we're still in the same window
+    const targetAttr = $target.getAttribute('target')
+    console.log(targetAttr)
+    if (!targetAttr || targetAttr.indexOf('blank') < 0) {
+      this.$menuLinks.forEach($link => $link.classList.remove('active-page'))
+      $target.classList.add('active-page')
+    }
 
     this.menuIsActive = false
     this.updateMenuOverlay()
