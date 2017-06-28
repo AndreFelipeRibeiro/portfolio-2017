@@ -25,20 +25,29 @@
     </li>
     <div class="menu-icons-row">
       <li class="menu-icon">
-        {# @|apply - import svg icons}
-        {@|apply icons/twitter.svg.block}
+        <a href="https://www.linkedin.com/in/andre-felipe-ribeiro-b95a061b/" target="_blank">
+          {@|apply icons/linkedin.svg.block}
+        </a>
       </li>
       <li class="menu-icon">
-        {@|apply icons/linkedin.svg.block}
+        <a href="https://twitter.com/feliperibeiros" target="_blank">
+        {@|apply icons/twitter.svg.block}
+        </a>
       </li>
       <li class="menu-icon icon-instagram">
+        <a href="https://www.instagram.com/andre_felipe_ribeiro/" target="_blank">
         {@|apply icons/instagram.svg.block}
-      </li>
-      <li class="menu-icon icon-mail">
-        {@|apply icons/mail.svg.block}
+        </a>
       </li>
       <li class="menu-icon icon-dribbble">
+        <a href="https://dribbble.com/AFR" target="_blank">
         {@|apply icons/dribbble.svg.block}
+        </a>
+      </li>
+      <li class="menu-icon icon-mail">
+        <a href="mailto:andre.felipe@gmail.com" target="_blank">
+        {@|apply icons/mail.svg.block}
+        </a>
       </li>
     </div>
   </ul>
