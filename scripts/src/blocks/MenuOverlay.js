@@ -31,16 +31,20 @@ class MenuOverlay {
   }
 
   handleClickLink(e, $target) {
-    if ($target.classList.contains('active-page')) {
+    const isActiveLink = $target.classList.contains('active-page')
+    const isWorkLink = $target.dataset.link === 'work'
+    const shouldOverrideHome = isWorkLink && location.pathname !== '/'
+
+    if (isActiveLink && !shouldOverrideHome) {
       e.preventDefault()
       e.stopImmediatePropagation()
-      return
     }
 
     // Only update the active page classes if we're still in the same window
-    const targetAttr = $target.getAttribute('target')
-    console.log(targetAttr)
-    if (!targetAttr || targetAttr.indexOf('blank') < 0) {
+    const $link = $target.getElementsByTagName('A')[0]
+    const linkTarget = $link.getAttribute('target')
+
+    if (!linkTarget || linkTarget.indexOf('blank') < 0) {
       this.$menuLinks.forEach($link => $link.classList.remove('active-page'))
       $target.classList.add('active-page')
     }
