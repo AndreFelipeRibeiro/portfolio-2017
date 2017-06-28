@@ -2,6 +2,11 @@
   background-color: #E5E5E5;
   overflow: hidden;
 
+ p {
+   color: black; //overwrites a weird .7 transparency that I couldn't figure from where it was coming from
+    // opacity: 1 !important;
+  }
+
   .wrapper {
     position: relative;
 
@@ -15,7 +20,7 @@
 
   .grid {
     z-index: 0;
-    border-left: 1px solid #888;
+    // border-left: 1px solid #888; remove duplicate left grid line
   }
 
   .content {
@@ -35,24 +40,35 @@
   }
 
   .intro {
-    display: flex;
-    align-items: flex-start;
 
     width: 100%;
-    padding: 180px 0 0;
+    padding: 20vmin 0 0;
+
+    @media @phone_lg {
+      display: flex;
+      align-items: flex-start;
+      padding: 180px 0 0;
+
+      .bio {
+        margin-bottom: 0px;
+      }
+    }
 
     .bio p,
     .role,
     .company {
       margin: 0 0;
       font-size: 20px;
+      line-height: 1.7em;
     }
 
     .bio {
       flex: 2;
+      margin-bottom: 40px;
 
       p {
         max-width: 300px;
+        padding-right: 40px;
       }
     }
 
@@ -81,7 +97,7 @@
     margin-left: -94%; // Offset to center "Felipe"
     margin-right: -100%;
     margin-top: 50px;
-    margin-bottom: 150px;
+    margin-bottom: 80px;
 
     -webkit-font-smoothing: antialiased;
     font-weight: 400;
@@ -90,11 +106,19 @@
     span {
       color: #fff;
     }
+
+    @media @phone_lg {
+      margin-bottom: 150px;
+    }
   }
 
   .detail {
-    display: flex;
+    display: block;
     align-items: flex-start;
+
+    @media @phone_lg {
+      display: flex;
+    }
 
     .label,
     .bio {
@@ -107,23 +131,32 @@
       color: #000;
       opacity: 1;
       letter-spacing: 0.01em;
+      font-weight: 200;
+
+      @media @phone_lg {
+        padding-top: 23px; //aligns the "about" label vertically with the block of copy on the right
+      }
     }
 
     .bio {
       p {
-        padding-right: 5%;
+        padding-right: 8%;
         font-size: 20px;
         line-height: 1.7em;
       }
     }
 
     .brands {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 200;
-      line-height: 2.2em;
+      line-height: 2.0em;
       max-width: 500px;
-
       margin: 100px 0;
+
+      @media @phone_lg {
+        font-size: 26px;
+      }
+
     }
 
     .social-links {
@@ -144,6 +177,10 @@
         color: #000;
         text-decoration: none;
 
+        padding-top: 8px;
+
+        transition: opacity @transition-duration-quick @cubic;
+
         span {
           vertical-align: bottom;
           font-size: 18px;
@@ -151,20 +188,34 @@
           padding-right: 10px;
         }
       }
+      .link:hover {
+        opacity: .5;
+      }
     }
   }
 
   .footer {
-    display: flex;
     align-items: flex-start;
+    margin-top: 110px;
+    padding-bottom: 70px;
 
-    margin-top: 200px;
+    @media @phone_lg {
+      margin-top: 120px;
+      padding-bottom: 100px;
+      display: flex; //2 column grid on larger screens
+    }
+
+    @media @desktop_lg {
+      margin-top: 150px;
+      padding-bottom: 120px;
+     }
 
     .back-to-the-top,
     .development-by,
     .cha {
       font-size: 20px;
       font-weight: 200;
+      margin-bottom: 5px;
     }
 
     .back-to-the-top {
@@ -192,8 +243,8 @@
         border-bottom: 1px solid #fff;
       }
     }
-  }
 
+  }
 
   @media @tablet {
     .wrapper {

@@ -5,7 +5,12 @@
     overflow: hidden;
     text-align: center;
 
-    padding: 120px 0;
+    padding: 50px 0;
+
+    @media @desktop {
+      padding: 150px 0;
+    }
+
 
     .gallery-wrapper {
       position: relative;
@@ -96,7 +101,13 @@
   .block[data-type="custom-gallery"] {
     .gallery-item {
       top: 0;
-      width: 68.4%;
+      width: 69.1%;
+    }
+
+    @media @desktop_xxl {
+      .gallery-item {
+        width: 1245px;
+      }
     }
   }
 }

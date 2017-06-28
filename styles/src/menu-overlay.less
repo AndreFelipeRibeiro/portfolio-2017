@@ -1,5 +1,5 @@
 .menu-overlay {
-  // opacity: 1;
+  opacity: 0;
   visibility: hidden;
   transform: translate3d(0, -100%, 0);
 
@@ -10,17 +10,6 @@
   top: 0;
   left: 0;
   z-index: 3;
-
-  //trying to create the stroke line state (activate page). This still needs to be hooked to the specific URLS
-  .current-section {
-    display: inline-block;
-    transition: font-size .3s @cubic;
-
-    //stroke styling
-    opacity: 1;
-    color: black;
-    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
-    }
 
   transition: opacity @transition-duration step-end,
               transform @transition-duration @cubic,
@@ -41,39 +30,19 @@
                 visibility @transition-duration step-start,
                 background-color @transition-duration @cubic;
 
-    &[data-active-link="work"] {
-      .link { opacity: 0.1; }
-      .link a { color: #fff; }
-      .link.is-active { opacity: 1; }
-    }
-
-    &[data-active-link="about"] {
-      // background-color: #000;
-      // .grid { opacity: 0.15; }
-      .link { opacity: 0.1; }
-      .link a { color: #fff; }
-      .link.is-active { opacity: 1; }
-    }
-
-    &[data-active-link="labs"] {
-      // background-color: #000;
-      // .grid { opacity: 0.15; }
-      .link { opacity: 0.1; }
-      .link a { color: #fff; }
-      .link.is-active { opacity: 1; }
-    }
-
-    &[data-active-link="archive"] {
-      // background-color: #000;
-      // .grid { opacity: 0.15; }
-      .link { opacity: 0.1; }
-      .link a { color: #fff; }
-      .link.is-active { opacity: 1; }
-    }
-
     .menu-links {
       opacity: 1;
       transition: opacity @transition-duration @cubic @transition-duration;
+    }
+  }
+
+  &.has-hovered-link {
+    .link {
+      color: rgba(255,255,255,0.1);
+
+      &:hover:not(.active-page) {
+        color: #fff;
+      }
     }
   }
 
@@ -84,27 +53,26 @@
     opacity: 0;
     position: relative;
 
-    font-size: 17vmin;
+    font-size: 18vmin;
     font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 1.05em;
 
     width: @page-width;
     height: 100%;
-    margin: 80px auto;
-    margin-top: 11vmin !important;
+    padding-left: 0;
+    margin: 22vmin auto;
 
     list-style: none;
     padding-top: @header-height;
-    padding-left: 0;
+    // padding-top: 9vmin;
 
-    transition: opacity @transition-duration-quick @cubic; //hover transition is clashing with the font-size transition. Hover is broken
-    transition: font-size .3s @cubic;
+    transition: opacity @transition-duration-quick @cubic;
   }
 
   .menu-icons-row {
     display: block;
-    margin-top: 60px;
+    margin-top: 40px;
     height: auto;
 
     .menu-icon {
@@ -113,7 +81,6 @@
       display: inline-block;
       width: 18px;
       height: 18px;
-      // margin-right: 20px;
     }
 
     .menu-icon:hover {
@@ -135,43 +102,46 @@
 
   .link {
     display: inline-block;
+    color: #FFF;
 
     user-select: none;
     cursor: pointer;
 
-    transition: opacity @transition-duration-quick @cubic;
-    transition: font-size .3s @cubic;
+    margin-top: 0em;
+
+
+    transition: color @transition-duration-quick @cubic;
+
+    &.active-page {
+      color: black;
+      text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+
+      transition: text-shadow @transition-duration-quick @cubic @transition-duration,
+                  color @transition-duration-quick @cubic @transition-duration;
+    }
 
     a {
-      color: #ffffff;
       text-decoration: none;
+      line-height: 0.6;
+    }
+  }
 
-      transition: color @transition-duration-quick @cubic;
+  @media @phone_lg{
+    .menu-links {
+      margin: 20vmin auto;
     }
   }
 
   @media @tablet {
     .menu-links {
       width: @page-width-tablet;
-      padding-top: 0;
-      font-size: 12vmin;
-    }
-    .current-section{
-      margin-top: 9vmin;
+      font-size: 14vmin;
+      margin-top: 14vmin;
     }
   }
-
   @media @desktop {
     .menu-links {
-      font-size: 14vmin;
-    }
-    .menu-icons-row {
-      margin-top: 100px;
-    }
-    .current-section {
-      font-size: 14vmin;
-      //moves the menu down in larger screens
-      margin-top: 7vmin;
+      font-size: 13.5vmin;
     }
   }
 }

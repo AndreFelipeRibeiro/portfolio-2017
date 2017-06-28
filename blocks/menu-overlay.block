@@ -2,26 +2,26 @@
   <ul class="menu-links">
 
     <div class="grid">
-      <div class="column"></div>
-      <div class="column"></div>
+      <div class="column mobile"></div>
+      <div class="column mobile"></div>
       <div class="column"></div>
       <div class="column"></div>
     </div>
 
-    <li class="current-section">
+    <li class='link {.equal? collection.regionName "project-detail"}active-page{.end}{.equal? collection.urlId "home"}active-page{.end}' data-link="work">
       <a href="/">work</a>
     </li>
     <br />
-    <li class="link" data-link="about">
+    <li class='link {.equal? collection.urlId "about"}active-page{.end}' data-link="about">
       <a href="/about">about</a>
     </li>
     <br />
-    <li class="link" data-link="labs">
-      <a href="">labs</a>
+    <li class='link {.equal? collection.urlId "labs"}active-page{.end}' data-link="labs">
+      <a href="/labs">labs</a>
     </li>
     <br />
-    <li class="link" data-link="archive">
-      <a href="">archive</a>
+    <li class='link {.equal? collection.urlId "archive"}active-page{.end}' data-link="archive">
+      <a href="http://archive.andrefeliperibeiro.com/" target="_blank">archive</a>
     </li>
     <div class="menu-icons-row">
       <li class="menu-icon">

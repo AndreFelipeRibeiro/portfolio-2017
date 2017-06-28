@@ -1,81 +1,82 @@
 {@|apply html-begin.block}
-  <div id="loading-screen">
-    <div class="scrim"></div>
-    <h1 class="project-title">{collection.title}</h1>
-  </div>
-
   <main id="project-detail" class="incoming-content collection-{collection.urlId}" data-content-field="main-content">
-
-    <div class="back-to-top">
-      <svg viewBox="0 0 31.6 19.9">
-        <polyline class="st0" points="1,18.8 15.7,1 30.5,18.8 "/>
-      </svg>
+    <div id="loading-screen">
+      <div class="scrim"></div>
+      <h1 class="project-title">{collection.title}</h1>
     </div>
 
-    <div class="scroll-wrapper">
-      {# HERO}
-      {.section collection}
-        {.section mainImage}
-          <div class="hero" style="background-color:#{colorData.suggestedBgColor};">
-            <div class="hero-image">
-              <img data-use-bg-image="true" data-load="false" data-src="{assetUrl}" />
-            </div>
-          </div>
-        {.end}
-      {.end}
-
-      {# INDEX}
-      <div class="page-index background-light-gray">
-        <div class="sqs-layout">
-          <h2 class="title">Index</h2>
-          <div class="links">
-            {.repeated section items}
-              {.equal? customContent.customType "headline"}
-                <a class="link">
-                  <h2><span class="index"></span>{customContent.title}</h2>
-                  <img class="link-thumbnail" {customContent.thumbnailImage|image-meta} />
-                </a>
-                <br />
-              {.end}
-            {.end}
-          </div>
-        </div>
+    <div class="content-wrapper">
+      <div class="back-to-top">
+        <svg viewBox="0 0 31.6 19.9">
+          <polyline class="st0" points="1,18.8 15.7,1 30.5,18.8 "/>
+        </svg>
       </div>
 
-      {# BLOCKS}
-      {.repeated section items}
-        <div
-          {.section customContent.title}id="{@|slugify}"{.end}
-          class="block {.repeated section categories}{@} {.end}"
-          {.section customContent.backgroundColor}style="background-color: {@}"{.end}
-          {.section customContent.customType}data-type="{@}"{.end}
-        >
-          {.equal? customContent.customType "custom-gallery"}
-            {@|apply project-detail/gallery.block}
-          {.or}
-            {.equal? customContent.customType "phone-collage"}
-              {@|apply project-detail/phone-collage.block}
+      <div class="scroll-wrapper">
+        {# HERO}
+        {.section collection}
+          {.section mainImage}
+            <div class="hero" style="background-color:#{colorData.suggestedBgColor};">
+              <div class="hero-image">
+                <img data-use-bg-image="true" data-load="false" data-src="{assetUrl}" />
+              </div>
+            </div>
+          {.end}
+        {.end}
+
+        {# INDEX}
+        <div class="page-index background-light-gray">
+          <div class="sqs-layout">
+            <h2 class="title">Index</h2>
+            <div class="links">
+              {.repeated section items}
+                {.equal? customContent.customType "headline"}
+                  <a class="link">
+                    <h2><span class="index"></span>{customContent.title}</h2>
+                    <img class="link-thumbnail" {customContent.thumbnailImage|image-meta} />
+                  </a>
+                  <br />
+                {.end}
+              {.end}
+            </div>
+          </div>
+        </div>
+
+        {# BLOCKS}
+        {.repeated section items}
+          <div
+            {.section customContent.title}id="{@|slugify}"{.end}
+            class="block {.repeated section categories}{@} {.end}"
+            {.section customContent.backgroundColor}style="background-color: {@}"{.end}
+            {.section customContent.customType}data-type="{@}"{.end}
+          >
+            {.equal? customContent.customType "custom-gallery"}
+              {@|apply project-detail/gallery.block}
             {.or}
-              {.equal? customContent.customType "headline"}
-                {@|apply project-detail/headline.block}
+              {.equal? customContent.customType "phone-collage"}
+                {@|apply project-detail/phone-collage.block}
               {.or}
-                {.equal? customContent.customType "project-title"}
-                  {@|apply project-detail/project-title.block}
+                {.equal? customContent.customType "headline"}
+                  {@|apply project-detail/headline.block}
                 {.or}
-                  {.equal? customContent.customType "credits"}
-                    {@|apply project-detail/credits.block}
+                  {.equal? customContent.customType "project-title"}
+                    {@|apply project-detail/project-title.block}
                   {.or}
-                    <div class="block-content" data-scrolled-into-view="false">
-                      {body}
-                    </div>
+                    {.equal? customContent.customType "credits"}
+                      {@|apply project-detail/credits.block}
+                    {.or}
+                      <div class="block-content" data-scrolled-into-view="false">
+                        {body}
+                      </div>
+                    {.end}
                   {.end}
                 {.end}
               {.end}
             {.end}
-          {.end}
-        </div>
-      {.end}
+          </div>
+        {.end}
 
+      </div>
     </div>
   </main>
 {@|apply html-end.block}

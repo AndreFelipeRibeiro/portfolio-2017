@@ -30,6 +30,14 @@
 
     .eyebrow, p, button { display: none; }
 
+    .eyebrow {
+
+      @media @desktop {
+        font-size: 12px;
+      }
+
+    }
+
     .title {
       font-size: 11px;
       font-weight: 400;
@@ -45,9 +53,17 @@
         font-size: 8.5vw;
         letter-spacing: -0.04em;
         font-weight: 400;
-        margin: -1.2vw 0 20px;
+        margin: -1.2vw 0 0px;
 
         text-transform: none;
+      }
+
+      @media @tablet_lg {
+        margin: -1.2vw 0 10px;
+      }
+
+      @media @desktop {
+        margin: -1.2vw 0 20px;
       }
 
       @media @desktop_xl {

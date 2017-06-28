@@ -2,23 +2,34 @@ const axios = require('axios')
 
 const MODULES = {
   '/': require('./pages/Home'),
+  '/about': require('./pages/About'),
   '/project-detail': require('./regions/ProjectDetail')
 }
 
 class Router {
   constructor() {
     this.$main = document.getElementsByTagName('main')[0]
+    this.$contentWrapper = this.$main.getElementsByClassName('content-wrapper')[0]
 
-    this.handleLinkClick = this.handleLinkClick.bind(this)
-    this.handlePopState  = this.handlePopState.bind(this)
+    this.handleDOMContentLoaded = this.handleDOMContentLoaded.bind(this)
+    this.handleLinkClick        = this.handleLinkClick.bind(this)
+    this.handlePopState         = this.handlePopState.bind(this)
 
-    this.loadContent()
+    this.history = []
+
+    this.path = this.getCleanUrlPath(location.pathname)
+
     this.addEventListeners()
   }
 
   addEventListeners() {
+    window.addEventListener('DOMContentLoaded', this.handleDOMContentLoaded)
     window.addEventListener('click', this.handleLinkClick)
     window.addEventListener('popstate', this.handlePopState)
+  }
+
+  handleDOMContentLoaded() {
+    this.loadContentScripts()
   }
 
   handleLinkClick(e) {
@@ -29,7 +40,7 @@ class Router {
 
     e.preventDefault()
 
-    this.updateView($link.href)
+    this.updateView($link.getAttribute('href'))
   }
 
   handlePopState(e) {
@@ -39,9 +50,7 @@ class Router {
   }
 
   updateView(path) {
-    console.log('updates')
     axios.get(path).then(response => {
-
       const $html = document.createElement('html')
       $html.innerHTML = response.data
       const $main = $html.getElementsByTagName('main')[0]
@@ -53,31 +62,33 @@ class Router {
         if (e.propertyName !== 'opacity') return
 
         this.$main.removeEventListener('transitionend', handleTransitionEnd)
-
-        document.body.replaceChild($main, this.$main)
+        this.$main.parentNode.replaceChild($main, this.$main)
         scrollTo(0,0)
 
         this.injectHTML($main)
 
         $main.classList.add('incoming-content')
+
         this.$main = $main
+        this.$contentWrapper = this.$main.getElementsByClassName('content-wrapper')[0]
 
         setTimeout(() => {
           history.pushState({}, "Title", path)
           this.path = this.getCleanUrlPath(path)
-          this.loadContent()
+          this.loadContentScripts()
         }, 0)
       }
 
-      this.$main.addEventListener('transitionend', handleTransitionEnd)
       this.$main.classList.add('exiting-content')
+      this.$main.addEventListener('transitionend', handleTransitionEnd)
 
     }).catch(error => console.log(error))
   }
 
-  loadContent() {
+  loadContentScripts() {
     const Module = this.getModule()
     if (Module) this.module = new Module
+    this.$main.classList.remove('incoming-content')
   }
 
   // Helpers

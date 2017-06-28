@@ -10,6 +10,7 @@ const IS_MOBILE_OS = require('../lib/is-mobile-os')
 
 class Home {
   constructor() {
+    this.$main                = document.getElementsByTagName('main')[0]
     this.$portfolio           = document.getElementById('portfolio')
     this.$coverGalleryWrapper = this.$portfolio.getElementsByClassName('cover-gallery-wrapper')[0]
     this.$coverGallery        = this.$portfolio.getElementsByClassName('cover-gallery')[0]

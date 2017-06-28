@@ -33,9 +33,7 @@ body {
 }
 
 main {
-  position: relative;
-  z-index: 0;
-  transition: opacity @transition-duration @cubic @transition-duration;
+  transition: opacity @transition-duration @cubic;
 
   &.exiting-content {
     opacity: 0;
@@ -48,6 +46,23 @@ main {
     position: fixed;
 
     transition: opacity @transition-duration @cubic @transition-duration;
+  }
+
+  .has-menu-overlay & {
+    visibility: hidden;
+
+    transition: visibility @transition-duration step-end;
+  }
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 0;
+  transition: opacity @transition-duration @cubic @transition-duration;
+
+  .is-loading & {
+    opacity: 0;
+    transition: none;
   }
 }
 
@@ -106,7 +121,7 @@ button {
 }
 
 .eyebrow {
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   font-weight: 400;
   text-transform: uppercase;
@@ -132,5 +147,12 @@ button {
 }
 
 @media @desktop_lg {
-  h1 { font-size: 48px; }
+  h1 {
+    font-size: 48px;
+    max-width: 460px;
+
+    &.project-title {
+      max-width: none; //adds max-width to all h1s on a project page, except the project-title (hero text lockup)
+    }
+   }
 }

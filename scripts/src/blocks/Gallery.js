@@ -1,5 +1,3 @@
-const transitionEnd = require('../lib/transition-end.js')
-
 /* This is a very very simple gallery.
 
   @param config: {

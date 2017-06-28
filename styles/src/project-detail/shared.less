@@ -25,7 +25,7 @@
     &:last-child {
       padding-bottom: 120px !important;
       @media @tablet { padding-bottom: 160px !important; }
-      @media @desktop_lg { padding-bottom: 200px !important; }
+      @media @desktop_lg { padding-bottom: 250px !important; }
     }
 
     [data-scrolled-into-view] {
@@ -89,7 +89,7 @@
     }
 
     .sqs-block-spacer {
-      height: 0;
+      height: 50px;
     }
 
     @media @tablet {
@@ -111,8 +111,14 @@
       .sqs-col-10 { width: 83.333%; }
 
       .sqs-block-spacer {
-        height: auto;
+        height: 100px;
       }
+    }
+    @media @desktop {
+      .sqs-block-spacer {
+        height: 150px;
+      }
+
     }
   }
 }
