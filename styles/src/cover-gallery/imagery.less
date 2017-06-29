@@ -9,20 +9,19 @@
     &[data-project="vans"] { background-color: #1a1a1a; }
 
     .imagery {
-      background-size: cover;
-      background-position: center;
-
       opacity: 0;
       z-index: 1;
+
+      overflow: hidden;
 
       transition: opacity @transition-duration-quick @cubic,
                   z-index @transition-duration-quick step-end;
 
-      &[data-project="squarespace"]    { background-image: url('../projects/squarespace-cover.jpg'); }
-      &[data-project="apple"]          { background-image: url('../projects/apple-cover.jpg'); }
-      &[data-project="bloomingdales"]  { background-image: url('../projects/bloomingdales-cover.jpg'); }
-      &[data-project="morgan-stanley"] { background-image: url('../projects/morgan-stanley-cover.jpg'); }
-      &[data-project="vans"]           { background-image: url('../projects/vans-cover.jpg'); }
+      &[data-project="squarespace"]    .image-background { background-image: url('../projects/squarespace-cover.jpg'); }
+      &[data-project="apple"]          .image-background { background-image: url('../projects/apple-cover.jpg'); }
+      &[data-project="bloomingdales"]  .image-background { background-image: url('../projects/bloomingdales-cover.jpg'); }
+      &[data-project="morgan-stanley"] .image-background { background-image: url('../projects/morgan-stanley-cover.jpg'); }
+      &[data-project="vans"]           .image-background { background-image: url('../projects/vans-cover.jpg'); }
 
       &[data-arrival-index="0"] {
         z-index: 2;
@@ -33,6 +32,19 @@
         .label {
           opacity: 0.3;
         }
+      }
+
+      &:hover {
+        .image-background { transform: scale(1.05); }
+      }
+
+      .image-background {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+
+        transition: transform @transition-duration-quick * 1.2 @cubic;
       }
     }
 

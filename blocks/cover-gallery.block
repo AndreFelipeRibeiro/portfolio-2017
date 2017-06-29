@@ -5,30 +5,35 @@
 
       <a href="/squarespace">
         <div class="imagery" data-project="squarespace" data-arrival-index="1">
+          <div class="image-background"></div>
           <div class="label">2016 — Present</div>
         </div>
       </a>
 
       <a href="/apple">
         <div class="imagery" data-project="apple">
+          <div class="image-background"></div>
           <div class="label">2014</div>
         </div>
       </a>
 
       <a href="/bloomingdales">
         <div class="imagery" data-project="bloomingdales">
+          <div class="image-background"></div>
           <div class="label">2015</div>
         </div>
       </a>
 
       <a href="/morgan-stanley">
         <div class="imagery" data-project="morgan-stanley">
+          <div class="image-background"></div>
           <div class="label">2015</div>
         </div>
       </a>
 
       <a href="/vans">
         <div class="imagery" data-project="vans">
+          <div class="image-background"></div>
           <div class="label">2012</div>
         </div>
       </a>
