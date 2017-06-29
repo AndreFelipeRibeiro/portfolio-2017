@@ -33,11 +33,14 @@ class Home {
     this.$sideNav             = this.$portfolio.getElementsByClassName('side-nav')[0]
     this.$sideNavOptions      = Array.from(this.$sideNav.getElementsByClassName('label'))
 
+    this.$cursorArrow         = document.getElementsByClassName('cursor-arrow')[0]
+
     this.handleCoverChange     = this.handleCoverChange.bind(this)
     this.handleResize          = this.handleResize.bind(this)
     this.handleScroll          = this.handleScroll.bind(this)
     this.requestScroll         = this.requestScroll.bind(this)
     this.handleLayoutChange    = this.handleLayoutChange.bind(this)
+    this.handleKeyDown         = this.handleKeyDown.bind(this)
     this.handleTouch           = this.handleTouch.bind(this)
 
     this.isFirstLoad         = true
@@ -45,6 +48,7 @@ class Home {
     this.lastPageYOffset     = window.pageYOffset
     this.currentPageYOffset  = window.pageYOffset
     this.sectionHeight       = IS_MOBILE_OS ? 1000 : 2000
+    this.scrollTimeout       = undefined
 
     this.initSideNav()
     this.initPagination()
@@ -65,6 +69,7 @@ class Home {
   addEventListeners() {
     window.addEventListener('scroll', this.requestScroll)
     window.addEventListener('resize', this.handleResize)
+    document.addEventListener('keydown', this.handleKeyDown)
 
     this.$gridBlocks.forEach($block => {
       $block.addEventListener('mouseenter', () => {
@@ -126,6 +131,7 @@ class Home {
   }
 
   handleResize() {
+    this.vw = window.innerWidth
     this.vh = window.innerHeight
     this.bodyHeight = document.body.clientHeight
 
@@ -137,17 +143,20 @@ class Home {
     if (this.layout === 'grid') return
     if (IS_MOBILE_OS) return
 
-    const section = Math.floor(this.currentPageYOffset / this.sectionHeight)
-    const nextIndex = section % this.$coverImages.length
+    clearTimeout(this.scrollTimeout)
 
+    const direction = this.currentPageYOffset > this.lastPageYOffset
     const endOfPage = this.bodyHeight - this.vh
 
-    if      (this.currentPageYOffset <= 1)             scrollTo(0,endOfPage + 1)
-    else if (this.currentPageYOffset >= endOfPage - 1) scrollTo(0,2)
+    if      (this.currentPageYOffset <= 1)             scrollTo(0, endOfPage + 1)
+    else if (this.currentPageYOffset >= endOfPage - 1) scrollTo(0, 2)
 
-    if (nextIndex === this.coverIndex) return
-
-    this.coverGalleryImagery.goToIndex(nextIndex)
+    this.scrollTimeout = setTimeout(() => {
+      clearTimeout(this.scrollTimeout)
+      if (this.isTransitioning) return
+      if (direction) return this.coverGalleryImagery.next()
+      if (!direction) return this.coverGalleryImagery.prev()
+    }, 30)
   }
 
   /**
@@ -198,6 +207,16 @@ class Home {
     this.$coverGalleryImagery.dataset.project = $activeChild.dataset.project
   }
 
+  handleKeyDown(e) {
+    if (this.isTransitioning) return
+
+    if (e.code === "ArrowRight") this.coverGalleryImagery.next()
+    if (e.code === "ArrowDown") this.coverGalleryImagery.next()
+
+    if (e.code === "ArrowLeft") this.coverGalleryImagery.prev()
+    if (e.code === "ArrowUp") this.coverGalleryImagery.prev()
+  }
+
   initSideNav() {
     this.$sideNavOptions.forEach($option => {
       $option.addEventListener('click', (e) => {
@@ -232,8 +251,6 @@ class Home {
 
   handleTouch(e) {
     const { direction } = e
-
-    console.log(direction)
 
     if (direction === Hammer.DIRECTION_LEFT)  this.coverGalleryImagery.next()
     if (direction === Hammer.DIRECTION_UP)    this.coverGalleryImagery.next()
