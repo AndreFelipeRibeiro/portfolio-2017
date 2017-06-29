@@ -186,7 +186,10 @@
               transform: translate3d(-40%,0,0);
             }
 
-            &::before { opacity: 0.6; }
+            &::before {
+              opacity: 0.6;
+              width: 65%;
+            }
           }
         }
       }
@@ -207,11 +210,11 @@
 
       button {
         margin-top: 50px;
+        padding-right: 100px;
 
         span {
           cursor: pointer;
           display: inline-block;
-          background-color: @white-0;
           padding-right: 20px;
 
           transition: transform @transition-duration-quick @cubic;
@@ -221,15 +224,16 @@
           content: "";
           position: absolute;
           top: 14px;
-          left: 60%;
+          right: 0;
 
-          width: 120%;
+          width: 45%;
           height: 1px;
           background-color: #000;
           opacity: 0.1;
           z-index: -2;
 
-          transition: opacity @transition-duration @cubic;
+          transition: opacity @transition-duration-quick @cubic,
+                      width @transition-duration-quick @cubic;
         }
       }
     }
