@@ -1,3 +1,4 @@
+const Lifecycle = require('@squarespace/core/Lifecycle')
 const axios = require('axios')
 
 const MODULES = {
@@ -30,6 +31,7 @@ class Router {
 
   handleDOMContentLoaded() {
     this.loadContentScripts()
+    this.injectHTML()
   }
 
   handleLinkClick(e) {
@@ -56,6 +58,7 @@ class Router {
       const $main = $html.getElementsByTagName('main')[0]
 
       if (this.module) this.module.out()
+      Lifecycle.destroy()
 
       const handleTransitionEnd = (e) => {
         if (e.target !== this.$main) return
@@ -123,21 +126,24 @@ class Router {
   }
 
   injectHTML($page) {
-    const $videoWrappers = Array.from($page.querySelectorAll('.sqs-video-wrapper[data-html]'))
+    Lifecycle.init()
+
+    const $videoWrappers = Array.from(this.$main.getElementsByClassName('sqs-video-wrapper'))
 
     $videoWrappers.forEach($wrapper => {
-      const html = $wrapper.dataset.html
+      const $iframe = $wrapper.getElementsByTagName('iframe')[0]
+      const src = $iframe.getAttribute('src')
+      const oembedUrl = `https://vimeo.com/api/oembed.json?url=${src}`
 
-      const $intrinsic = document.createElement('div')
-      $intrinsic.classList.add('intrinsic')
+      axios.get(oembedUrl).then(response => {
+        const { data } = response
+        if (!data) return
 
-      const $intrinsicInner = document.createElement('div')
-      $intrinsicInner.classList.add('intrinsic-inner')
-      $intrinsicInner.style.paddingBottom = '56.3%'
-      $intrinsicInner.innerHTML = html
+        const aspectRatio = data.height / data.width
 
-      $intrinsic.appendChild($intrinsicInner)
-      $wrapper.appendChild($intrinsic)
+        const $intrinsicInner = $wrapper.getElementsByClassName('intrinsic-inner')[0]
+        $intrinsicInner.style.paddingBottom = aspectRatio * 100 + '%'
+      })
     })
   }
 }
