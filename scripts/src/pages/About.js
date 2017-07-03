@@ -12,6 +12,7 @@ class About {
     this.currentPageYOffset = window.pageYOffset
 
     this.handleResize()
+    this.handleScroll()
     this.addEventListeners()
   }
 

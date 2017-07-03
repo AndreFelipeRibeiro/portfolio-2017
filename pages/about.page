@@ -19,14 +19,14 @@
 
       <div class="detail">
         <p class="label" data-scrolled-into-view="false">about</p>
-        <div class="bio">
-          <p data-scrolled-into-view="false">
+        <div class="bio" data-scrolled-into-view="false">
+          <p>
             With more than 12 years of experience, I work at Squarespace as a Design Team Lead. Previously, I was a Senior Art Director at Huge Inc.
           </p>
-          <p data-scrolled-into-view="false">
+          <p>
             At Squarespace, my role is to lead the design efforts of our Front Site team, which is a group fully dedicated to working on our main website (squarespace.com). Our tasks range from page improvements to complete overhauls of entire flows, as well as the design of some of our marketing-driven digital initiatives.
           </p>
-          <p data-scrolled-into-view="false">
+          <p>
             We work closely with various departments of the company, including branding, marketing, strategy, the templates and product design teams, engineering, as well as product owners, stakeholders, and executive leadership. We ensure that all facets of our company and product offerings are properly communicated to our customers and website visitors.
           </p>
 

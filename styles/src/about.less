@@ -4,11 +4,15 @@
 
   [data-scrolled-into-view] {
     opacity: 0;
-    transition: opacity @transition-duration-quick @cubic;
+    transform: translate3d(0,50px,0);
+
+    transition: opacity @transition-duration @cubic,
+                transform @transition-duration @cubic;
   }
 
   [data-scrolled-into-view="true"] {
     opacity: 1;
+    transform: translate3d(0,0,0);
   }
 
  p {
