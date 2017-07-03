@@ -10,7 +10,7 @@
   <div class="description-wrapper">
     <p class="description">{customContent.description}</p>
     {.section customContent.linkUrl}
-      <a class="link" href="{customContent.linkUrl}">{customContent.linkText}</a>
+      <a class="link" target="_blank" href="{customContent.linkUrl}">{customContent.linkText}</a>
     {.end}
   </div>
 </div>
