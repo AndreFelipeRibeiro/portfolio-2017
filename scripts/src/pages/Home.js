@@ -137,6 +137,13 @@ class Home {
 
     this.setGalleryHeights()
     this.setGridBlockSizes()
+
+    if (this.vw < 1024) {
+      this.layout = 'cover'
+      this.$portfolio.dataset.view = this.layout
+      this.$sideNav.dataset.view = this.layout
+      this.updateLayout(this.layout)
+    }
   }
 
   handleScroll(e) {
@@ -208,6 +215,7 @@ class Home {
   }
 
   handleKeyDown(e) {
+    if (this.layout === 'grid') return
     if (this.isTransitioning) return
 
     if (e.code === "ArrowRight") this.coverGalleryImagery.next()
