@@ -1,5 +1,5 @@
 <main id="labs">
-  <div class="wrapper">
+  <div class="wrapper vh-for-mobile">
 
     <div class="grid-labs">
       <div class="column mobile"></div>

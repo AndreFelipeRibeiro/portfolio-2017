@@ -6,6 +6,7 @@ const ORIGINAL_PX_PER_MILLISECOND = 0.02
 class LoadingScreen {
   constructor() {
     this.$main          = document.getElementsByTagName('main')[0]
+    this.$header        = document.getElementById('header')
     this.$loadingScreen = document.getElementById('loading-screen')
     this.$scrim         = this.$main.getElementsByClassName('scrim')[0]
 
@@ -82,20 +83,27 @@ class LoadingScreen {
     this.$scrim.style.transitionDuration = `${transitionDuration}ms`
 
     const handleTransitionEnd = (e) => {
-      if (e.target !== this.$scrim) return
-
-      if (e.propertyName === prefixedTransform) {
-        document.body.classList.remove('is-loading')
+      if (e.target === this.$loadingScreen) {
+        if (e.propertyName === 'opacity') {
+          this.$header.classList.remove('force-is-light')
+          this.$loadingScreen.removeEventListener('transitionend', handleTransitionEnd)
+          return
+        }
       }
 
-      if (e.propertyName === 'opacity') {
-        document.body.classList.remove('is-fixed')
-        this.$scrim.removeEventListener('transitionend', handleTransitionEnd)
-        return
+      if (e.target === this.$scrim) {
+        if (e.propertyName === prefixedTransform) {
+          document.body.classList.remove('is-loading')
+          this.$header.classList.add('force-is-light')
+        }
+
+        if (e.propertyName === 'opacity') {
+          document.body.classList.remove('is-fixed')
+        }
       }
     }
 
-    this.$scrim.addEventListener('transitionend', handleTransitionEnd)
+    this.$loadingScreen.addEventListener('transitionend', handleTransitionEnd)
   }
 }
 

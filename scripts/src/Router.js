@@ -1,5 +1,6 @@
 const Lifecycle = require('@squarespace/core/Lifecycle')
 const axios = require('axios')
+const VHForMobile = require('./lib/vh-for-mobile')
 
 const MODULES = {
   '/': require('./pages/Home'),
@@ -31,6 +32,8 @@ class Router {
   }
 
   handleDOMContentLoaded() {
+    this.vhForMobile = new VHForMobile()
+
     this.loadContentScripts()
     this.injectHTML()
   }
@@ -149,6 +152,9 @@ class Router {
         $intrinsicInner.style.paddingBottom = aspectRatio * 100 + '%'
       })
     })
+
+    this.vhForMobile.updateChildren()
+    this.vhForMobile.updateView()
   }
 }
 

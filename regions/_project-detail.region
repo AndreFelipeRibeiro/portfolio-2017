@@ -16,7 +16,7 @@
         {# HERO}
         {.section collection}
           {.section mainImage}
-            <div class="hero" style="background-color:#{colorData.suggestedBgColor};">
+            <div class="hero vh-for-mobile" style="background-color:#{colorData.suggestedBgColor};">
               <div class="hero-image">
                 <img data-use-bg-image="true" data-load="false" data-src="{assetUrl}" />
               </div>

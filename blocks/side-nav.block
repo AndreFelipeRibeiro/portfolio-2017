@@ -1,4 +1,4 @@
-<div class="side-nav" data-view="cover">
+<div class="side-nav vh-for-mobile" data-view="cover">
   <ul>
     <li class="label" data-view="cover">Cover</li>
     <li class="label" data-view="grid">Grid</li>

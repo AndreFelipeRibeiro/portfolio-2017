@@ -109,6 +109,8 @@ class Home {
       const translation = (timeSinceLastChange / 8000) * 100
       this.$paginationTimer.style.transform = `translate3d(${translation}%,0,0)`
 
+      if (window.STOP_GALLERY) return this.coverGalleryImagery.stop()
+
       if (timeSinceLastChange >= 8000) this.coverGalleryImagery.next()
     }, 700)
   }
