@@ -198,7 +198,6 @@ class Home {
     const handleTransitionEnd = (e) => {
       if (e.propertyName !== 'opacity') return
       if (!e.target.classList.contains('imagery')) return
-      if (e.elapsedTime < 1) return
 
       $activeChild.removeEventListener(transitionEnd, handleTransitionEnd)
       this.isTransitioning = false
@@ -237,7 +236,6 @@ class Home {
         this.$sideNav.dataset.view = this.layout
 
         this.$gridBlocks = Array.from(this.$gridGallery.querySelectorAll(`.grid-block`))
-
         this.updateLayout()
       })
     })
