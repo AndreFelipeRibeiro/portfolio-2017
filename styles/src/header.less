@@ -12,6 +12,16 @@
     .hamburger .bar { background-color: #fff; }
   }
 
+  .is-loading & {
+
+  }
+
+  .collection-morgan-stanley:not(.is-loading) &:not(.is-dark),
+  .collection-vans:not(.is-loading) &:not(.is-dark) {
+    h1 { color: #fff; }
+    .hamburger .bar { background-color: #fff; }
+  }
+
   .header-content {
     width: @page-width;
     height: 100%;
@@ -45,7 +55,7 @@
     color: #000;
     margin: 0 0;
 
-    transition: color @transition-duration-quick @cubic @transition-duration-quick;
+    transition: color @transition-duration-quick @cubic;
   }
 
   .hamburger {

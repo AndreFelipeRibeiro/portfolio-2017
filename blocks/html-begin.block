@@ -9,6 +9,6 @@
     {squarespace-headers}
     <link id="stylesheet" rel="stylesheet" href="/assets/styles/index.css?{squarespace.template-revision}">
   </head>
-  <body>
+  <body class="collection-{collection.urlId}">
     {@|apply header.block}
     {@|apply menu-overlay.block}

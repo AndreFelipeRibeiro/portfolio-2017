@@ -13,6 +13,7 @@ class ProjectDetail {
   constructor() {
     this.$main          = document.getElementsByTagName('main')[0]
     this.$hero          = document.getElementsByClassName('hero')[0]
+    this.$header        = document.getElementById('header')
     this.$scrollWrapper = this.$main.getElementsByClassName('scroll-wrapper')[0]
     this.$pageIndex     = this.$main.getElementsByClassName('page-index')[0]
     this.$backToTop     = this.$main.getElementsByClassName('back-to-top')[0]
@@ -89,9 +90,28 @@ class ProjectDetail {
     $nodesToWatch.forEach($node => {
       $node.dataset.top = $node.getBoundingClientRect().top + this.currentPageYOffset
     })
+
+    this.$blocks.forEach($block => {
+      $block.dataset.top = $block.getBoundingClientRect().top + this.currentPageYOffset
+    })
   }
 
   handleScroll(e) {
+    this.$visibleBlocks = []
+
+    this.$blocks.forEach($block => {
+      const top = parseInt($block.dataset.top)
+      const isInView = top < this.currentPageYOffset
+
+      if (isInView) this.$visibleBlocks.push($block)
+    })
+
+    const $lastVisibleBlock = this.$visibleBlocks[this.$visibleBlocks.length - 1]
+    const shouldForceLightHeader = $lastVisibleBlock && $lastVisibleBlock.classList.contains('light-header')
+
+    if (this.currentPageYOffset >= this.vh && !shouldForceLightHeader) this.$header.classList.add('is-dark')
+    else this.$header.classList.remove('is-dark')
+
     this.$scrollNodes.forEach($node => {
       const top = parseInt($node.dataset.top)
       const isInView = top < this.currentPageYOffset + this.vh

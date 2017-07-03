@@ -55,6 +55,7 @@ class Router {
     axios.get(path).then(response => {
       const $html = document.createElement('html')
       $html.innerHTML = response.data
+      const $body = $html.getElementsByTagName('body')[0]
       const $main = $html.getElementsByTagName('main')[0]
 
       if (this.module) this.module.out()
@@ -72,6 +73,7 @@ class Router {
 
         $main.classList.add('incoming-content')
 
+        document.body.className = $body.className
         this.$main = $main
         this.$contentWrapper = this.$main.getElementsByClassName('content-wrapper')[0]
 

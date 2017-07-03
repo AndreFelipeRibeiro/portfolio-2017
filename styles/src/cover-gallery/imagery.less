@@ -10,11 +10,13 @@
 
     .imagery {
       opacity: 0;
+      visibility: hidden;
       z-index: 1;
 
       overflow: hidden;
 
       transition: opacity @transition-duration-quick @cubic,
+                  visibility @transition-duration-quick step-end,
                   z-index @transition-duration-quick step-end;
 
       &[data-project="squarespace"]    .image-background { background-image: url('../projects/squarespace-cover.jpg'); }
@@ -26,7 +28,9 @@
       &[data-arrival-index="0"] {
         z-index: 2;
         opacity: 1;
+        visibility: visible;
         transition: opacity @transition-duration-quick @cubic,
+                    visibility @transition-duration-quick step-start,
                     z-index @transition-duration-quick step-start;
 
         .label {
@@ -68,9 +72,6 @@
 
     @media @tablet {
       .imagery {
-        transition: opacity @transition-duration-quick @cubic,
-                    z-index @transition-duration step-end;
-
         &[data-project="squarespace"] {
           width: 55%;
         }
@@ -102,6 +103,7 @@
 
         &[data-arrival-index="0"] {
           transition: opacity @transition-duration-quick @cubic (@transition-duration * 2),
+                      visibility @transition-duration-quick step-start,
                       z-index @transition-duration-quick step-start;
         }
       }
