@@ -11,6 +11,7 @@ class Router {
   constructor() {
     this.$main = document.getElementsByTagName('main')[0]
     this.$contentWrapper = this.$main.getElementsByClassName('content-wrapper')[0]
+    this.$header = document.getElementById('header')
 
     this.handleDOMContentLoaded = this.handleDOMContentLoaded.bind(this)
     this.handleLinkClick        = this.handleLinkClick.bind(this)
@@ -74,6 +75,7 @@ class Router {
         $main.classList.add('incoming-content')
 
         document.body.className = $body.className
+        this.$header.className = ''
         this.$main = $main
         this.$contentWrapper = this.$main.getElementsByClassName('content-wrapper')[0]
 

@@ -9,35 +9,33 @@
     </div>
 
     <div class="content">
-      {# <div class="back"><span>←</span>back</div> }
-
-      <div class="intro">
+      <div class="intro" data-scrolled-into-view="false">
         <div class="bio"><p>Brazilian born Designer and Art&nbsp;Director living in Brooklyn,  New&nbsp;York.</p></div>
         <p class="role">Team Lead, Design</p>
         <a class="company">@<span>Squarespace</span></a>
       </div>
 
-      <h2>Andre <span>Felipe</span> Ribeiro</h2>
+      <h2 data-scrolled-into-view="false">Andre <span>Felipe</span> Ribeiro</h2>
 
       <div class="detail">
-        <p class="label">about</p>
+        <p class="label" data-scrolled-into-view="false">about</p>
         <div class="bio">
-          <p>
+          <p data-scrolled-into-view="false">
             With more than 12 years of experience, I work at Squarespace as a Design Team Lead. Previously, I was a Senior Art Director at Huge Inc.
           </p>
-          <p>
+          <p data-scrolled-into-view="false">
             At Squarespace, my role is to lead the design efforts of our Front Site team, which is a group fully dedicated to working on our main website (squarespace.com). Our tasks range from page improvements to complete overhauls of entire flows, as well as the design of some of our marketing-driven digital initiatives.
           </p>
-          <p>
+          <p data-scrolled-into-view="false">
             We work closely with various departments of the company, including branding, marketing, strategy, the templates and product design teams, engineering, as well as product owners, stakeholders, and executive leadership. We ensure that all facets of our company and product offerings are properly communicated to our customers and website visitors.
           </p>
 
-          <h4 class="brands">
+          <h4 class="brands" data-scrolled-into-view="false">
             A few of the brands I worked with in the past few years are:
             Squarespace, Apple, Morgan Stanley, Audi, Chase, Nespresso, Google, Vans, and Cartoon Network.
           </h4>
 
-          <div class="social-links">
+          <div class="social-links" data-scrolled-into-view="false">
             <div class="column left">
               <a class="link" href="https://www.linkedin.com/in/andre-felipe-ribeiro-b95a061b/" target="_blank"><span>↗</span>LinkedIn</a>
               <a class="link" href="https://twitter.com/feliperibeiros" target="_blank"><span>↗</span>Twitter</a>
@@ -49,13 +47,12 @@
               <a class="link" href="mailto:andre.felipe@gmail.com" target="_blank"><span>↗</span>Email</a>
               <a class="link" href="https://archive.andrefeliperibeiro.com/" target="_blank"><span>↗</span>Archive</a>
               <a class="link" href="https://www.linkedin.com/in/andre-felipe-ribeiro-b95a061b#awards" target="_blank"><span>↗</span>Awards</a>
-              <a class="link" href="https://www.linkedin.com/in/andre-felipe-ribeiro-b95a061b#publications" target="_blank"><span>↗</span>Publications</a>            
+              <a class="link" href="https://www.linkedin.com/in/andre-felipe-ribeiro-b95a061b#publications" target="_blank"><span>↗</span>Publications</a>
             </div>
           </div>
         </div>
       </div>
-      <div class="footer">
-        {# <div class="back-to-the-top"><span>↑</span> back to the top</div> }
+      <div class="footer" data-scrolled-into-view="false">
         <div class="development-by">development by</div>
         <a class="cha" href="https://www.christinecha.com"><span>Christine Cha</span></a>
       </div>
