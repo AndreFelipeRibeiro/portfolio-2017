@@ -110,8 +110,6 @@ class ProjectDetail {
   }
 
   initLoadingState() {
-    document.body.classList.add('is-loading')
-
     this.loadingScreen = new LoadingScreen()
   }
 

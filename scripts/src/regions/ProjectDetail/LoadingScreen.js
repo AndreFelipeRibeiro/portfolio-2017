@@ -22,6 +22,8 @@ class LoadingScreen {
   }
 
   init() {
+    document.body.classList.add('is-loading')
+    document.body.classList.add('is-fixed')
     this.animate()
   }
 
@@ -79,7 +81,21 @@ class LoadingScreen {
     this.$scrim.style[prefixedTransform] = `translate3d(100%,0,0)`
     this.$scrim.style.transitionDuration = `${transitionDuration}ms`
 
-    document.body.classList.remove('is-loading')
+    const handleTransitionEnd = (e) => {
+      if (e.target !== this.$scrim) return
+
+      if (e.propertyName === prefixedTransform) {
+        document.body.classList.remove('is-loading')
+      }
+
+      if (e.propertyName === 'opacity') {
+        document.body.classList.remove('is-fixed')
+        this.$scrim.removeEventListener('transitionend', handleTransitionEnd)
+        return
+      }
+    }
+
+    this.$scrim.addEventListener('transitionend', handleTransitionEnd)
   }
 }
 
