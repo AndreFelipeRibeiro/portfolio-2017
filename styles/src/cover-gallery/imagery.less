@@ -36,22 +36,20 @@
 
       &:hover {
         .image-background { transform: scale(1.05); }
-        &::after{
-          opacity: 1;
-        }
+        &::after { opacity: 1;}
       }
 
       &::after {
-      content: "";
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.05);
-      opacity: 0;
-      transition: opacity @transition-duration-quick * 1.2 @cubic;
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.05);
+        opacity: 0;
+        transition: opacity @transition-duration-quick * 1.2 @cubic;
       }
 
       .image-background {
