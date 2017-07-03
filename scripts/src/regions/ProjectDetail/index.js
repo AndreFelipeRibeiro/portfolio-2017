@@ -109,6 +109,9 @@ class ProjectDetail {
     const $lastVisibleBlock = this.$visibleBlocks[this.$visibleBlocks.length - 1]
     const shouldForceLightHeader = $lastVisibleBlock && $lastVisibleBlock.classList.contains('light-header')
 
+    if (shouldForceLightHeader) this.$header.classList.add('force-is-light')
+    else this.$header.classList.remove('force-is-light')
+
     if (this.currentPageYOffset >= this.vh && !shouldForceLightHeader) this.$header.classList.add('is-dark')
     else this.$header.classList.remove('is-dark')
 

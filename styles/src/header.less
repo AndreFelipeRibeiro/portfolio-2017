@@ -7,19 +7,16 @@
   font-size: 0;
   z-index: 4;
 
-  &.has-menu-overlay {
-    h1 { color: #fff; }
-    .hamburger .bar { background-color: #fff; }
-  }
-
-  .is-loading & {
-
-  }
-
+  &.has-menu-overlay,
   .collection-morgan-stanley:not(.is-loading) &:not(.is-dark),
   .collection-vans:not(.is-loading) &:not(.is-dark) {
     h1 { color: #fff; }
     .hamburger .bar { background-color: #fff; }
+  }
+
+  &.force-is-light {
+    h1 { color: #fff !important; }
+    .hamburger .bar { background-color: #fff !important; }
   }
 
   .header-content {
