@@ -1,5 +1,6 @@
 const Lifecycle = require('@squarespace/core/Lifecycle')
 const axios = require('axios')
+const IS_MOBILE_OS = require('./lib/is-mobile-os')
 const VHForMobile = require('./lib/vh-for-mobile')
 
 const MODULES = {
@@ -32,7 +33,7 @@ class Router {
   }
 
   handleDOMContentLoaded() {
-    this.vhForMobile = new VHForMobile()
+    if (IS_MOBILE_OS) this.vhForMobile = new VHForMobile()
 
     this.loadContentScripts()
     this.injectHTML()
@@ -153,8 +154,10 @@ class Router {
       })
     })
 
-    this.vhForMobile.updateChildren()
-    this.vhForMobile.updateView()
+    if (this.vhForMobile) {
+      this.vhForMobile.updateChildren()
+      this.vhForMobile.updateView()
+    }
   }
 }
 
