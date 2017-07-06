@@ -40,6 +40,11 @@
       transition: opacity @transition-duration @cubic,
                   visibility @transition-duration step-end;
 
+      .imagery {
+        visibility: hidden !important;
+        transition: visibility @transition-duration step-end;
+      }
+
       .text {
         visibility: hidden;
         opacity: 0;

@@ -40,7 +40,12 @@
 
       &:hover {
         .image-background { transform: scale(1.05); }
-        &::after { opacity: 1; }
+        &::after {
+          opacity: 1;
+          visibility: visible;
+          transition: opacity @transition-duration-quick * 1.2 @cubic,
+                      visibility @transition-duration-quick * 1.2 step-start;
+        }
       }
 
       &::after {
@@ -53,7 +58,10 @@
         height: 100%;
         background-color: rgba(0,0,0,0.05);
         opacity: 0;
-        transition: opacity @transition-duration-quick * 1.2 @cubic;
+        visibility: hidden;
+
+        transition: opacity @transition-duration-quick * 1.2 @cubic,
+                    visibility @transition-duration-quick * 1.2 step-end;
       }
 
       .image-background {
