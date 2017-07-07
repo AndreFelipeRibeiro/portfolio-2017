@@ -159,6 +159,7 @@ class Router {
           if (!$intrinsicInner.style.paddingBottom) return tries += 1
 
           $intrinsicInner.style.paddingBottom = aspectRatio * 100 + '%'
+          clearInterval(interval)
         }, 300)
       })
     })
