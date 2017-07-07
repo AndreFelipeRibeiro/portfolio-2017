@@ -143,6 +143,9 @@ class Router {
       const src = $iframe.getAttribute('src')
       const oembedUrl = `https://vimeo.com/api/oembed.json?url=${src}`
 
+      const tryMax = 5
+      let tries = 0
+
       axios.get(oembedUrl).then(response => {
         const { data } = response
         if (!data) return
@@ -150,7 +153,13 @@ class Router {
         const aspectRatio = data.height / data.width
 
         const $intrinsicInner = $wrapper.getElementsByClassName('intrinsic-inner')[0]
-        $intrinsicInner.style.paddingBottom = aspectRatio * 100 + '%'
+
+        const interval = setInterval(() => {
+          if (tries > tryMax) return clearInterval(interval)
+          if (!$intrinsicInner.style.paddingBottom) return tries += 1
+
+          $intrinsicInner.style.paddingBottom = aspectRatio * 100 + '%'
+        }, 300)
       })
     })
 
