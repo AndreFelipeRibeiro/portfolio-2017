@@ -133,17 +133,17 @@ class Router {
     return MODULES[id] || null
   }
 
-  injectHTML($page) {
+  injectHTML($main = this.$main) {
     Lifecycle.init()
 
-    const $videoWrappers = Array.from(this.$main.getElementsByClassName('sqs-video-wrapper'))
+    const $videoWrappers = Array.from($main.getElementsByClassName('sqs-video-wrapper'))
 
     $videoWrappers.forEach($wrapper => {
       const $iframe = $wrapper.getElementsByTagName('iframe')[0]
       const src = $iframe.getAttribute('src')
       const oembedUrl = `https://vimeo.com/api/oembed.json?url=${src}`
 
-      const tryMax = 5
+      const tryMax = 20
       let tries = 0
 
       axios.get(oembedUrl).then(response => {
@@ -153,14 +153,7 @@ class Router {
         const aspectRatio = data.height / data.width
 
         const $intrinsicInner = $wrapper.getElementsByClassName('intrinsic-inner')[0]
-
-        const interval = setInterval(() => {
-          if (tries > tryMax) return clearInterval(interval)
-          if (!$intrinsicInner.style.paddingBottom) return tries += 1
-
-          $intrinsicInner.style.paddingBottom = aspectRatio * 100 + '%'
-          clearInterval(interval)
-        }, 300)
+        $intrinsicInner.style.paddingBottom = aspectRatio * 100 + '%'
       })
     })
 
