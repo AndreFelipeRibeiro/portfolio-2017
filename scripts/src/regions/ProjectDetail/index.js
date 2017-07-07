@@ -97,20 +97,29 @@ class ProjectDetail {
   }
 
   handleScroll(e) {
-    this.$visibleBlocks = []
+    this.$partiallyVisibleBlocks = []
+    this.$completelyVisibleBlocks = []
 
     this.$blocks.forEach($block => {
       const top = parseInt($block.dataset.top)
-      const isInView = top < this.currentPageYOffset
+      const isCompletelyInView = top < this.currentPageYOffset
+      const isPartiallyInView = top < this.currentPageYOffset + this.vh
 
-      if (isInView) this.$visibleBlocks.push($block)
+      if (isCompletelyInView) this.$completelyVisibleBlocks.push($block)
+      if (isPartiallyInView) this.$partiallyVisibleBlocks.push($block)
     })
 
-    const $lastVisibleBlock = this.$visibleBlocks[this.$visibleBlocks.length - 1]
-    const shouldForceLightHeader = $lastVisibleBlock && $lastVisibleBlock.classList.contains('light-header')
+    const $lastCompletelyVisibleBlock = this.$completelyVisibleBlocks[this.$completelyVisibleBlocks.length - 1]
+    const shouldForceLightHeader = $lastCompletelyVisibleBlock && $lastCompletelyVisibleBlock.classList.contains('light-header')
+
+    const $lastPartiallyVisibleBlock = this.$partiallyVisibleBlocks[this.$partiallyVisibleBlocks.length - 1]
+    const shouldForceLightBackToTop = $lastPartiallyVisibleBlock && $lastPartiallyVisibleBlock.classList.contains('light-header')
 
     if (shouldForceLightHeader) this.$header.classList.add('force-is-light')
     else this.$header.classList.remove('force-is-light')
+
+    if (shouldForceLightBackToTop) this.$backToTop.classList.add('force-is-light')
+    else this.$backToTop.classList.remove('force-is-light')
 
     if (this.currentPageYOffset >= this.vh && !shouldForceLightHeader) this.$header.classList.add('is-dark')
     else this.$header.classList.remove('is-dark')

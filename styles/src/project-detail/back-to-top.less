@@ -21,6 +21,14 @@
                   visibility @transition-duration-quick step-start;
     }
 
+    &.force-is-light {
+      svg {
+        polyline {
+          stroke: #fff;
+        }
+      }
+    }
+
     svg {
       width: 30px;
       height: 30px;
@@ -28,6 +36,8 @@
       polyline {
         stroke: #000;
         fill: none;
+
+        transition: stroke @transition-duration-quick @cubic;
       }
     }
 
