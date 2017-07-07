@@ -54,7 +54,7 @@
       </div>
       <div class="footer" data-scrolled-into-view="false">
         <div class="development-by">development by</div>
-        <a class="cha" href="https://www.christinecha.com"><span>Christine Cha</span></a>
+        <a class="cha" href="https://www.christinecha.com" target="_blank"><span>Christine Cha</span></a>
       </div>
     </div>
   </div>
