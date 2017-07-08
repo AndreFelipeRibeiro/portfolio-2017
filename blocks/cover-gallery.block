@@ -60,10 +60,10 @@
       <a href="/apple">
         <article class="text" data-project="apple">
           <div class="text-content">
-            <h3 class="eyebrow">Redesign Concepts</h3>
+            <h3 class="eyebrow">Concepts</h3>
             <h2 class="title">Apple</h2>
             <p>
-              As part of the first partnership between Huge and Apple, our team worked out of their San Francisco HQ, and was challenged to explore blue-sky concepts for their website redesign.
+              Blue-sky concepts and design explorations on how Apple's website could look like.
               <br />
               <button><span>Learn More</span></button>
             </p>
